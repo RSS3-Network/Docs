@@ -2,12 +2,17 @@
 	"title": "Developer Guide",
 	"root": true,
 	"pages": [
-		"---Developer Guide---",
+		"---Guide---",
 		"index",
-		"guide",
+		"guide/get-activity-by-id",
+		"guide/get-activities-by-account",
+		"guide/get-activities-by-pattern",
+		"guide/get-activities-by-network",
+		"guide/get-account-activities-in-batch",
+		"guide/get-rss-activity-by-path",
 		"---API---",
 		"api",
 		"---SDK---",
-		"sdk"
+		"sdk/index"
 	]
 }
