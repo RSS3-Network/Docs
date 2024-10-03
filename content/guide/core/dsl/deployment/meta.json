@@ -1,5 +1,0 @@
-{
-	"title": "Deployment",
-	"defaultOpen": false,
-	"pages": ["index", "light-mode", "serverless", "view-info"]
-}
