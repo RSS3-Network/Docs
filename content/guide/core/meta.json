@@ -12,9 +12,13 @@
 		"whitepaper",
 		"ownership-economy",
 		"governance-and-rep",
-		"---DSL (Data Sublayer)---",
-		"dsl",
-		"---VSL (Value Sublayer)---",
+		"---Data Sublayer (DSL)---",
+		"dsl/overview",
+		"dsl/global-indexer",
+		"dsl/node",
+		"dsl/coverage",
+		"dsl/worker",
+		"---Value Sublayer (VSL)---",
 		"vsl"
 	]
 }

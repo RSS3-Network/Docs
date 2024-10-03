@@ -13,17 +13,22 @@ export const modes: Mode[] = [
 	{
 		param: "core",
 		name: "Core",
-		description: "The core concepts",
+		description: "Core concepts",
 	},
 	{
 		param: "developer",
-		name: "Developer",
-		description: "The buidl guide",
+		name: "For Developer",
+		description: "Build Guide",
+	},
+	{
+		param: "operator",
+		name: "For Node Operator",
+		description: "Operation Manual",
 	},
 	{
 		param: "ai",
-		name: "AI",
-		description: "The AI",
+		name: "For AI",
+		description: "Artificial Intelligence",
 	},
 ];
 
