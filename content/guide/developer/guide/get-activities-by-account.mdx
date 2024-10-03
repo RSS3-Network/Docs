@@ -1,0 +1,91 @@
+---
+title: Get Activities By Account
+---
+
+## ⭐️ Description
+
+This API endpoint allows you to fetch the latest activities associated with an account in the decentralized system.
+
+The API call is a **GET request** and the `account` parameter is required in the API call path. You can use various query parameters to filter and paginate the results.
+
+For more details, please visit the [RSS3 DSL API](https://docs.rss3.io/api-reference#tag/dsl/GET/decentralized/{account}).
+
+## 🔨 Example
+
+Let's make an API call to retrieve the latest activities of `vitalik.eth`. We set the query parameters limit=1 and action_limit=1 to display only one action from a single activity initiated by this account address, and direction=out to show only outgoing activities.
+
+Copy the code below and run it in your terminal to see the result.
+
+```shell
+curl 'https://gi.rss3.io/decentralized/vitalik.eth?limit=1&action_limit=1&direction=out'
+```
+
+## 📝 Response
+
+```json
+{
+  "data": [
+    {
+      "id": "0xfaf1b8505995bd5cae8b3a02b5350dcae65830388d2cd97c6395a0a72a31a67d",
+      "owner": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+      "network": "ethereum",
+      "index": 0,
+      "from": "0x30ED0d3EeC718e0e0f333dC2b396Cf99d2476554",
+      "to": "0x21A4D9a037a06B0dFE7d6067edbE10b64795dEe6",
+      "tag": "transaction",
+      "type": "transfer",
+      "fee": {
+        "amount": "176930308124892",
+        "decimal": 18
+      },
+      "calldata": {
+        "function_hash": "0x81744fb1"
+      },
+      "total_actions": 16,
+      "actions": [
+        {
+          "tag": "transaction",
+          "type": "transfer",
+          "from": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+          "to": "0x22220682EB7014aD3418707C8E4b3ad3EAD655c1",
+          "metadata": {
+            "address": "0x21A4D9a037a06B0dFE7d6067edbE10b64795dEe6",
+            "value": "1000000000000000000000000",
+            "name": "BlockDAG",
+            "symbol": "BDAG",
+            "decimals": 18,
+            "standard": "ERC-20"
+          },
+          "related_urls": [
+            "https://etherscan.io/tx/0xfaf1b8505995bd5cae8b3a02b5350dcae65830388d2cd97c6395a0a72a31a67d"
+          ]
+        }
+      ],
+      "direction": "out",
+      "success": true,
+      "timestamp": 1721513099
+    }
+  ],
+  "meta": {
+    "cursor": "0xfaf1b8505995bd5cae8b3a02b5350dcae65830388d2cd97c6395a0a72a31a67d:ethereum"
+  }
+}
+```
+
+Congratulations 🎉! You just learned how to retrieve the activities of `vitalik.eth`.
+
+## 🧰 SDK
+
+You can also integrate this feature into your code using our RSS3 SDKs. The SDK ensures type safety and provides IDE auto-completion support, making your integration smoother.
+
+### JavaScript Example
+
+```ts
+import { getActivities } from '@rss3/sdk'
+
+const activities = await getActivities({
+  account: "vitalik.eth",
+});
+
+console.log(activities)
+```

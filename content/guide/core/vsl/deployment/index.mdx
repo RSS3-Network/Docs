@@ -1,0 +1,55 @@
+---
+title: Run a VSL RPC Node
+description: Learn how to run a VSL RPC node.
+---
+
+This tutorial will walk you through the process of using Docker to run a VSL RPC Node.
+
+A VSL RPC Node is different from an RSS3 [Node](/guide/core/vsl/node) which earns Network Rewards.
+
+## Prerequisites
+
+- [Docker](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Setup
+
+1. Clone the VSL repository:
+
+```bash
+git clone https://github.com/RSS3-Network/VSL-RPC-Node.git
+cd VSL-RPC-Node && cp .env.example .env
+```
+## Configuration
+
+replace OP_NODE_L1_ETH_RPC to "your_l1_rpc_url" in .env
+
+```bash
+OP_NODE_L1_ETH_RPC="https://cloudflare-eth.com/" #use your own l1 rpc endpoint
+```
+
+For the initial deployment, generate the secret files:
+
+```bash
+bash gen-secret.sh
+```
+
+## Run
+
+### Start the node
+
+```bash
+docker compose up -d
+```
+
+### Check the logs
+
+```bash
+docker compose logs -f --tail 100
+```
+
+### Stop the node
+
+```bash
+docker compose down
+```

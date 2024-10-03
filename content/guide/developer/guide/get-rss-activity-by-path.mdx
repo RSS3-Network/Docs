@@ -1,0 +1,84 @@
+---
+title: Get RSS Activity by Path
+---
+
+## ⭐️ Description
+
+This API endpoint enables you to fetch details about RSS3 feed entries from sources in the specified RSS path.
+
+The API call is a **GET request**. For more details, please visit the [RSS3 DSL API](https://docs.rss3.io/api-reference#tag/rss/GET/rss/{path}).
+
+### 🔨 Example
+
+Let's make an API call to retrieve details from the RSS path `abc`.
+
+Copy the code below and run it in your terminal to see the result.
+
+```shell
+curl 'https://gi.rss3.io/rss/abc'
+```
+
+## 💻 Response
+
+The response from this call will look like this:
+
+```json
+{
+  "data": [
+    {
+      "id": "https://www.abc.net.au/news/2024-06-26/nsw-newcastle-bucks-party-gang-rape-court/104026112",
+      "owner": "www.abc.net.au",
+      "network": "rss",
+      "index": 0,
+      "from": "www.abc.net.au",
+      "to": "www.abc.net.au",
+      "tag": "rss",
+      "type": "feed",
+      "total_actions": 1,
+      "actions": [
+        {
+          "tag": "rss",
+          "type": "feed",
+          "platform": "www.abc.net.au",
+          "from": "www.abc.net.au",
+          "to": "www.abc.net.au",
+          "metadata": {
+            "title": "Woman sent text to friend saying 'help me now' before allegedly being sexually assaulted, court told",
+            "description": "<p>A young woman sent her friend a message saying \"help me now\" before a group of men on a bucks weekend allegedly sexually assaulted her in a Newcastle Airbnb, a jury has heard.</p><p><strong>WARNING: This story contains content that readers may find distressing.</strong></p><p>Brothers Maurice Hawell, 30, Marius Hawell, 22, and another man Andrew David, 30, are facing trial at the NSW District Court accused of gang-raping three women during a bucks weekend on February 25 and 26, 2022.</p><p>The trial previously heard it was Mr David's bucks party that was being celebrated that weekend.</p><p>All three men are facing trial in the NSW District Court after pleading not guilty to multiple counts of aggravated sexual assault in company, aggravated sexual touching and attempting to commit aggravated sexual assault in company.</p><p>Prosecutors allege two 18-year-old women were attacked on the Friday night, and a 19-year-old woman on the following Saturday night.</p><p>Crown prosecutor Craig Evans argued the three men were participants of a joint criminal enterprise in the alleged sexual assaults.</p><p>The third female complainant, who cannot be named for legal reasons, was called to give evidence on Wednesday.</p><p>The young woman said she met with friends at the Cambridge Hotel on the evening of February 26 and left shortly after to call another friend and started walking down the street to meet her.</p><p>She told the court she was on speakerphone when an unknown man, who said his name was Jonathon, \"ran out of the bush\" and said she \"should go for pre-drinks with his friends\" to which she allegedly replied \"no\".</p><p>The Crown said the man claiming to be Jonathon was one of the accused, Maurice Hawell.</p><p>The complainant said Jonathon walked alongside her as she continued down the street until they passed a glass door, which led up to an apartment that the man had been staying at.</p><p>The woman told jurors she felt \"unsafe\" being pestered by Jonathan at the time and then sent a message to her friend who she was attempting to meet up with saying \"help me now\" and \"answer\".</p><p>The complainant said she then entered the apartment with the man because she \"thought it would be safe\" after hearing loud music and had assumed there were several people upstairs.</p><h2>Woman denies feeling 'flattered' by invitation</h2><p>Under cross examination from Maurice Hawell's defence barrister, Richard Pontello SC put to the woman that she felt \"flattered\" that Jonathan had shown interest in her, which she denied.</p><p>Mr Pontello then played audio from CCTV footage of the two walking along the street, where the man was heard asking about drinks she liked and she responded, \"anything but beer\".</p><p>The woman agreed that even after having multiple alcoholic drinks earlier in the night, that she had \"full control\" of what she did and didn't do.</p><p>The complainant said when she entered the apartment, she was \"confused\" why there was only a man and a woman in the kitchen area.</p><p>\"I was confused because I was told there were people up having pre-drinks in the apartment,\" the woman told the court.</p><p>\"Jonathan grabbed my hand and led me into a bedroom.</p><p>\"I asked Jonathan where the pre-drinks was, and Jonathon said 'we'll get to that'.\"</p><h2>Complainant describes alleged assault</h2><p>The woman said she felt \"scared and anxious\" as the man pushed her on the bed and started to assault her.</p><p>She told jurors after about five minutes, another man entered the bedroom who she then saw lying naked on the floor, when the light was turned on for a brief moment.</p><p>The complainant became emotional as she told jurors Jonathan then asked for a threesome, to which she replied \"what, no\".</p><p>She said both men then assaulted her before another man entered the \"dark\" room and said something to the two men in a foreign language before she was alleged filmed on a mobile phone.</p><p>The court heard after being allegedly assaulted, all the men then left the bedroom and she later walked out of the apartment.</p><p>Mr Pontello claimed that the sexual acts, which occurred in the bedroom, were all consensual, which the woman denied.</p><p>The jury were told that the woman sent a message to her friend after leaving the apartment, saying \"I literally got raped\".</p><p>The woman said she then called her flatmate, who met up with her and told her to call police.</p><p>Jurors were played a triple-0 call made by the woman shortly afterwards, where she reports the alleged assault.</p><p>Police later attended the woman's home where she provided her clothes as evidence and then showed them the location of the apartment.</p><p>The court heard she then attended a hospital twice over two days, where swabs were taken from her body as evidence.</p><p>The trial continues before Judge Gina O'Rourke.</p>\n",
+            "pub_date": "2024-06-26T06:45:58.000Z",
+            "authors": [
+              {
+                "name": "Ethan Rix"
+              }
+            ]
+          },
+          "related_urls": [
+            "https://www.abc.net.au/news/2024-06-26/nsw-newcastle-bucks-party-gang-rape-court/104026112"
+          ]
+        }
+      ],
+      "direction": "out",
+      "success": false,
+      "timestamp": 1719385886
+    }
+  ]
+}
+```
+
+**Congratulations** 🎉! You just learned how to retrieve data from sources in an RSS path.
+
+## 🧰 SDK
+
+You can also integrate this feature into your code using our RSS3 SDKs. The SDK ensures type safety and provides IDE auto-completion support, making your integration smoother.
+
+### Javascript Example
+
+```ts
+import { getRSSActivity } from '@rss3/sdk'
+
+const rssActivity = await getRSSActivity({
+  path: "abc",
+});
+
+console.log(rssActivity)
+```

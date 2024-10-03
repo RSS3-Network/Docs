@@ -1,0 +1,5 @@
+{
+	"title": "Deployment",
+	"defaultOpen": true,
+	"pages": ["index", "chainlit", "ollama"]
+}

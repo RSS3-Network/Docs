@@ -1,0 +1,238 @@
+---
+title: Deployment
+description: How to deploy OpenAgent.
+---
+
+# Deployment
+
+Learn how to deploy OpenAgent.
+
+## Introduction
+
+This guide provides instructions for a deployment using containerized solutions including Docker and Kubernetes. It is assumed that the user has a basic understanding of terminal commands and containerization concepts.
+
+The guide is opinionated towards a containerized deployment solution, the source code is available at: https://github.com/RSS3-Network/OpenAgent, if one prefers an alternative deployment method.
+
+It's important to note that while the Node itself is production-ready, the deployment methods we outline here may not be universally applicable in all environments. Adaptation of these methods may be necessary to fit the specific requirements of your own setup.
+
+## Prerequisites
+
+- Basic command line proficiency.
+- Have [Docker](https://www.docker.com/) installed, or
+- Use [Terraform](https://www.terraform.io/).
+
+## Hardware Requirements
+
+Here is a recommended hardware configuration:
+
+- CPU: 4 Cores
+- RAM: 8 GB
+- GPU: an NVIDIA card with 16 GB VRAM
+- Storage: 20 GB SSD (adjust it based on your model size)
+
+## Configure via .env
+
+A `.env` file is required for deploying your OpenAgent. Duplicate the `.env.sample` file in `src/` to begin with.
+
+Here we provide a sample `.env` file:
+
+```shell
+# Usage: Copy this file to .env and fill in the values
+
+
+# Database settings
+DB_CONNECTION=postgresql+psycopg://postgres:password@vector_db:5432/openagent
+
+#####################
+# Model configuration
+
+## LLM provider settings (at least one required)
+## To get a Google Cloud Vertex project ID, visit: https://console.cloud.google.com/vertex-ai
+VERTEX_PROJECT_ID=your_google_cloud_vertex_project_id
+
+## To get an OpenAI API key, sign up at: https://platform.openai.com/signup
+OPENAI_API_KEY=your_openai_api_key
+
+## To get a Google Gemini API key, visit: https://ai.google.dev
+GOOGLE_GEMINI_API_KEY=your_google_gemini_api_key
+
+## For local models via Ollama, download and install from: https://github.com/ollama/ollama
+OLLAMA_HOST=http://ollama:11434
+
+# End of model configuration
+############################
+
+#########################
+# Executors configuration
+## Executors may require additional external services to function.
+## if these services aren't enabled here, the corresponding executors will be disabled.
+
+## RSS3 DSL
+## required for accessing real-time on-chain data
+RSS3_DATA_API=https://gi.rss3.io
+RSS3_SEARCH_API=https://devnet.rss3.io/search
+
+## NFTScan
+## required for accessing NFT-related data: https://developer.nftscan.com/
+NFTSCAN_API_KEY=your_nftscan_api_key
+
+## Tavily
+## Get your Tavily API key at: https://www.tavily.com/
+TAVILY_API_KEY=your_tavily_api_key
+
+## Covalent
+## Get your Covalent API key at: https://www.covalenthq.com/platform/auth/register/
+COVALENT_API_KEY=your_covalent_api_key
+
+## RootData
+## Register for a RootData API key at: https://www.rootdata.com/
+ROOTDATA_API_KEY=your_rootdata_api_key
+
+## CoinGecko
+## required for accessing token price-related data: https://www.coingecko.com/en/api/pricing
+COINGECKO_API_KEY=your_coingecko_api_key
+
+# End of Executors configuration
+################################
+
+########################
+# Chainlit configuration, optional.
+
+## OAuth configuration for AUTH0.
+### So users can login via social accounts.
+### See https://docs.chainlit.io/authentication/oauth.
+### For demostartion purposes, we use Google as the provider.
+### See https://developers.google.com/identity/protocols/oauth2.
+OAUTH_AUTH0_CLIENT_ID=...
+OAUTH_AUTH0_CLIENT_SECRET=...
+OAUTH_AUTH0_DOMAIN=...
+CHAINLIT_AUTH_SECRET=...
+
+# End of Chainlit configuration
+###############################
+```
+
+## Deploy via docker-compose
+
+### Sample docker-compose.yaml
+
+For your reference, a docker-compose.yaml looks like this for production:
+
+```yaml
+version: '3.4'
+services:
+  openagent:
+    image: rss3/openagent:latest
+    container_name: openagent
+    ports:
+      - "18000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - vector_db
+    networks:
+      - openagent-network
+
+  vector_db:
+    image: pgvector/pgvector:pg16
+    container_name: vec_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: openagent
+    ports:
+      - "15432:5432"
+    volumes:
+      - vector_data:/var/lib/postgresql/data
+    networks:
+      - openagent-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  ollama:
+    volumes:
+      - ollama_data:/root/.ollama
+    container_name: ollama
+    tty: true
+    restart: unless-stopped
+    image: ollama/ollama:latest
+    ports:
+      - "21434:11434"
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+    networks:
+      - openagent-network
+
+volumes:
+  vector_data:
+  ollama_data:
+networks:
+  openagent-network:
+    external: false
+```
+
+### Start OpenAgent
+
+Once you have the compose file and .env file ready, simply run:
+
+```plaintext
+docker-compose up -d
+```
+
+🎉 And you are done! (Yes it's that simple.)
+
+## Deploy via Terraform on Google Cloud
+
+If you are reading this, you probably don't need much guidance.
+
+See our Terraform module:
+
+https://github.com/RSS3-Network/terraform-gcp-openagent
+
+https://registry.terraform.io/modules/RSS3-Network/openagent/gcp/latest
+
+## Integrate into Any Apps
+
+To integrate OpenAgent into any apps, see:
+
+<Card title="Integrate OpenAgent into Apps" href="/guide/ai/openagent/integrations/app" />
+
+You may also use [localhost:18000](http://localhost:18000) to visit Chainlit, which is built into OpenAgent by default, to start using OpenAgent. See:
+
+<Card title="Chainlit" href="/guide/ai/openagent/deployment/chainlit" />
+
+Learn how to interact with OpenAgent via Chainlit.
+
+## Initialization with Local Models
+
+If you have successfully deployed your OpenAgent instance, and you are using a local model, there are some initialization steps you need to take. OpenAgent uses Ollama to manage your local models, see:
+
+<Card title="Ollama" href="/guide/ai/openagent/deployment/ollama" />
+
+Learn how to deploy an open source model with OpenAgent using Ollama.
+
+### Download the Model
+
+Send this request to Ollama for downloading the chosen model:
+
+```shell
+curl -X POST -H 'Content-Type: application/json' -d '{"name": "${MODEL_NAME}"}' http://localhost:21434/api/pull
+```
+
+Replace `${MODEL_NAME}` with the model you are using. For compatible models, see:
+
+<Card title="Compatible Models" href="/guide/ai/openagent/compatible-models" />
+
+Learn what models are compatible with OpenAgent.
+
+## Conclusion
+
+This guide provides basic instructions for deploying an OpenAgent instance in containerized environments. For more advanced configurations, refer to the respective Docker or Kubernetes documentation.
+
+This guide adopts an opinionated stance in favor of containerized deployment. We advocate for this approach due to its benefits in ensuring consistency and scalability, promoting ease of portability across various environments. However, we appreciate the diverse preferences and needs within our community, for those who wish to compile and run the application locally, the source code is available on: https://github.com/RSS3-Network/OpenAgent.

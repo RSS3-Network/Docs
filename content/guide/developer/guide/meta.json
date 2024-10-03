@@ -1,0 +1,12 @@
+{
+	"title": "Getting Started",
+	"pages": [
+		"index",
+		"get-activity-by-id",
+		"get-activities-by-account",
+		"get-activities-by-pattern",
+		"get-activities-by-network",
+		"get-account-activities-in-batch",
+		"get-rss-activity-by-path"
+	]
+}

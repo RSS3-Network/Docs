@@ -1,0 +1,13 @@
+{
+	"title": "Developer Guide",
+	"root": true,
+	"pages": [
+		"---Developer Guide---",
+		"index",
+		"guide",
+		"---API---",
+		"api",
+		"---SDK---",
+		"sdk"
+	]
+}

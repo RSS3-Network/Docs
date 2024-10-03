@@ -1,0 +1,12 @@
+{
+	"title": "Fee and Calculation",
+	"defaultOpen": true,
+	"pages": [
+		"request-fee",
+		"network-reward",
+		"operation-tax",
+		"demotion",
+		"slashing",
+		"reliability-score"
+	]
+}

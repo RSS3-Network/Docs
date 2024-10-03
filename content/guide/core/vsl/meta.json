@@ -1,0 +1,16 @@
+{
+	"title": "Value Sublayer",
+	"defaultOpen": true,
+	"pages": [
+		"node",
+		"chip",
+		"bridge",
+		"operation",
+		"staking",
+		"epoch",
+		"pool",
+		"fee-and-calculations",
+		"links",
+		"deployment"
+	]
+}

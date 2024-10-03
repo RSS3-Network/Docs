@@ -1,0 +1,35 @@
+---
+title: Google Vertex AI
+description: Learn how to integrate OpenAgent with Google Vertex AI.
+---
+
+> Google Vertex AI is available with Google Cloud. For non-Google Cloud developers, we recommend using [Google Gemini](/guide/ai/openagent/integrations/gemini) instead.
+
+## Introduction
+
+OpenAgent is able to bootstrap your development with native Google Vertex AI support.
+
+In this guide, we assume that you have adequate knowledge about Google Cloud, and your OpenAgent is deployed on Google Cloud.
+
+## Steps
+
+### Create a Google Cloud Vertex AI Project
+
+Follow this guide to create a Google Cloud Vertex AI Project: https://cloud.google.com/vertex-ai/docs/start/cloud-environment .
+
+Upon successful creation of your project, take note of your project_id , as it is required in your OpenAgent .env file.
+
+### Create a Service Account with Vertex AI Access
+
+Follow this guide to create a service account: https://cloud.google.com/iam/docs/service-accounts-create .
+
+Upon successful creation of your service account, make sure that it has one of the following roles:
+
+- [Vertex AI User (recommended)](https://cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user)
+- [Vertex AI Administrator (full access to resources)](https://cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.admin)
+
+### Authenticate to Vertex AI
+
+When deploying on Google Cloud, your OpenAgent is automatically authenticated to access Vertex AI.
+
+Follow this guide to authenticate OpenAgent with Vertex AI: https://cloud.google.com/vertex-ai/docs/authentication .

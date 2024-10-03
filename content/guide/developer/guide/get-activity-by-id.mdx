@@ -1,0 +1,96 @@
+---
+title: Get Activity By Id
+---
+
+## ⭐️ Description
+
+This API endpoint allows you to retrieve a decentralized transaction activity using its ID.
+
+The API call is a **GET request** and the `id` parameter is required in the API call path. You can also use two query parameters:
+
+- `action_limit` controls the number of actions from the transaction activity
+- `action_page` specifies the pagination for actions from the activity
+
+For more details, please visit the [RSS3 DSL API](https://docs.rss3.io/api-reference#tag/dsl/GET/decentralized/tx/{id}).
+
+## 🔨 Example
+
+Let's make an API call to retrieve an activity using its ID. We add the activity id to the request path and use the query parameter `action_limit=1` to display only one action from the activity.
+
+Copy the code below and run it in your terminal to see the result.
+
+```shell
+curl 'https://gi.rss3.io/decentralized/tx/0x840e42d573ebe1ff27a9e4914573b4e0518fcd685c7f9331d319abe854f780e3?action_limit=1'
+```
+
+## 💻 Response
+
+The response from this call will look like this:
+
+```json
+{
+  "data": {
+    "id": "0x840e42d573ebe1ff27a9e4914573b4e0518fcd685c7f9331d319abe854f780e3",
+    "owner": "0x28C6c06298d514Db089934071355E5743bf21d60",
+    "network": "ethereum",
+    "index": 0,
+    "from": "0xBAB4d1f27bAA7762a4d822B80C647F715922492f",
+    "to": "0x7964B6A8aE5a71409e7E17a5b2669903A27997Ac",
+    "tag": "transaction",
+    "type": "transfer",
+    "fee": {
+      "amount": "315699955320960",
+      "decimal": 18
+    },
+    "calldata": {
+      "function_hash": "0x4022b75e"
+    },
+    "total_actions": 10,
+    "actions": [
+      {
+        "tag": "transaction",
+        "type": "transfer",
+        "from": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+        "to": "0xefC5f77c5AD5DB85bc287E80d8c3B88c3f27662C",
+        "metadata": {
+          "address": "0x7964B6A8aE5a71409e7E17a5b2669903A27997Ac",
+          "value": "10000000000000000000000",
+          "name": "PlayDoge",
+          "symbol": "PLAY",
+          "decimals": 18,
+          "standard": "ERC-20"
+        },
+        "related_urls": [
+          "<https://etherscan.io/tx/0x840e42d573ebe1ff27a9e4914573b4e0518fcd685c7f9331d319abe854f780e3>"
+        ]
+      }
+    ],
+    "direction": "in",
+    "success": true,
+    "timestamp": 1718689727
+  },
+  "meta": {
+    "totalPages": 1
+  }
+}
+```
+
+**Congratulations** 🎉! You just learned how to retrieve an activity by its id.
+
+## 🧰 SDK
+
+You can also integrate this feature into your code using our RSS3 SDKs. The SDK ensures type safety and provides IDE auto-completion support, making your integration smoother.
+
+[SDKs](SDKs for building with RSS3.)
+
+### Javascript Example
+
+```typescript
+import { getActivity } from '@rss3/sdk'
+
+const activity = await getActivity({
+    id: "0x840e42d573ebe1ff27a9e4914573b4e0518fcd685c7f9331d319abe854f780e3",
+});
+
+console.log(activity)
+```

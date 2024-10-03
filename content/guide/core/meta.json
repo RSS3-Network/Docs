@@ -1,0 +1,20 @@
+{
+	"title": "Core Concepts",
+	"root": true,
+	"pages": [
+		"---Core Concepts---",
+		"index",
+		"open-web",
+		"open-information",
+		"open-information-initiative",
+		"open-source",
+		"protocols",
+		"whitepaper",
+		"ownership-economy",
+		"governance-and-rep",
+		"---DSL (Data Sublayer)---",
+		"dsl",
+		"---VSL (Value Sublayer)---",
+		"vsl"
+	]
+}

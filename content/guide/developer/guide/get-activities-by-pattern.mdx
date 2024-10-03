@@ -1,0 +1,110 @@
+---
+title: Get Activities By Pattern
+---
+
+## ⭐️ Description
+
+This API endpoint allows you to fetch activities from a specified decentralized platform.
+
+The API call is a **GET request** and the `platform` parameter is **required** in the API call path. You can use additional query parameters like `limit`, `tag`, and `direction` to filter and customize the results.
+
+For more details, please visit the [RSS3 DSL API](https://docs.rss3.io/api-reference#tag/dsl/GET/decentralized/platform/{platform}).
+
+### 🔨 Example
+
+We use the following API call to retrieve activities from a platform on Ethereum. The path parameter `Uniswap` is added to the request path, and we set the query parameters `limit=1` and `action_limit=1` to display only one action from a single activity, and `direction=out` to show only outgoing activities.
+
+Copy the code below and run it in your terminal to see the result.
+
+```shell
+curl 'https://gi.rss3.io/decentralized/platform/Uniswap?limit=1&action_limit=1&direction=out'
+```
+
+## 💻 Response
+
+The response from this call will look like this:
+
+```json
+{
+  "data": [
+    {
+      "id": "0xc787eb3e234e01ce4425b9ec6c7181922c5dc6070fe42777d9bf407944fd8008",
+      "owner": "0xD01D6E604B6472A4dc0cB267D849F98576F508b3",
+      "network": "ethereum",
+      "index": 0,
+      "from": "0xD01D6E604B6472A4dc0cB267D849F98576F508b3",
+      "to": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+      "tag": "exchange",
+      "type": "swap",
+      "platform": "Uniswap",
+      "fee": {
+        "amount": "219873838940800",
+        "decimal": 18
+      },
+      "calldata": {
+        "function_hash": "0x7ff36ab5"
+      },
+      "total_actions": 2,
+      "actions": [
+        {
+          "tag": "exchange",
+          "type": "swap",
+          "platform": "Uniswap",
+          "from": "0xD01D6E604B6472A4dc0cB267D849F98576F508b3",
+          "to": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+          "metadata": {
+            "from": {
+              "value": "290747507511363600",
+              "name": "Ethereum",
+              "symbol": "ETH",
+              "decimals": 18
+            },
+            "to": {
+              "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+              "value": "290747507511363600",
+              "name": "Wrapped Ether",
+              "symbol": "WETH",
+              "decimals": 18,
+              "standard": "ERC-20"
+            }
+          },
+          "related_urls": [
+            "https://etherscan.io/tx/0xc787eb3e234e01ce4425b9ec6c7181922c5dc6070fe42777d9bf407944fd8008"
+          ]
+        }
+      ],
+      "direction": "out",
+      "success": true,
+      "timestamp": 1721528255
+    }
+  ],
+  "meta": {
+    "cursor": "0xc787eb3e234e01ce4425b9ec6c7181922c5dc6070fe42777d9bf407944fd8008:ethereum"
+  }
+}
+```
+
+**Congratulations** 🎉! You just learned how to retrieve activities from a specified platform.
+
+## 🧰 SDK
+
+You can also integrate this feature into your code using our RSS3 SDKs. The SDK ensures type safety and provides IDE auto-completion support, making your integration smoother.
+
+### Javascript Example
+
+```typescript
+import { getPlatformActivity } from '@rss3/sdk';
+
+const activities = await getPlatformActivity(
+  {
+    platform: "Uniswap",
+  },
+  {
+    limit: 1,
+    action_limit: 1,
+    direction: "out"
+  }
+);
+
+console.log(activities);
+```

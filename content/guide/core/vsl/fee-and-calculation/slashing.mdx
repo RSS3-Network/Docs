@@ -1,0 +1,56 @@
+---
+title: Slashing
+description: Learn about slashing in VSL.
+---
+
+Slashing is a mechanism used to maintain network stability.
+
+<Callout type="error">
+  Currently, the slashing mechanism is still in its design stage. An REP is required to approve the final design before implementation.
+</Callout>
+
+A Node is slashed when its [demotion](/guide/core/vsl/fee-and-calculation/demotion) counter reaches 4.
+
+## Consequences
+
+A slashed Node faces many consequences.
+
+### [Reliability Score](/guide/core/vsl/fee-and-calculation/reliability-score)
+
+The Node’s score is set to 0. This effectively means that the Node will not receive any requests during the current Epoch.
+
+### [Staking Pool](/guide/core/vsl/pool/staking-pool)
+
+0.5% of tokens in the Node’s Staking Pool will be temporarily put into the Slashing Pool.
+
+### [Operation Pool](/guide/core/vsl/pool/operation-pool)
+
+1% of tokens in the Node’s Operation Pool will be temporarily put into the Slashing Pool. Learn more about Operation Pool:
+
+### Node Stage
+
+The Node is put into the `Offline` stage, which means it will not enter subsequent Epochs and resume operation, unless the Operator manually confirms that it is ready.
+
+## Challenge
+
+There will be a 3-Epoch challenge window during which the Operator can challenge a slash. Each challenge will undergo a manual review. A successful challenge revokes the slash and returns all tokens from the Slashing Pool. However, lost opportunities, such as network rewards, will not be distributed retrospectively.
+
+## Committed Slash
+
+Failing to revoke a slash within the challenge window means that the slash will be committed permanently. The slashed tokens will be:
+
+### Burned
+
+50% of the slashed tokens will be burned.
+
+## Reward and Reimbursement
+
+20% of the slashed tokens will be awarded to reporters. When the slash is automatically triggered without a reporter, 20% of the slashed tokens will be reimbursed to all developers who paid [request fees](/guide/core/vsl/fee-and-calculation/request-fee) during the Epoch in which the slashing occurred.
+
+## Donation
+
+The remaining tokens will be donated to the Treasury and used for [Public Good](/guide/core/vsl/nodes/public-good-node) initiatives and clauses.
+
+<Callout>
+  Treasury address: `0x7BB0c7cE05f4A676F91055724F0Db0EcC31f742F`
+</Callout>

@@ -1,0 +1,24 @@
+---
+title: Demotion
+description: Learn about demotion in VSL.
+---
+
+Demotion is a mechanism designed to maintain network stability.
+
+<Callout type="error">
+  Currently, the demotion mechanism is still in its design stage. An REP is required to approve the final design before implementation.
+</Callout>
+
+Each Node has a Demotion counter which records the number of times it has behaved unexpectedly. This includes but is not limited to:
+
+1. Failed to maintain a healthy online state.
+2. Failed to process a request.
+3. Processed a request with an incorrect response.
+
+Each increase in the counter drastically reduces the Node’s [Reliability Score](/guide/core/vsl/fee-and-calculation/reliability-score).
+
+When the Demotion counter reaches the threshold imposed by the Network, the Node is [slashed](/guide/core/vsl/fee-and-calculation/slashing).
+
+<Callout>
+  Currently, the threshold is designed to be 4.
+</Callout>

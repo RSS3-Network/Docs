@@ -1,0 +1,96 @@
+---
+title: Get Activities By Network
+---
+
+## ⭐️ Description
+
+This API endpoint allows you to retrieve activities from a specified decentralized network.
+
+The API call is a **GET request** and the `network` parameter is **required** in the API call path. You can use various query parameters to filter and paginate the results.
+
+For more details, please visit the [RSS3 DSL API](https://docs.rss3.io/api-reference#tag/dsl/GET/decentralized/network/{network}).
+
+## 🔨 Example
+
+Let's make an API call to retrieve a list of activities from the Ethereum network. We set the path parameter to `ethereum`, and use the query parameters `action_limit=1`, `limit=1`, and `direction=out` to display only one action from one outgoing activity on the Ethereum network.
+
+Copy the code below and run it in your terminal to see the result.
+
+```shell
+curl 'https://gi.rss3.io/decentralized/network/ethereum?limit=1&action_limit=1&direction=out'
+```
+
+## 💻 Response
+
+The response from this call will look like this:
+
+```json
+{
+  "data": [
+    {
+      "id": "0xf25f42fa56ba9f866dd639525a406299fceaf38321be3bb7bd653835cc007adc",
+      "owner": "0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5",
+      "network": "ethereum",
+      "index": 0,
+      "from": "0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5",
+      "to": "0x3938Fc796125eDf184B18a5C7f8Ef0704386aedE",
+      "tag": "transaction",
+      "type": "transfer",
+      "fee": {
+        "amount": "47293252251000",
+        "decimal": 18
+      },
+      "calldata": {},
+      "total_actions": 1,
+      "actions": [
+        {
+          "tag": "transaction",
+          "type": "transfer",
+          "from": "0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5",
+          "to": "0x3938Fc796125eDf184B18a5C7f8Ef0704386aedE",
+          "metadata": {
+            "value": "22484669526053934",
+            "name": "Ethereum",
+            "symbol": "ETH",
+            "decimals": 18
+          },
+          "related_urls": [
+            "https://etherscan.io/tx/0xf25f42fa56ba9f866dd639525a406299fceaf38321be3bb7bd653835cc007adc"
+          ]
+        }
+      ],
+      "direction": "out",
+      "success": true,
+      "timestamp": 1721528315
+    }
+  ],
+  "meta": {
+    "cursor": "0xf25f42fa56ba9f866dd639525a406299fceaf38321be3bb7bd653835cc007adc:ethereum"
+  }
+}
+```
+
+**Congratulations** 🎉! You just learned how to retrieve activities from a network.
+
+## 🧰 SDK
+
+You can also integrate this feature into your code using our RSS3 SDKs. The SDK ensures type safety and provides IDE auto-completion support, making your integration smoother.
+
+### Javascript Example
+
+```typescript
+import { getNetworkActivity } from '@rss3/sdk';
+
+const activities = await getNetworkActivity(
+  {
+    network: "ethereum",
+  },
+  {
+    limit: 1,
+    action_limit: 1,
+    direction: "out"
+  }
+);
+
+console.log(activities);
+```

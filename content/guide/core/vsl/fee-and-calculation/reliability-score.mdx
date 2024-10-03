@@ -1,0 +1,17 @@
+---
+title: Reliability Score
+description: Learn how the reliability score affects a Node.
+---
+
+A Global Indexer routes requests to Nodes based on their coverage and reliability score. The calculation of the score is based on a range of factors, including but not limited to:
+
+1. Node’s uptime
+2. Requests processed (total and within current Epoch)
+3. Slash records
+4. Operation deposit
+5. Operation Pool size
+6. Staking Pool size
+
+Nodes with a higher reliability score have an increased likelihood of receiving requests, thus maximizing the potential [network reward](/guide/core/vsl/reward/network-reward) received.
+
+Reliability Score is greatly impact by demotion and slashing.

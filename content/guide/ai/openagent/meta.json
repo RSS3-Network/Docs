@@ -1,0 +1,5 @@
+{
+	"title": "OpenAgent",
+	"defaultOpen": true,
+	"pages": ["index", "compatible-models", "deployment", "integrations"]
+}

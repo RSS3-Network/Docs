@@ -1,0 +1,5 @@
+{
+	"title": "Pool",
+	"defaultOpen": true,
+	"pages": ["operation-pool", "staking-pool", "slashing-pool"]
+}

@@ -1,0 +1,29 @@
+---
+title: Websites
+description: Explorer, Scan and Faucet
+---
+
+## Explorer & Scan
+
+VSL has an explorer that offers an intuitive interface for operations including bridging, staking, and more.
+
+| Network | Explorer | Scan |
+|---------|----------|------|
+| Mainnet | [https://explorer.rss3.io](https://explorer.rss3.io) | [https://scan.rss3.io](https://scan.rss3.io) |
+| Testnet | [https://explorer.testnet.rss3.io](https://explorer.testnet.rss3.io) | [https://scan.testnet.rss3.io](https://scan.testnet.rss3.io) |
+
+## Faucet on Ethereum Sepolia
+
+On Ethereum Sepolia, RSS3 ([0x3Ef1D5be1E2Ce46c583a0c8e511f015706A0ab23](https://sepolia.etherscan.io/address/0x3Ef1D5be1E2Ce46c583a0c8e511f015706A0ab23)) can be minted via:
+
+1. Calling `mint(address to,uint256 amount)` function to receive 1,000 RSS3.
+
+   ```plaintext
+   cast send \
+     0x3Ef1D5be1E2Ce46c583a0c8e511f015706A0ab23 \
+     "mint(address,uint256)" $ADDR 1000000000000000000000 \
+     --private-key=$PRIV_KEY \
+     --rpc-url=https://rpc.sepolia.org
+   ```
+
+2. Using etherscan to interact with the contract: [https://sepolia.etherscan.io/address/0x3Ef1D5be1E2Ce46c583a0c8e511f015706A0ab23#writeProxyContract](https://sepolia.etherscan.io/address/0x3Ef1D5be1E2Ce46c583a0c8e511f015706A0ab23#writeProxyContract)

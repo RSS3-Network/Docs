@@ -1,0 +1,61 @@
+---
+title: Global Indexer
+description: An introduction to Global Indexer on the RSS3 Network.
+---
+
+## Architecture
+
+A Global Indexer (GI) is responsible for facilitating coordination among Nodes and engaging with the VSL. The GI performs critical duties to ensure the Network is robust and reliable.
+
+The operation of a GI is subject to a set of requirements set by the Network and approvals from the Community.
+
+## What a GI does
+
+A GI has many duties to perform.
+
+### Broadcaster
+
+The broadcaster constantly monitors all Nodes’ status for irregular behaviors. It works closely with the broadcaster and router to ensure the Network’s stability.
+
+### Enforcer
+
+The enforcer works with the broadcaster and router to maintain a record of demotion and slashing. Learn more about these concepts:
+
+<Cards>
+  <Card href="/guide/core/concepts/demotion" title="Demotion" description="Learn about what a demotion is." />
+  <Card href="/guide/core/concepts/slashing" title="Slashing" description="Learn about how and when a slash occurs." />
+</Cards>
+
+### Indexer
+
+The indexer is responsible for structuring activities that take place on the entire Network, and supplying the information via network transparency API:
+
+<Card href="/guide/core/concepts/network-transparency-api" title="Network Transparency API" description="Learn about the Network Transparency API." />
+
+### Payment Processor
+
+The payment processor (works together with the settler) ensures that requests fee collected are correctly distributed to the corresponding Nodes and creators. Learn more:
+
+<Card href="/guide/core/concepts/request-fee" title="Request Fee" description="Learn about the Request Fee." />
+
+### Router
+
+GIs are equipped with more computational power to work out the optimal route to process incoming requests. A request retrieves Open Information from a Node and frequently from a group of Nodes simultaneously.
+
+The router ensures requests are routed and served in high performance with minimal latency.
+
+### Settler
+
+The settler initiates submissions of work records to the VSL, and the settlement contract will verify and distribute network reward. Learn more about the reward:
+
+<Card href="/guide/core/concepts/network-reward" title="Network Reward" description="Learn about the Network Reward." />
+
+### Taxer
+
+The taxer works out the Network’s average tax rate and updates the settlement contract on the VSL. Learn why this is needed:
+
+<Card href="/guide/core/concepts/public-good" title="Tax Rate" description="Learn about why the tax rate is needed." />
+
+## Open Source
+
+The code base is publicly available as open source on [GitHub](https://github.com/RSS3-Network/Global-Indexer).

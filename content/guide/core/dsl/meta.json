@@ -1,0 +1,5 @@
+{
+	"title": "Data Sublayer",
+	"defaultOpen": true,
+	"pages": ["global-indexer", "node", "worker", "coverage", "deployment"]
+}

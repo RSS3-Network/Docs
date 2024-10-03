@@ -1,0 +1,41 @@
+---
+title: Deploy Contract
+description: Learn how to deploy a contract on VSL.
+---
+
+Deploying contracts on VSL is exactly the same process as on any EVM-compatible blockchain.
+
+You may use any stacks of your choice, here is a list of popular ones:
+
+1. [Foundry](https://github.com/foundry-rs/foundry) is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.
+
+```js
+{
+  networks: {
+    // for mainnet
+    "vsl-mainnet": {
+      url: "https://rpc.rss3.io",
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
+    // for testnet
+    "vsl-testnet": {
+      url: "https://rpc.testnet.rss3.io",
+      accounts: [process.env.PRIVATE_KEY as string]
+    },
+    // for local dev environment
+    "local": {
+      url: "http://localhost:8545",
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
+  },
+  defaultNetwork: "local",
+}
+```
+
+2. [Hardhat](https://hardhat.org/) is a development environment for Ethereum software. It consists of different components for editing, compiling, debugging and deploying your smart contracts and dApps, all of which work together to create a complete development environment.
+
+3. [Remix](https://remix.ethereum.org/) is a full stack web framework that lets you focus on the user interface and work back through web standards to deliver a fast, slick, and resilient user experience.
+
+4. [ethers.js](https://docs.ethers.org/v6/) is a complete, compact and simple library for Ethereum and ilk, written in TypeScript.
+
+5. [Web3.js](https://docs.web3js.org/v2/) is a TypeScript implementation of the Ethereum JSON RPC API and related tooling maintained by ChainSafe Systems.

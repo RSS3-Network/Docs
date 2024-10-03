@@ -1,0 +1,119 @@
+---
+title: Get Account Activities in Batch
+---
+
+## ⭐️ Description
+
+This API endpoint allows you to fetch the latest activities associated with multiple specified accounts in one or more decentralized systems.
+
+The API call is a **POST request** and requires a **request body** instead of query and path parameters. The body specifies this account and the platforms from which we want to retrieve activities.
+
+For more details, please visit the [RSS3 DSL API](https://docs.rss3.io/api-reference#tag/dsl/POST/decentralized/accounts).
+
+## 🔨 Example
+
+Let's make an API call to retrieve activities of vitalik.eth from Ethereum. We set limit=1, action_limit=1, direction=out, and other parameters to filter the activities we want.
+
+Copy the code below and run it in your terminal to see the result.
+
+```shell
+curl --request POST \
+  --url https://gi.rss3.io/decentralized/accounts \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "accounts": [
+    "vitalik.eth"
+  ],
+  "limit": 1,
+  "action_limit": 1,
+  "direction": "out",
+  "network": [
+    "ethereum"
+  ],
+  "tag": [
+    "transaction"
+  ]
+}
+'
+```
+
+## 💻 Response
+
+The response from this call will look like this:
+
+```json
+{
+    "data": [
+        {
+            "id": "0xfaf1b8505995bd5cae8b3a02b5350dcae65830388d2cd97c6395a0a72a31a67d",
+            "owner": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+            "network": "ethereum",
+            "index": 0,
+            "from": "0x30ED0d3EeC718e0e0f333dC2b396Cf99d2476554",
+            "to": "0x21A4D9a037a06B0dFE7d6067edbE10b64795dEe6",
+            "tag": "transaction",
+            "type": "transfer",
+            "fee": {
+                "amount": "176930308124892",
+                "decimal": 18
+            },
+            "calldata": {
+                "function_hash": "0x81744fb1"
+            },
+            "total_actions": 16,
+            "actions": [
+                {
+                    "tag": "transaction",
+                    "type": "transfer",
+                    "from": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+                    "to": "0x22220682EB7014aD3418707C8E4b3ad3EAD655c1",
+                    "metadata": {
+                        "address": "0x21A4D9a037a06B0dFE7d6067edbE10b64795dEe6",
+                        "value": "1000000000000000000000000",
+                        "name": "BlockDAG",
+                        "symbol": "BDAG",
+                        "decimals": 18,
+                        "standard": "ERC-20"
+                    },
+                    "related_urls": [
+                        "https://etherscan.io/tx/0xfaf1b8505995bd5cae8b3a02b5350dcae65830388d2cd97c6395a0a72a31a67d"
+                    ]
+                }
+            ],
+            "direction": "out",
+            "success": true,
+            "timestamp": 1721513099
+        }
+    ],
+    "meta": {
+        "cursor": "0xfaf1b8505995bd5cae8b3a02b5350dcae65830388d2cd97c6395a0a72a31a67d:ethereum"
+    }
+}
+```
+
+Congratulations 🎉! You just learned how to retrieve activities of vitalik from multiple network sources.
+
+## 🧰 SDK
+
+You can also integrate this feature into your code using our RSS3 SDKs. The SDK ensures type safety and provides IDE auto-completion support, making your integration smoother.
+
+```ts
+import { getActivitiesByAccounts } from '@rss3/sdk';
+
+// Define the parameters for the API call
+const params = {
+  accounts: ["vitalik.eth"],
+  limit: 1,
+  action_limit: 1,
+  direction: "out",
+  network: ["ethereum"],
+  tag: ["transaction"],
+  type: ["transfer"],
+  platform: ["1inch"]
+};
+
+// Make the API call
+const activities = await getActivitiesByAccounts(params);
+
+console.log(activities);
+```
