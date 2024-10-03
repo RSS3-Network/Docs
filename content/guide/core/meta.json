@@ -19,6 +19,16 @@
 		"dsl/coverage",
 		"dsl/worker",
 		"---Value Sublayer (VSL)---",
-		"vsl"
+		"vsl/overview",
+		"vsl/node",
+		"vsl/chip",
+		"vsl/bridge",
+		"vsl/operation",
+		"vsl/staking",
+		"vsl/epoch",
+		"vsl/pool",
+		"vsl/fee-and-calculations",
+		"vsl/links",
+		"vsl/deployment"
 	]
 }

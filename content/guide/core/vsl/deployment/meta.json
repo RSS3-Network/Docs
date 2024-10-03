@@ -1,5 +1,5 @@
 {
 	"title": "Deployment",
-	"defaultOpen": true,
+	"defaultOpen": false,
 	"pages": ["index", "deploy-contract"]
 }
