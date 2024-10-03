@@ -3,7 +3,7 @@
   "root": true,
   "pages": [
     "---Core Concepts---",
-    "concept/index",
+    "index",
     "concept/open-web",
     "concept/open-information",
     "concept/open-information-initiative",
