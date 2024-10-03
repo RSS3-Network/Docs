@@ -13,17 +13,17 @@ const font = Poppins({
 
 export const metadata = createMetadata({
 	title: {
-		template: "%s | Fumadocs",
-		default: "Fumadocs",
+		template: "%s | RSS3 Docs",
+		default: "RSS3 Documentation",
 	},
-	description: "The Next.js framework for building documentation sites",
+	description: "Everything you need to build with RSS3.",
 	metadataBase: baseUrl,
 });
 
 export const viewport: Viewport = {
 	themeColor: [
-		{ media: "(prefers-color-scheme: dark)", color: "#0A0A0A" },
-		{ media: "(prefers-color-scheme: light)", color: "#fff" },
+		{ media: "(prefers-color-scheme: dark)", color: "##1477fb" },
+		{ media: "(prefers-color-scheme: light)", color: "##1477fb" },
 	],
 };
 
