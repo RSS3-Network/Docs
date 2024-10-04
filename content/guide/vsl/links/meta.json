@@ -1,5 +1,5 @@
 {
 	"title": "Links",
-	"defaultOpen": false,
+	"defaultOpen": true,
 	"pages": ["contract-addresses", "websites", "chains"]
 }

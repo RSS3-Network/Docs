@@ -1,6 +1,6 @@
 {
 	"title": "Fee and Calculation",
-	"defaultOpen": false,
+	"defaultOpen": true,
 	"pages": [
 		"request-fee",
 		"network-reward",

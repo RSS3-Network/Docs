@@ -1,5 +1,5 @@
 {
 	"title": "Operation",
-	"defaultOpen": false,
+	"defaultOpen": true,
 	"pages": ["deposit"]
 }

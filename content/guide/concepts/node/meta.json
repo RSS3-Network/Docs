@@ -1,5 +1,5 @@
 {
 	"title": "Node",
-	"defaultOpen": false,
+	"defaultOpen": true,
 	"pages": ["normal-node", "alpha-node", "public-good-node"]
 }
