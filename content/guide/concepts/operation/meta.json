@@ -1,5 +1,12 @@
 {
 	"title": "Operation",
-	"defaultOpen": true,
-	"pages": ["deposit"]
+	"defaultOpen": false,
+	"pages": [
+		"demotion",
+		"deposit",
+		"network-reward",
+		"operation-tax",
+		"reliability-score",
+		"slashing"
+	]
 }

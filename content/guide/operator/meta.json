@@ -1,11 +1,11 @@
 {
-  "title": "Deployment",
-  "root": true,
-  "pages": [
-    "---Deployment---",
-    "index",
-    "light-mode",
-    "serverless",
-    "view-status"
-  ]
+	"title": "Deployment",
+	"root": true,
+	"pages": [
+		"---Deployment---",
+		"index",
+		"light-mode",
+		"serverless",
+		"view-status"
+	]
 }

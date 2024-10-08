@@ -11,8 +11,6 @@
 		"guide/get-account-activities-in-batch",
 		"guide/get-rss-activity-by-path",
 		"---API---",
-		"api",
-		"---SDK---",
-		"sdk/index"
+		"api"
 	]
 }

@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 :root {
-  /* RSS3 blue: #1477fb */
-  --primary: 214 97% 53%;
+	/* RSS3 blue: #1477fb */
+	--primary: 214 97% 53%;
 }
