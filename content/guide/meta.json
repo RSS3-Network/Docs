@@ -19,7 +19,7 @@
 		"concepts/epoch",
 		"concepts/operation",
 		"concepts/staking",
-		"concepts/fee-and-calculations",
+		"concepts/fee-and-calculation",
 		"---Data Sublayer (DSL)---",
 		"dsl/index",
 		"dsl/global-indexer",
