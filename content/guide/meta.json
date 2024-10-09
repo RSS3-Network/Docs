@@ -41,6 +41,7 @@
 		"operator/light-mode",
 		"operator/serverless",
 		"operator/view-status",
+		"operator/node-status-map",
 		"---AI---",
 		"ai/index",
 		"ai/openagent",
