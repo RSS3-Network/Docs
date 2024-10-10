@@ -16,12 +16,12 @@ VSL has an explorer that offers an intuitive interface for operations including 
 
 On Ethereum Sepolia, RSS3 ([0x3Ef1D5be1E2Ce46c583a0c8e511f015706A0ab23](https://sepolia.etherscan.io/address/0x3Ef1D5be1E2Ce46c583a0c8e511f015706A0ab23)) can be minted via:
 
-1. Calling `mint(address to,uint256 amount)` function to receive 1,000 RSS3.
+1. Calling `mint()` function to receive 10,000 RSS3.
 
    ```plaintext
    cast send \
      0x3Ef1D5be1E2Ce46c583a0c8e511f015706A0ab23 \
-     "mint(address,uint256)" $ADDR 1000000000000000000000 \
+     "mint()" \
      --private-key=$PRIV_KEY \
      --rpc-url=https://rpc.sepolia.org
    ```
