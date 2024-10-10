@@ -6,6 +6,7 @@
 		"index",
 		"light-mode",
 		"serverless",
-		"view-status"
+		"view-node-info",
+		"node-status-map"
 	]
 }
