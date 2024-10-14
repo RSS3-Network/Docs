@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@rss3/web3-icons-react':
-        specifier: ^0.0.12
-        version: 0.0.12
+        specifier: ^0.0.13
+        version: 0.0.13
       fumadocs-core:
         specifier: 13.4.10
         version: 13.4.10(@types/react@18.3.11)(next@14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1068,8 +1068,8 @@ packages:
   '@radix-ui/rect@1.1.0':
     resolution: {integrity: sha512-A9+lCBZoaMJlVKcRBz2YByCG+Cp2t6nAnMnNba+XiWxnj6r4JUFqfsgwocMBZU9LPtdxC6wB56ySYpc7LQIoJg==}
 
-  '@rss3/web3-icons-react@0.0.12':
-    resolution: {integrity: sha512-Eh9iGY9JSr7PeXN+WotU11mzMYqsMKFlT+9Ct8yYpM3cmatCpjZvDA5CmOwetb/4cPMTxZoEqg/uMPUy34gHQA==}
+  '@rss3/web3-icons-react@0.0.13':
+    resolution: {integrity: sha512-OJB9EOaGiNQnDdenyfyiMqQ923R6pUAef+PpaFOt82KK5U1/l7xu/Q+BWLwI9ZJHBBNtRM3wNCfMsv4J40xzlA==}
 
   '@shikijs/core@1.20.0':
     resolution: {integrity: sha512-KlO3iE0THzSdYkzDFugt8SHe6FR3qNYTkmpbdW1d6xo8juQkMjybxAw/cBi2npL2eb2F4PbbnSs5Z9tDusfvyg==}
@@ -3218,7 +3218,7 @@ snapshots:
 
   '@radix-ui/rect@1.1.0': {}
 
-  '@rss3/web3-icons-react@0.0.12': {}
+  '@rss3/web3-icons-react@0.0.13': {}
 
   '@shikijs/core@1.20.0':
     dependencies:
