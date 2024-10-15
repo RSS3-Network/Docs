@@ -1,6 +1,7 @@
 // import { RootToggle } from "fumadocs-ui/components/layout/root-toggle";
 import type { HomeLayoutProps } from "fumadocs-ui/home-layout";
 import type { DocsLayoutProps } from "fumadocs-ui/layout";
+import Image from "next/image";
 import { source } from "./source";
 
 // export interface Mode {
@@ -41,7 +42,16 @@ import { source } from "./source";
  */
 export const baseOptions: HomeLayoutProps = {
 	nav: {
-		title: "RSS3 Docs",
+		title: (
+			<>
+				<Image
+					alt="RSS3 Documentation"
+					src="/rss3-doc-logo.svg"
+					width={200}
+					height={100}
+				/>
+			</>
+		),
 	},
 	links: [
 		{
