@@ -16,6 +16,7 @@
 		"---Data Sublayer (DSL)---",
 		"dsl/index",
 		"dsl/global-indexer",
+		"dsl/supported-networks",
 		"dsl/coverage",
 		"dsl/worker",
 		"---Value Sublayer (VSL)---",
