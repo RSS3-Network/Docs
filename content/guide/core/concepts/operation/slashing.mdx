@@ -9,23 +9,23 @@ Slashing is a mechanism used to maintain network stability.
   Currently, the slashing mechanism is still in its design stage. An REP is required to approve the final design before implementation.
 </Callout>
 
-A Node is slashed when its [demotion](/guide/core/concepts/fee-and-calculation/demotion) counter reaches 4.
+A Node is slashed when its [demotion](./demotion) counter reaches 4.
 
 ## Consequences
 
 A slashed Node faces many consequences.
 
-### [Reliability Score](/guide/core/concepts/fee-and-calculation/reliability-score)
+### [Reliability Score](./reliability-score)
 
 The Node’s score is set to 0. This effectively means that the Node will not receive any requests during the current Epoch.
 
-### [Staking Pool](/guide/core/concepts/pool/staking-pool)
+### Staking Pool
 
-0.5% of tokens in the Node’s Staking Pool will be temporarily put into the Slashing Pool.
+0.5% of tokens in the Node’s [Staking Pool](../pool/staking-pool) will be temporarily put into the Slashing Pool.
 
-### [Operation Pool](/guide/core/concepts/pool/operation-pool)
+### Operation Pool
 
-1% of tokens in the Node’s Operation Pool will be temporarily put into the Slashing Pool. Learn more about Operation Pool:
+1% of tokens in the Node’s [Operation Pool](../pool/operation-pool) will be temporarily put into the Slashing Pool. Learn more about Operation Pool:
 
 ### Node Stage
 
@@ -45,7 +45,7 @@ Failing to revoke a slash within the challenge window means that the slash will 
 
 ## Reward and Reimbursement
 
-20% of the slashed tokens will be awarded to reporters. When the slash is automatically triggered without a reporter, 20% of the slashed tokens will be reimbursed to all developers who paid [request fees](/guide/core/concepts/fee-and-calculation/request-fee) during the Epoch in which the slashing occurred.
+20% of the slashed tokens will be awarded to reporters. When the slash is automatically triggered without a reporter, 20% of the slashed tokens will be reimbursed to all developers who paid [request fees](./request-fee) during the Epoch in which the slashing occurred.
 
 ## Donation
 
