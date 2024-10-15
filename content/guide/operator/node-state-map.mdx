@@ -1,19 +1,19 @@
 ---
-title: Node Status Map
-description: Understanding and managing your Node's status.
+title: Node State Map
+description: Understanding and managing your Node's state.
 ---
 
-The Node Status Map provides a visual representation of your RSS3 Node's operational status, enabling easy monitoring and management of its performance.
+The Node State Map provides a visual representation of your RSS3 Node's operational state, enabling easy monitoring and management of its performance.
 
-To view your Node's status information, visit the Explorer page at `https://explorer.rss3.io/nodes/{your_node_address}`.
-![Node Status Detail](./assets/node-status-detail.png)
+To view your Node's state information, visit the Explorer page at `https://explorer.rss3.io/nodes/{your_node_address}`.
+![Node State Detail](./assets/node-state-detail.png)
 
-To view your Node's detailed status map, visit the Explorer page at `https://explorer.rss3.io/nodes/{your_node_address}?info-tab=stage`.
-![Node Status Map](./assets/node-status-map-view.png)
+To view your Node's detailed state map, visit the Explorer page at `https://explorer.rss3.io/nodes/{your_node_address}?info-tab=stage`.
+![Node State Map](./assets/node-state-map-view.png)
 
-The overall status of a Node is determined by two key factors: its current status and its current stage. Different combinations of statuses and stages are represented by unique icons on the map.
+The overall state of a Node is determined by two key factors: its current state and its current stage. Different combinations of statees and stages are represented by unique icons on the map.
 
-### A Node can have one of two main statuses:
+### A Node can have one of two main states:
 1. `online`: The Node is functioning normally.
 2. `offline`: The Node is currently unavailable.
 
@@ -35,9 +35,9 @@ Nodes in the Online, Initializing, Slashing or Exiting stages are eligible to pr
 </Callout>
 
 ### In the following situations, operators need to take action:
-1. When the Node is in the `unhealthy` stage: After fixing the issue, you need to click the `REINITIALIZE` button on the Explorer Node Status Map page to restore the Node.
-![Node Status Map](./assets/node-status-map-reinitialize.png)
+1. When the Node is in the `unhealthy` stage: After fixing the issue, you need to click the `REINITIALIZE` button on the Explorer Node State Map page to restore the Node.
+![Node State Map](./assets/node-state-map-reinitialize.png)
 2. When the Node is in the `registered`, `Outdated`, `Initializing`, or `Healthy` stage: The operator can choose to click the `EXIT` button to exit. Except for Nodes in the `Healthy` stage which will automatically exit in the next epoch, Nodes in other stages will immediately enter the `exited` stage.
-![Node Status Map](./assets/node-status-map-exit.png)
+![Node State Map](./assets/node-state-map-exit.png)
 3. When the Node is in the `exited` stage: The operator can choose to click the `REGISTER` button to restore the Node to the `registered` stage, thereby re-entering the network.
-![Node Status Map](./assets/node-status-map-register.png)
+![Node State Map](./assets/node-state-map-register.png)

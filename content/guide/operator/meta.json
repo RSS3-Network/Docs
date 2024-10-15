@@ -7,6 +7,6 @@
 		"light-mode",
 		"serverless",
 		"view-node-info",
-		"node-status-map"
+		"node-state-map"
 	]
 }
