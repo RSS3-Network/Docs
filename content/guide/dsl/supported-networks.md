@@ -24,3 +24,4 @@ description: Networks and protocols supported by the RSS3 Network DSL.
 | RSS                 |      |                   |
 | RSS3 VSL            |      |                   |
 | X Layer             |      |                   |
+| Total:              |      |                   |
