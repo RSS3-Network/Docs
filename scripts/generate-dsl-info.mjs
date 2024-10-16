@@ -1,11 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import fetch from "node-fetch";
 
-// API endpoints
-const NETWORK_CONFIG_ENDPOINT =
-	process.env.NETWORK_CONFIG_ENDPOINT || "https://gi.rss3.dev";
+// API endpoint
+const NETWORK_CONFIG_ENDPOINT = "https://gi.rss3.dev";
 
 // Read worker.md and supported-networks.md files
 const __filename = fileURLToPath(import.meta.url);

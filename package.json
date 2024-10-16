@@ -10,8 +10,9 @@
 		"typecheck": "tsc --noEmit",
 		"lint": "biome check",
 		"lint:fix": "biome check --write",
-		"generate-dsl-info": "node scripts/generate-dsl-info.mjs",
-		"generate-openapi": "node scripts/generate-openapi.mjs"
+		"generate:all": "pnpm run generate:dsl-info && pnpm run generate:openapi",
+		"generate:dsl-info": "node scripts/generate-dsl-info.mjs",
+		"generate:openapi": "node scripts/generate-openapi.mjs"
 	},
 	"dependencies": {
 		"@rss3/web3-icons-react": "^0.0.16",
@@ -21,7 +22,6 @@
 		"fumadocs-ui": "13.4.10",
 		"lucide-react": "^0.446.0",
 		"next": "^14.2.15",
-		"node-fetch": "^3.3.2",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"sharp": "^0.33.5",
