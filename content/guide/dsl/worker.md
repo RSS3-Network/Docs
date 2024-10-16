@@ -26,7 +26,7 @@ Here is a list of available workers.
 <!-- network-worker table starts -->
 | Network/Worker | arbitrum | arweave | avax | base | binance-smart-chain | crossbell | ethereum | farcaster | gnosis | linea | mastodon | near | optimism | polygon | rss | vsl | x-layer |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **core**[1] | ✓ |   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |   | ✓ | ✓ | ✓ |   | ✓ | ✓ |
+| **core**[1] | ✓ |   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |   | ✓ | ✓ |
 | 1inch |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
 | aave | ✓ |   | ✓ | ✓ |   |   | ✓ |   |   |   |   |   | ✓ | ✓ |   |   |   |
 | aavegotchi |   |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
@@ -44,7 +44,6 @@ Here is a list of available workers.
 | linea |   |   |   |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |   |
 | linear |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |   |
 | looksrare |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
-| mastodon |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |
 | matters |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |
 | mirror |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 | momoka |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
