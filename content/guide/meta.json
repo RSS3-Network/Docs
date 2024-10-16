@@ -32,6 +32,7 @@
 		"developer/tutorials",
 		"developer/api",
 		"developer/sdk/index",
+		"developer/migration",
 		"---For Operators---",
 		"operator/index",
 		"operator/deployment",
