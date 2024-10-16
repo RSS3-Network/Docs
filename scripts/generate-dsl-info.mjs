@@ -38,8 +38,7 @@ for (const category of ["decentralized", "federated", "rss"]) {
 		workers.add(networkConfigData[category].worker_configs.worker.value);
 	} else {
 		for (const network of networkConfigData[category]) {
-			const networkId = network.id === "mastodon" ? "activitypub" : network.id;
-			networks.push(networkId);
+			networks.push(network.id);
 			for (const workerConfig of network.worker_configs) {
 				workers.add(workerConfig.worker.value);
 			}
@@ -75,13 +74,9 @@ const workerTableRows = workersList
 						workerExists = true;
 						break;
 					}
-				} else if (
-					networkConfigData[category].some(
-						(n) => n.id === (network === "activitypub" ? "mastodon" : network),
-					)
-				) {
+				} else if (networkConfigData[category].some((n) => n.id === network)) {
 					const networkData = networkConfigData[category].find(
-						(n) => n.id === (network === "activitypub" ? "mastodon" : network),
+						(n) => n.id === network,
 					);
 					if (
 						networkData.worker_configs.some((w) => w.worker.value === worker)
@@ -130,13 +125,10 @@ const supportedNetworksTableStyle = `
 
 const supportedNetworksTableRows = networks
 	.map((network, i) => {
-		const assetInfo =
-			network === "activitypub"
-				? { ...networkAssetsData.networks.mastodon, name: "Activity Pub" }
-				: networkAssetsData.networks[network] || {
-						name: network,
-						icon_url: "",
-					};
+		const assetInfo = networkAssetsData.networks[network] || {
+			name: network,
+			icon_url: "",
+		};
 		const logo = assetInfo.icon_url
 			? `<img src="${assetInfo.icon_url}" alt="${assetInfo.name} logo" style={{width: '20px', height: '20px', verticalAlign: 'middle', display: 'inline-block'}} />`
 			: "";
