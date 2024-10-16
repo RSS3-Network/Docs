@@ -46,7 +46,7 @@ export const baseOptions: HomeLayoutProps = {
 			<>
 				<Image
 					alt="RSS3 Documentation"
-					src="/rss3-doc-logo.svg"
+					src="/logo/rss3-doc-logo.svg"
 					width={200}
 					height={100}
 				/>

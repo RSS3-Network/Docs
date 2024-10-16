@@ -61,8 +61,7 @@ Here is a list of available workers.
 | uniswap |   |   |   |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |   |
 | vsl |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
 | zerion | ✓ |   | ✓ | ✓ | ✓ |   |   |   | ✓ | ✓ |   |   | ✓ | ✓ |   |   | ✓ |
-| Subtotal: | 8 | 3 | 6 | 6 | 4 | 2 | 21 | 1 | 3 | 6 | 1 | 3 | 10 | 11 | 1 | 1 | 2 |
-| **Total workers:** | **89** | | | | | | | | | | | | | | | | |
+| **Subtotal** | 8 | 3 | 6 | 6 | 4 | 2 | 21 | 1 | 3 | 6 | 1 | 3 | 10 | 11 | 1 | 1 | 2 |
 <!-- network-worker table ends -->
 
 [1] A core worker covers all the data on the network where it operates, except for the data already covered by other workers.
