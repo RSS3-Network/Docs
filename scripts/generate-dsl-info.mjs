@@ -59,57 +59,58 @@ if (workersList.includes("core")) {
 }
 
 // Initialize the table for worker.md
-let workerTable = `| Network/Worker | ${networks.join(" | ")} |\n`;
-workerTable += `| --- | ${networks.map(() => "---").join(" | ")} |\n`;
+const workerTableHeader = `| Network/Worker | ${networks.join(" | ")} |\n| --- | ${networks.map(() => "---").join(" | ")} |\n`;
 
 // Generate table rows for worker.md
 const networkTotals = new Array(networks.length).fill(0);
-for (const worker of workersList) {
-	const displayName = worker === "core" ? `**${worker}**[1]` : worker;
-	let row = `| ${displayName} |`;
-	for (let i = 0; i < networks.length; i++) {
-		const network = networks[i];
-		let workerExists = false;
-		for (const category of ["decentralized", "federated", "rss"]) {
-			if (category === "rss") {
-				if (
-					network === networkConfigData[category].id &&
-					networkConfigData[category].worker_configs.worker.value === worker
+const workerTableRows = workersList
+	.map((worker) => {
+		const displayName = worker === "core" ? `**${worker}**[1]` : worker;
+		const row = networks.map((network, i) => {
+			let workerExists = false;
+			for (const category of ["decentralized", "federated", "rss"]) {
+				if (category === "rss") {
+					if (
+						network === networkConfigData[category].id &&
+						networkConfigData[category].worker_configs.worker.value === worker
+					) {
+						workerExists = true;
+						break;
+					}
+				} else if (
+					networkConfigData[category].some(
+						(n) => n.id === (network === "activitypub" ? "mastodon" : network),
+					)
 				) {
-					workerExists = true;
-					break;
-				}
-			} else if (
-				networkConfigData[category].some(
-					(n) => n.id === (network === "activitypub" ? "mastodon" : network),
-				)
-			) {
-				const networkData = networkConfigData[category].find(
-					(n) => n.id === (network === "activitypub" ? "mastodon" : network),
-				);
-				if (networkData.worker_configs.some((w) => w.worker.value === worker)) {
-					workerExists = true;
-					break;
+					const networkData = networkConfigData[category].find(
+						(n) => n.id === (network === "activitypub" ? "mastodon" : network),
+					);
+					if (
+						networkData.worker_configs.some((w) => w.worker.value === worker)
+					) {
+						workerExists = true;
+						break;
+					}
 				}
 			}
-		}
-		row += workerExists ? " ✓ |" : "   |";
-		if (workerExists) networkTotals[i]++;
-	}
-	workerTable += `${row}\n`;
-}
+			if (workerExists) networkTotals[i]++;
+			return workerExists ? "✓" : " ";
+		});
+		return `| ${displayName} | ${row.join(" | ")} |`;
+	})
+	.join("\n");
 
-// Add subtotal row
-workerTable += `| Subtotal: | ${networkTotals.map((total) => ` ${total} |`).join("")}\n`;
-
-// Calculate and add total workers row
+// Add subtotal and total rows
+const subtotalRow = `| Subtotal: | ${networkTotals.join(" | ")} |`;
 const totalWorkers = networkTotals.reduce((a, b) => a + b, 0);
-workerTable += `| Total workers: | ${totalWorkers} |${" |".repeat(networks.length - 1)}\n`;
+const totalRow = `| **Total workers:** | **${totalWorkers}** |${" |".repeat(networks.length - 1)}`;
+
+const workerTable = `${workerTableHeader}${workerTableRows}\n${subtotalRow}\n${totalRow}`;
 
 // Update worker.md content
 const workerPattern =
 	/<!-- network-worker table starts -->[\s\S]*?<!-- network-worker table ends -->/;
-const workerReplacement = `<!-- network-worker table starts -->\n${workerTable}<!-- network-worker table ends -->`;
+const workerReplacement = `<!-- network-worker table starts -->\n${workerTable}\n<!-- network-worker table ends -->`;
 const updatedWorkerContent = workerContent.replace(
 	workerPattern,
 	workerReplacement,
@@ -117,7 +118,7 @@ const updatedWorkerContent = workerContent.replace(
 fs.writeFileSync(workerPath, updatedWorkerContent);
 
 // Generate table for supported-networks.mdx
-let supportedNetworksTable = `
+const supportedNetworksTableStyle = `
 <table style={{borderCollapse: 'collapse'}}>
   <thead>
     <tr>
@@ -129,25 +130,29 @@ let supportedNetworksTable = `
   <tbody>
 `;
 
-for (let i = 0; i < networks.length; i++) {
-	const network = networks[i];
-	const assetInfo =
-		network === "activitypub"
-			? { ...networkAssetsData.networks.mastodon, name: "Activity Pub" }
-			: networkAssetsData.networks[network] || { name: network, icon_url: "" };
-	const logo = assetInfo.icon_url
-		? `<img src="${assetInfo.icon_url}" alt="${assetInfo.name} logo" style={{width: '20px', height: '20px', verticalAlign: 'middle', display: 'inline-block'}} />`
-		: "";
-	supportedNetworksTable += `
+const supportedNetworksTableRows = networks
+	.map((network, i) => {
+		const assetInfo =
+			network === "activitypub"
+				? { ...networkAssetsData.networks.mastodon, name: "Activity Pub" }
+				: networkAssetsData.networks[network] || {
+						name: network,
+						icon_url: "",
+					};
+		const logo = assetInfo.icon_url
+			? `<img src="${assetInfo.icon_url}" alt="${assetInfo.name} logo" style={{width: '20px', height: '20px', verticalAlign: 'middle', display: 'inline-block'}} />`
+			: "";
+		return `
     <tr>
       <td style={{padding: '4px 8px'}}>${assetInfo.name}</td>
       <td style={{padding: '4px 8px', lineHeight: 0}}>${logo}</td>
       <td style={{padding: '4px 8px'}}>${networkTotals[i]}</td>
     </tr>
   `;
-}
+	})
+	.join("");
 
-supportedNetworksTable += `
+const supportedNetworksTableFooter = `
     <tr>
       <td style={{padding: '4px 8px'}}><strong>Total:</strong></td>
       <td style={{padding: '4px 8px'}}></td>
@@ -156,6 +161,8 @@ supportedNetworksTable += `
   </tbody>
 </table>
 `;
+
+const supportedNetworksTable = `${supportedNetworksTableStyle}${supportedNetworksTableRows}${supportedNetworksTableFooter}`;
 
 // Update supported-networks.mdx content
 const supportedNetworksPattern =
@@ -170,5 +177,3 @@ fs.writeFileSync(
 	updatedSupportedNetworksContent,
 	"utf8",
 );
-
-console.log("DSL info generation completed successfully.");
