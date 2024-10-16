@@ -38,8 +38,7 @@ for (const category of ["decentralized", "federated", "rss"]) {
 		workers.add(networkConfigData[category].worker_configs.worker.value);
 	} else {
 		for (const network of networkConfigData[category]) {
-			const networkId = network.id === "mastodon" ? "activitypub" : network.id;
-			networks.push(networkId);
+			networks.push(network.id);
 			for (const workerConfig of network.worker_configs) {
 				workers.add(workerConfig.worker.value);
 			}
@@ -75,13 +74,9 @@ const workerTableRows = workersList
 						workerExists = true;
 						break;
 					}
-				} else if (
-					networkConfigData[category].some(
-						(n) => n.id === (network === "activitypub" ? "mastodon" : network),
-					)
-				) {
+				} else if (networkConfigData[category].some((n) => n.id === network)) {
 					const networkData = networkConfigData[category].find(
-						(n) => n.id === (network === "activitypub" ? "mastodon" : network),
+						(n) => n.id === network,
 					);
 					if (
 						networkData.worker_configs.some((w) => w.worker.value === worker)
@@ -99,11 +94,10 @@ const workerTableRows = workersList
 	.join("\n");
 
 // Add subtotal and total rows
-const subtotalRow = `| Subtotal: | ${networkTotals.join(" | ")} |`;
+const subtotalRow = `| **Subtotal** | ${networkTotals.join(" | ")} |`;
 const totalWorkers = networkTotals.reduce((a, b) => a + b, 0);
-const totalRow = `| **Total workers:** | **${totalWorkers}** |${" |".repeat(networks.length - 1)}`;
 
-const workerTable = `${workerTableHeader}${workerTableRows}\n${subtotalRow}\n${totalRow}`;
+const workerTable = `${workerTableHeader}${workerTableRows}\n${subtotalRow}`;
 
 // Update worker.md content
 const workerPattern =
@@ -117,46 +111,73 @@ fs.writeFileSync(workerPath, updatedWorkerContent);
 
 // Generate table for supported-networks.mdx
 const supportedNetworksTableStyle = `
-<table style={{borderCollapse: 'collapse'}}>
-  <thead>
-    <tr>
-      <th style={{padding: '4px 8px'}}>Network</th>
-      <th style={{padding: '4px 8px'}}>Logo</th>
-      <th style={{padding: '4px 8px'}}>Number of Workers</th>
-    </tr>
-  </thead>
-  <tbody>
+<table id="network-table">
+	<thead>
+		<tr>
+			<th>Network</th>
+			<th>Workers</th>
+		</tr>
+	</thead>
+	<tbody>
 `;
+
+function getAssetInfo(network, networkAssetsData) {
+	return (
+		networkAssetsData.networks[network] || {
+			icon_url: "",
+			name: network,
+		}
+	);
+}
+
+function getLogo(network, assetInfo) {
+	const logos = {
+		mastodon: "/logo/mastodon.svg",
+		rss: "/logo/rss.svg",
+	};
+
+	if (logos[network]) {
+		return `<img src="${logos[network]}" alt="${assetInfo.name} logo"/>`;
+	}
+
+	return assetInfo.icon_url
+		? `<img src="${assetInfo.icon_url}" alt="${assetInfo.name} logo"/>`
+		: "";
+}
 
 const supportedNetworksTableRows = networks
 	.map((network, i) => {
-		const assetInfo =
-			network === "activitypub"
-				? { ...networkAssetsData.networks.mastodon, name: "Activity Pub" }
-				: networkAssetsData.networks[network] || {
-						name: network,
-						icon_url: "",
-					};
-		const logo = assetInfo.icon_url
-			? `<img src="${assetInfo.icon_url}" alt="${assetInfo.name} logo" style={{width: '20px', height: '20px', verticalAlign: 'middle', display: 'inline-block'}} />`
-			: "";
+		const assetInfo = getAssetInfo(network, networkAssetsData);
+		const logo = getLogo(network, assetInfo);
+
 		return `
-    <tr>
-      <td style={{padding: '4px 8px'}}>${assetInfo.name}</td>
-      <td style={{padding: '4px 8px', lineHeight: 0}}>${logo}</td>
-      <td style={{padding: '4px 8px'}}>${networkTotals[i]}</td>
-    </tr>
-  `;
+	<tr>
+		<td>
+			<div>${logo}${assetInfo.name}</div>
+		</td>
+		<td>
+			${networkTotals[i]}
+		</td>
+	</tr>
+	`;
 	})
 	.join("");
 
 const supportedNetworksTableFooter = `
-    <tr>
-      <td style={{padding: '4px 8px'}}><strong>Total:</strong></td>
-      <td style={{padding: '4px 8px'}}></td>
-      <td style={{padding: '4px 8px'}}><strong>${totalWorkers}</strong></td>
-    </tr>
-  </tbody>
+	<tr>
+		<td>
+			<div>
+			<strong>
+				<span style={{"margin-right": "1rem"}}>Total: </span>
+				<span> ${networks.length} </span>
+			</strong>
+			</div>
+		</td>
+		<td>
+			<strong> ${totalWorkers} </strong>
+		</td>
+	</tr>
+	</tbody>
 </table>
 `;
 

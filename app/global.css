@@ -6,3 +6,32 @@
 	/* RSS3 blue: #1477fb */
 	--primary: 214 97% 53%;
 }
+
+#network-table {
+	border-collapse: collapse;
+}
+
+#network-table th:first-child,
+#network-table td:first-child {
+	width: 30rem;
+}
+
+#network-table th,
+#network-table td {
+	padding: 0.25rem 0.5rem;
+	font-size: 1rem;
+	vertical-align: middle;
+}
+
+#network-table td div {
+	text-align: left;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#network-table img {
+	margin: 0 1rem 0 0.5rem;
+	width: 2.5rem;
+	height: 2.5rem;
+}
