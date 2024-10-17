@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 // API endpoint
-const NETWORK_CONFIG_ENDPOINT = "https://gi.rss3.dev";
+const NETWORK_CONFIG_ENDPOINT = "https://gi.rss3.io";
 
 // Read worker.md and supported-networks.md files
 const __filename = fileURLToPath(import.meta.url);
