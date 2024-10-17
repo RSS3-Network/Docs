@@ -29,6 +29,21 @@ _openapi:
       title: Retrieve RSS Activity by Path
       url: '#retrieve-rss-activity-by-path'
     - depth: 2
+      title: Retrieve Federated Activity by ID (Beta)
+      url: '#retrieve-federated-activity-by-id-beta'
+    - depth: 2
+      title: Retrieve Federated Account Activities (Beta)
+      url: '#retrieve-federated-account-activities-beta'
+    - depth: 2
+      title: Batch Get Federated Accounts Activities (Beta)
+      url: '#batch-get-federated-accounts-activities-beta'
+    - depth: 2
+      title: Retrieve Federated Network Activities (Beta)
+      url: '#retrieve-federated-network-activities-beta'
+    - depth: 2
+      title: Retrieve Federated Platform Activities (Beta)
+      url: '#retrieve-federated-platform-activities-beta'
+    - depth: 2
       title: Retrieve bridging transactions
       url: '#retrieve-bridging-transactions'
     - depth: 2
@@ -104,17 +119,11 @@ _openapi:
       title: Retrieve the average of epochs APY
       url: '#retrieve-the-average-of-epochs-apy'
     - depth: 2
-      title: Retrieve all compatible networks
-      url: '#retrieve-all-compatible-networks'
-    - depth: 2
       title: Retrieve Node Assets
       url: '#retrieve-node-assets'
     - depth: 2
-      title: Retrieve available workers by network
-      url: '#retrieve-available-workers-by-network'
-    - depth: 2
-      title: Retrieve config by network and worker
-      url: '#retrieve-config-by-network-and-worker'
+      title: Retrieve network config
+      url: '#retrieve-network-config'
     - depth: 2
       title: Retrieve DSL total requests
       url: '#retrieve-dsl-total-requests'
@@ -138,6 +147,16 @@ _openapi:
         id: retrieve-platform-activities
       - content: Retrieve RSS Activity by Path
         id: retrieve-rss-activity-by-path
+      - content: Retrieve Federated Activity by ID (Beta)
+        id: retrieve-federated-activity-by-id-beta
+      - content: Retrieve Federated Account Activities (Beta)
+        id: retrieve-federated-account-activities-beta
+      - content: Batch Get Federated Accounts Activities (Beta)
+        id: batch-get-federated-accounts-activities-beta
+      - content: Retrieve Federated Network Activities (Beta)
+        id: retrieve-federated-network-activities-beta
+      - content: Retrieve Federated Platform Activities (Beta)
+        id: retrieve-federated-platform-activities-beta
       - content: Retrieve bridging transactions
         id: retrieve-bridging-transactions
       - content: Retrieve bridging transaction by hash
@@ -188,14 +207,10 @@ _openapi:
         id: retrieve-node-rewards-by-epoch
       - content: Retrieve the average of epochs APY
         id: retrieve-the-average-of-epochs-apy
-      - content: Retrieve all compatible networks
-        id: retrieve-all-compatible-networks
       - content: Retrieve Node Assets
         id: retrieve-node-assets
-      - content: Retrieve available workers by network
-        id: retrieve-available-workers-by-network
-      - content: Retrieve config by network and worker
-        id: retrieve-config-by-network-and-worker
+      - content: Retrieve network config
+        id: retrieve-network-config
       - content: Retrieve DSL total requests
         id: retrieve-dsl-total-requests
       - content: Retrieve RSS3 token total supply on VSL
@@ -230,6 +245,34 @@ _openapi:
           platform. This endpoint allows you to filter activities by various
           parameters such as limit, timestamp, success status, and more.
         heading: retrieve-platform-activities
+      - content: >-
+          This endpoint retrieves the details of a specified federated activity
+          by its ID. You can also specify additional query parameters to limit
+          the number of actions retrieved and to paginate through actions.
+        heading: retrieve-federated-activity-by-id-beta
+      - content: >-
+          This endpoint retrieves the activities associated with a specified
+          account in the federated system. You can use various query parameters
+          to filter and paginate the results, including limits on the number of
+          activities and actions, timestamps, success status, direction, and
+          more.
+        heading: retrieve-federated-account-activities-beta
+      - content: >-
+          Retrieve activities associated with multiple accounts on all
+          compatible networks. You can use various query parameters to filter
+          and paginate the results, including limits on the number of activities
+          and actions, timestamps, success status, direction, and more.
+        heading: batch-get-federated-accounts-activities-beta
+      - content: >-
+          Retrieve a list of activities from the specified federated network.
+          This endpoint allows you to filter activities by various parameters
+          such as limit, timestamp, success status, and more.
+        heading: retrieve-federated-network-activities-beta
+      - content: >-
+          Retrieve a list of activities from the specified decentralized
+          platform. This endpoint allows you to filter activities by various
+          parameters such as limit, timestamp, success status, and more.
+        heading: retrieve-federated-platform-activities-beta
       - content: >-
           Retrieve a list of bridging transactions based on various query
           parameters such as cursor, sender, receiver, address, transaction
@@ -359,16 +402,12 @@ _openapi:
         heading: retrieve-node-rewards-by-epoch
       - content: Retrieve the average Annual Percentage Yield (APY) for all epochs.
         heading: retrieve-the-average-of-epochs-apy
-      - content: Retrieve a list of all compatible networks.
-        heading: retrieve-all-compatible-networks
       - content: Retrieve Node assets details.
         heading: retrieve-node-assets
-      - content: Retrieve a list of available workers for a specific network.
-        heading: retrieve-available-workers-by-network
       - content: >-
-          Retrieve the configuration details of a specific worker on a specific
-          network.
-        heading: retrieve-config-by-network-and-worker
+          Retrieve the configuration details of RSS, Decentralized, and
+          Federated networks.
+        heading: retrieve-network-config
       - content: Retrieve the total number of requests served by Global Indexers.
         heading: retrieve-dsl-total-requests
       - content: Retrieve the total supply of RSS3 token on VSL.
@@ -379,4 +418,4 @@ _openapi:
         heading: retrieve-tvl-in-
 ---
 
-<APIPage document={"https://gi.rss3.io/docs/openapi.json"} operations={[{"method":"get","path":"/decentralized/tx/{id}"},{"method":"get","path":"/decentralized/{account}"},{"method":"post","path":"/decentralized/accounts"},{"method":"get","path":"/decentralized/network/{network}"},{"method":"get","path":"/decentralized/platform/{platform}"},{"method":"get","path":"/rss/{path}"},{"method":"get","path":"/nta/bridgings/transactions"},{"method":"get","path":"/nta/bridgings/transactions/{transaction_hash}"},{"method":"get","path":"/nta/stakings/transactions"},{"method":"get","path":"/nta/stakings/transactions/{transaction_hash}"},{"method":"get","path":"/nta/stakings/stakings"},{"method":"get","path":"/nta/stakings/{staker_address}/profit"},{"method":"get","path":"/nta/stakings/{staker_address}/stat"},{"method":"get","path":"/nta/chips"},{"method":"get","path":"/nta/chips/{chip_id}"},{"method":"get","path":"/nta/chips/{chip_id}/image.svg"},{"method":"get","path":"/nta/snapshots/nodes/count"},{"method":"get","path":"/nta/snapshots/stakers/count"},{"method":"get","path":"/nta/snapshots/stakers/profit"},{"method":"get","path":"/nta/snapshots/nodes/operation/profit"},{"method":"get","path":"/nta/snapshots/epochs/apy"},{"method":"get","path":"/nta/nodes"},{"method":"get","path":"/nta/nodes/{address}"},{"method":"get","path":"/nta/nodes/{address}/avatar.svg"},{"method":"get","path":"/nta/nodes/{address}/events"},{"method":"get","path":"/nta/nodes/{address}/operation/profit"},{"method":"get","path":"/nta/epochs"},{"method":"get","path":"/nta/epochs/{epoch_id}"},{"method":"get","path":"/nta/epochs/distributions/{transaction_hash}"},{"method":"get","path":"/nta/epochs/{address}/rewards"},{"method":"get","path":"/nta/epochs/apy"},{"method":"get","path":"/nta/networks"},{"method":"get","path":"/nta/networks/assets"},{"method":"get","path":"/nta/networks/{network_name}/list_workers"},{"method":"get","path":"/nta/networks/{network_name}/workers/{worker_name}"},{"method":"get","path":"/nta/dsl/total_requests"},{"method":"get","path":"/nta/token/supply"},{"method":"get","path":"/nta/token/tvl"}]} hasHead={true} />
+<APIPage document={"https://gi.rss3.io/docs/openapi.json"} operations={[{"method":"get","path":"/decentralized/tx/{id}"},{"method":"get","path":"/decentralized/{account}"},{"method":"post","path":"/decentralized/accounts"},{"method":"get","path":"/decentralized/network/{network}"},{"method":"get","path":"/decentralized/platform/{platform}"},{"method":"get","path":"/rss/{path}"},{"method":"get","path":"/federated/tx/{id}"},{"method":"get","path":"/federated/{account}"},{"method":"post","path":"/federated/accounts"},{"method":"get","path":"/federated/network/{network}"},{"method":"get","path":"/federated/platform/{platform}"},{"method":"get","path":"/nta/bridgings/transactions"},{"method":"get","path":"/nta/bridgings/transactions/{transaction_hash}"},{"method":"get","path":"/nta/stakings/transactions"},{"method":"get","path":"/nta/stakings/transactions/{transaction_hash}"},{"method":"get","path":"/nta/stakings/stakings"},{"method":"get","path":"/nta/stakings/{staker_address}/profit"},{"method":"get","path":"/nta/stakings/{staker_address}/stat"},{"method":"get","path":"/nta/chips"},{"method":"get","path":"/nta/chips/{chip_id}"},{"method":"get","path":"/nta/chips/{chip_id}/image.svg"},{"method":"get","path":"/nta/snapshots/nodes/count"},{"method":"get","path":"/nta/snapshots/stakers/count"},{"method":"get","path":"/nta/snapshots/stakers/profit"},{"method":"get","path":"/nta/snapshots/nodes/operation/profit"},{"method":"get","path":"/nta/snapshots/epochs/apy"},{"method":"get","path":"/nta/nodes"},{"method":"get","path":"/nta/nodes/{address}"},{"method":"get","path":"/nta/nodes/{address}/avatar.svg"},{"method":"get","path":"/nta/nodes/{address}/events"},{"method":"get","path":"/nta/nodes/{address}/operation/profit"},{"method":"get","path":"/nta/epochs"},{"method":"get","path":"/nta/epochs/{epoch_id}"},{"method":"get","path":"/nta/epochs/distributions/{transaction_hash}"},{"method":"get","path":"/nta/epochs/{address}/rewards"},{"method":"get","path":"/nta/epochs/apy"},{"method":"get","path":"/nta/networks/assets"},{"method":"get","path":"/nta/networks/config"},{"method":"get","path":"/nta/dsl/total_requests"},{"method":"get","path":"/nta/token/supply"},{"method":"get","path":"/nta/token/tvl"}]} hasHead={true} />
