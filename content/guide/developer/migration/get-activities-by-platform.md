@@ -1,5 +1,5 @@
 ---
-title: Get Activities by Accounts
+title: Get Activities by Platform
 ---
 
 ## API Changes
