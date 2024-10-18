@@ -4,7 +4,15 @@
 	"pages": [
 		"---Core---",
 		"core/index",
-		"...core",
+		"core/open-web",
+		"core/ownership-economy",
+		"core/open-information",
+		"core/open-information-initiative",
+		"core/whitepaper",
+		"core/governance-and-rep",
+		"core/protocols",
+		"core/concepts",
+		"core/open-source",
 		"---Data Sublayer (DSL)---",
 		"dsl/index",
 		"...dsl",
@@ -31,6 +39,11 @@
 		"ai/index",
 		"ai/open-data",
 		"ai/openagent",
-		"ai/chatgpt/index"
+		"ai/chatgpt/index",
+		"---Links---",
+		"[PartyPopper][We're Hiring](https://link.rss3.io/careers)",
+		"[Github][Github](https://link.rss3.io/github)",
+		"[Twitter][Twitter](https://link.rss3.io/twitter)",
+		"[Discord][Discord](https://link.rss3.io/discord)"
 	]
 }
