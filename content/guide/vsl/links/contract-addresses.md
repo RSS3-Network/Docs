@@ -1,6 +1,7 @@
 ---
 title: Contract Addresses
 description: Learn about the contract addresses on VSL.
+full: true
 ---
 
 ## VSL Contracts on Ethereum (L1)
