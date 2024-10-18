@@ -1,0 +1,52 @@
+---
+title: Open Data
+description: Build with Open Data from the RSS3 Network.
+icon: Huggingface
+---
+
+## Introduction
+
+Open Data has always been the cornerstone of innovation.
+GPT (and all other LLMs) wouldn’t exist without the freely available corpus of Open Data on the Internet.
+
+Unfortunately, Open Data is becoming increasingly scarce, as more platforms build paywalls or restrict access to user-generated content.
+It has always be RSS3's aim to provide permissionless access to Open Information to all, this includes AI researchers and developers.
+
+## Motivation
+
+Diverse data is crucial for creating AI systems that can truly understand and respond to a wide range of perspectives.
+Data on the RSS3 Network is sourced from decentralized and permissionless sources, collectively indexed by over 80 RSS3 Nodes distributed globally.
+The data provides the much-needed diversity by capturing a broader spectrum of user interactions and social dynamics, unlike traditional, limited datasets.
+
+Accessing the data is already straightforward via the RSS3 Network, but we want to make it even easier for AI researchers and developers.
+Instead of making loads of RESTful API calls to the RSS3 Network, we are providing high-quality, structured and pre-processed datasets that can be directly used for many machine learning tasks.
+
+## List of Datasets
+
+We are continouslly working on creating and releasing new datasets.
+Please check back often for updates.
+
+### Hugging Face - A High Quality Open Web Content Dataset
+
+[This dataset on HF](https://huggingface.co/datasets/RSS3-Network/high_quality_open_web_content) is specifically optimized for machine learning tasks, making it straightforward to parse, transform, and analyze.
+
+It contains **over 11 million posts**  from various decentralized sources, including Farcaster, Lens, and more. Internally, we have been fine-tuning Llama and Gemma with this dataset.
+
+Here’s what you’ll find in the dataset:
+
+1. handle: The author’s handle on the corresponding platform (e.g., Farcaster, Lens).
+1. body: The main text content of the post.
+1. media: A list of media objects linked to the post.
+   1. address: The URL where the media is hosted.
+   1. mime_type: The MIME type of the media (e.g., image/jpeg, video/mp4).
+1. profile_id: The profile identifier of the author on the platform.
+1. publication_id: The unique identifier for the post on the corresponding platform.
+1. timestamp: The time the post was published or, if not available, the time when it was indexed by RSS3 Nodes.
+
+
+## Conclusion
+
+We are excited to see what you can build with the data.
+If you have a great idea, you may apply for the Open Information Grant here: https://openinformation.io/grant.
+
+If you have any questions or need help, please reach out to us on [Discord](https://link.rss3.io/discord).
