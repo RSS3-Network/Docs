@@ -1,7 +1,7 @@
 // import { RootToggle } from "fumadocs-ui/components/layout/root-toggle";
 import type { HomeLayoutProps } from "fumadocs-ui/home-layout";
 import type { DocsLayoutProps } from "fumadocs-ui/layout";
-import { BookOpenText, PartyPopper } from "lucide-react";
+import { BookOpenText, PartyPopper } from 'lucide-react';
 import Image from "next/image";
 import { source } from "./source";
 
@@ -62,10 +62,10 @@ export const baseOptions: HomeLayoutProps = {
 			icon: <BookOpenText />,
 		},
 		{
-			text: "We're hiring",
-			url: "https://link.rss3.io/careers",
+			text: 'We\'re hiring',
+			url: 'https://link.rss3.io/careers',
 			icon: <PartyPopper color="red" />,
-		},
+		  },
 	],
 	githubUrl: "https://github.com/rss3-network/docs",
 };
