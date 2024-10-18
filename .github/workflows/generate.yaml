@@ -36,6 +36,9 @@ jobs:
       - name: Generate all
         run: pnpm run "/^generate:.*/" --parallel
 
+      - name: Pull Remote Changes # https://github.com/stefanzweifel/git-auto-commit-action/discussions/290
+        run: git pull
+
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: generate dsl info and openapi spec"
