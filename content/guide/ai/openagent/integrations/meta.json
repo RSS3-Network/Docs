@@ -1,5 +1,0 @@
-{
-	"title": "Integrations",
-	"defaultOpen": false,
-	"pages": ["openai", "gemini", "vertex", "app"]
-}

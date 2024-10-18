@@ -1,5 +1,0 @@
-{
-	"title": "Pool",
-	"defaultOpen": false,
-	"pages": ["operation-pool", "staking-pool", "slashing-pool"]
-}

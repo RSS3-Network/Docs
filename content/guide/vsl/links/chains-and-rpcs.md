@@ -1,5 +1,5 @@
 ---
-title: Chains
+title: Chains and RPCs
 description: Learn about the chains on VSL.
 ---
 
