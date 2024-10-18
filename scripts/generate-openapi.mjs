@@ -19,6 +19,7 @@ await generateFiles({
 });
 
 // add icon to the file:
+// @case-police-ignore Openapi
 // prepend `icon: Openapi` to the file's frontmatter
 const content = fs.readFileSync(
 	"./content/guide/developer/api/index.mdx",
@@ -27,5 +28,5 @@ const content = fs.readFileSync(
 fs.writeFileSync(
 	"./content/guide/developer/api/index.mdx",
 	`---
-icon: Openapi${content.replace("---", "")}`,
+icon: Openapi # @case-police-ignore Openapi${content.replace("---", "")}`,
 );

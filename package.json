@@ -8,8 +8,10 @@
 		"start": "next start",
 		"postinstall": "fumadocs-mdx",
 		"typecheck": "tsc --noEmit",
-		"lint": "biome check",
-		"lint:fix": "biome check --write",
+		"lint:biome": "biome check",
+		"lint:case": "case-police --dict ./utils/case-police.json --disable unix",
+		"lint": "pnpm run lint:biome && pnpm run lint:case",
+		"lint:fix": "pnpm run lint:biome --write && pnpm run lint:case --fix",
 		"generate:dsl-info": "node scripts/generate-dsl-info.mjs",
 		"generate:openapi": "node scripts/generate-openapi.mjs"
 	},
@@ -34,6 +36,7 @@
 		"@types/react": "^18.3.11",
 		"@types/react-dom": "^18.3.1",
 		"autoprefixer": "^10.4.20",
+		"case-police": "^0.7.0",
 		"postcss": "^8.4.47",
 		"tailwindcss": "^3.4.13",
 		"typescript": "^5.6.3"

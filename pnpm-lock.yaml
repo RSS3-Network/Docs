@@ -63,6 +63,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.47)
+      case-police:
+        specifier: ^0.7.0
+        version: 0.7.0
       postcss:
         specifier: ^8.4.47
         version: 8.4.47
@@ -1255,6 +1258,10 @@ packages:
 
   caniuse-lite@1.0.30001664:
     resolution: {integrity: sha512-AmE7k4dXiNKQipgn7a2xg558IRqPN3jMQY/rOsbxDhrd0tyChwbITBfiwtnqz8bi2M5mIWbxAYBvk7W7QBUS2g==}
+
+  case-police@0.7.0:
+    resolution: {integrity: sha512-ULkv4kNeSBFCFwXE1NA/x6/FqY8lRRXT10HsGX7K0LcMcA/B45SgnNY98hnQ9c05AaVhgbR5jlCO0BXMlIEuPg==}
+    hasBin: true
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -3426,6 +3433,8 @@ snapshots:
   camelcase-css@2.0.1: {}
 
   caniuse-lite@1.0.30001664: {}
+
+  case-police@0.7.0: {}
 
   ccount@2.0.1: {}
 
