@@ -1,4 +1,5 @@
 ---
+id: openagent-deployment
 title: Deployment
 description: Learn to deploy OpenAgent.
 ---
@@ -199,11 +200,11 @@ https://registry.terraform.io/modules/RSS3-Network/openagent/gcp/latest
 
 To integrate OpenAgent into any apps, see:
 
-<Card title="Integrate OpenAgent into Apps" href="/guide/ai/openagent/integrations/app" />
+<LinkCard id="openagent-integrations-app" />
 
 You may also use [localhost:18000](http://localhost:18000) to visit Chainlit, which is built into OpenAgent by default, to start using OpenAgent. See:
 
-<Card title="Chainlit" href="/guide/ai/openagent/deployment/chainlit" />
+<LinkCard id="chainlit" />
 
 Learn how to interact with OpenAgent via Chainlit.
 
@@ -211,7 +212,7 @@ Learn how to interact with OpenAgent via Chainlit.
 
 If you have successfully deployed your OpenAgent instance, and you are using a local model, there are some initialization steps you need to take. OpenAgent uses Ollama to manage your local models, see:
 
-<Card title="Ollama" description="Learn how to deploy an open source model with OpenAgent using Ollama." href="/guide/ai/openagent/deployment/ollama"/>
+<LinkCard id="ollama" />
 
 ### Download the Model
 
@@ -223,7 +224,7 @@ curl -X POST -H 'Content-Type: application/json' -d '{"name": "${MODEL_NAME}"}' 
 
 Replace `${MODEL_NAME}` with the model you are using. For compatible models, see:
 
-<Card title="Compatible Models" description="Learn about the models compatible with OpenAgent." href="/guide/ai/openagent/compatible-models" />
+<LinkCard id="compatible-models" />
 
 Learn what models are compatible with OpenAgent.
 

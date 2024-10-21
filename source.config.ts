@@ -9,6 +9,7 @@ export const { docs, meta } = defineDocs({
 	docs: {
 		dir: "content/guide",
 		schema: frontmatterSchema.extend({
+			id: z.string().optional(),
 			index: z.boolean().optional(),
 		}),
 	},
@@ -17,4 +18,6 @@ export const { docs, meta } = defineDocs({
 	},
 });
 
-export default defineConfig({});
+export default defineConfig({
+	mdxOptions: {},
+});

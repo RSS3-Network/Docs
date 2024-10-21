@@ -1,9 +1,9 @@
 import { baseUrl, createMetadata } from "@/utils/metadata";
-import "./global.css";
 import { RootProvider } from "fumadocs-ui/provider";
 import type { Viewport } from "next";
 import { Poppins } from "next/font/google";
 import type { ReactNode } from "react";
+import "./global.css";
 
 const font = Poppins({
 	weight: ["200", "300", "400", "500", "600", "700", "800"],

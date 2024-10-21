@@ -1,4 +1,5 @@
 ---
+id: node-state-map
 title: Node State Map
 description: Understanding and managing your Node's state.
 ---
@@ -23,7 +24,7 @@ The overall state of a Node is determined by two key factors: its current state 
 3. `exiting`: When the Node is exiting at the end of the current epoch, but it still remains available.
 
 ### For offline Nodes, there are six possible stages:
-1. `unhealthy`: When the Node is unreachable. 
+1. `unhealthy`: When the Node is unreachable.
 2. `registered`: When a Node's deposit meets the minimum requirement. It will progress automatically after starting.
 3. `outdated`: When Node's version does not meet the minimum requirement. It will progress after upgrading.
 4. `exited`: When the Node has gracefully exited.

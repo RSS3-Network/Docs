@@ -1,4 +1,5 @@
 import { openapi, source } from "@/app/source";
+import { LinkCard } from "@/components/ui/link-card/link-card";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import { getImageMeta } from "fumadocs-ui/og";
 import {
@@ -39,6 +40,7 @@ export default async function Page({
 					components={{
 						...defaultMdxComponents,
 						APIPage: openapi.APIPage,
+						LinkCard: LinkCard,
 					}}
 				/>
 			</DocsBody>

@@ -33,6 +33,18 @@ export const source = loader({
 	},
 });
 
+// check if there are duplicate ids
+const ids = new Set<string>();
+const pages = source.getPages();
+for (const page of pages) {
+	if (page.data.id) {
+		if (ids.has(page.data.id)) {
+			console.warn(`There are duplicate ids: ${page.data.id}`);
+		}
+		ids.add(page.data.id);
+	}
+}
+
 export const openapi = createOpenAPI({
 	generateTypeScriptSchema: false,
 });

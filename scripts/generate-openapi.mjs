@@ -18,8 +18,8 @@ await generateFiles({
 	per: "file",
 });
 
-// add icon to the file:
-// prepend `icon: Openapi` to the file's frontmatter
+// add necessary frontmatter to the file:
+// prepend `id: api` and `icon: Openapi` to the file's frontmatter
 const content = fs.readFileSync(
 	"./content/guide/developer/api/index.mdx",
 	"utf-8",
@@ -27,5 +27,6 @@ const content = fs.readFileSync(
 fs.writeFileSync(
 	"./content/guide/developer/api/index.mdx",
 	`---
+id: api
 icon: Openapi${content.replace("---", "")}`,
 );
