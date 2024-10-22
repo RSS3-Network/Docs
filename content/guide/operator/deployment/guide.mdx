@@ -139,9 +139,9 @@ component:
   # `rss` network type includes the worker indexing data in RSS format.
   rss:
     id: rss-rsshub
-    network: rss
-    worker: rsshub
-    endpoint: https://your.rsshub.com/
+    network: rsshub
+    worker: core
+    endpoint: https://your.rsshub.domain/
     parameters:
       authentication:
         access_key:
@@ -171,15 +171,6 @@ component:
       parameters:
         # `concurrent_block_requests` is used to specify the number of concurrent block requests.
         concurrent_block_requests: 2
-  # `federated` network type includes workers indexing data from federated networks such as ActivityPub.
-  federated:
-    # mastodon
-    - id: mastodon-core
-      network: mastodon
-      worker: core
-      endpoint: mastodon
-      parameters:
-        kafka_topic: activitypub_events
 ```
 
 ### Configuration Options
@@ -390,8 +381,6 @@ component:
     - For Farcaster:
       - `APIKey`: API key for Farcaster Hubble.
       - `TimestampStart`: The Farcaster seconds timestamp that the worker should start from.
-    - For Mastodon:
-      - `KafkaTopic`: Kafka topic for Mastodon worker.
 
 ## Deploy via Kubernetes
 
