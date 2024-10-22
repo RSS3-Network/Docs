@@ -1,7 +1,8 @@
 import { openapi, source } from "@/app/source";
 import { LinkCard } from "@/components/ui/link-card/link-card";
+import { createMetadata } from "@/utils/metadata";
+import { metadataImage } from "@/utils/metadata-image";
 import defaultMdxComponents from "fumadocs-ui/mdx";
-import { getImageMeta } from "fumadocs-ui/og";
 import {
 	DocsBody,
 	DocsCategory,
@@ -12,11 +13,10 @@ import {
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export default async function Page({
-	params,
-}: {
-	params: { slug?: string[] };
+export default async function Page(props: {
+	params: Promise<{ slug: string[] }>;
 }) {
+	const params = await props.params;
 	const page = source.getPage(params.slug);
 	if (!page) notFound();
 
@@ -44,9 +44,7 @@ export default async function Page({
 					}}
 				/>
 			</DocsBody>
-			{page.data.index ? (
-				<DocsCategory page={page} pages={source.getPages()} />
-			) : null}
+			{page.data.index ? <DocsCategory page={page} from={source} /> : null}
 		</DocsPage>
 	);
 }
@@ -55,21 +53,24 @@ export async function generateStaticParams() {
 	return source.generateParams();
 }
 
-export function generateMetadata({ params }: { params: { slug?: string[] } }) {
+export async function generateMetadata(props: {
+	params: Promise<{ slug: string[] }>;
+}): Promise<Metadata> {
+	const params = await props.params;
 	const page = source.getPage(params.slug);
+
 	if (!page) notFound();
 
-	const image = getImageMeta("og", page.slugs);
+	const description =
+		page.data.description ?? "The library for building documentation sites";
 
-	return {
-		title: page.data.title,
-		description: page.data.description,
-		openGraph: {
-			images: image,
-		},
-		twitter: {
-			images: image,
-			card: "summary_large_image",
-		},
-	} satisfies Metadata;
+	return createMetadata(
+		metadataImage.withImage(page.slugs, {
+			title: page.data.title,
+			description,
+			openGraph: {
+				url: `/docs/${page.slugs.join("/")}`,
+			},
+		}),
+	);
 }
