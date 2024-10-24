@@ -103,6 +103,17 @@ component:
 +++     worker: core
 ```
 
+For users of the automated deployer, the upgrade process is straightforward:
+
+1. Update your `config.yaml` file in the `config/` directory.
+2. Execute the following command to initiate the automated update process:
+
+   ```shell
+   curl -s https://raw.githubusercontent.com/RSS3-Network/Node-Automated-Deployer/main/automated_deploy.sh | bash
+   ```
+
+This command will automatically update all necessary components of your Node.
+
 ### Sample config.yaml
 
 For your reference, a config.yaml should look like this:
