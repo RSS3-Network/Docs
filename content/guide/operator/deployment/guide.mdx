@@ -103,16 +103,16 @@ component:
 +++     worker: core
 ```
 
-For users of the automated deployer, the upgrade process is straightforward:
+For users using the automated deployer, the upgrade process is:
 
 1. Update your `config.yaml` file in the `config/` directory.
-2. Execute the following command to initiate the automated update process:
+2. Execute the following command in the same directory as your existing `docker-compose.yaml` file to initiate the automated upgrade process:
 
    ```shell
    curl -s https://raw.githubusercontent.com/RSS3-Network/Node-Automated-Deployer/main/automated_deploy.sh | bash
    ```
 
-This command will automatically update all necessary components of your Node.
+This command will automatically upgrade all necessary components of your Node.
 
 ### Sample config.yaml
 
