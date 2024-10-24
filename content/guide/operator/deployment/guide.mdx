@@ -70,11 +70,49 @@ A configuration file is required for deploying your Node.
 A successful deployment (if you have enabled at least 1 decentralized worker) will generate the following containers:
 
 1. rss3_node_core: This container is used to process incoming requests from Global Indexers.
-1. rss3_node_broadcaster: This container is used to broadcast the Node's status to Global Indexers.
-1. rss3_node_monitor: This container is used to monitor worker status.
-1. rss3_node_alloydb: This container is used to store data.
-1. rss3_node_redis: This container is used to cache data.
-1. worker containers: These containers are used to index data from their corresponding sources.
+2. rss3_node_broadcaster: This container is used to broadcast the Node's status to Global Indexers.
+3. rss3_node_monitor: This container is used to monitor worker status.
+4. rss3_node_alloydb: This container is used to store data.
+5. rss3_node_redis: This container is used to cache data.
+6. worker containers: These containers are used to index data from their corresponding sources.
+
+### Upgrading Your Node
+
+Maintaining an up-to-date Node is crucial for optimal performance and security. We recommend regularly checking the [Changelog](https://github.com/RSS3-Network/Node/releases) for updates and new features.
+
+<Callout type="info">
+When upgrading, ensure that you update your `config.yaml` file or modify the configurations in accordance with the latest [Deployment Guide](https://docs.rss3.io/guide/operator/deployment/guide#configuration-options).
+</Callout>
+
+<Callout type="warning">
+Before proceeding with any upgrade, carefully review the release notes, particularly for major version changes. Major versions may introduce breaking changes that require additional steps or modifications.
+</Callout>
+
+#### Upgrade Process for v1.0.x or older to v1.1.x
+
+When upgrading from v1.0.x or older versions to v1.1.x, please note that the `rss` component has undergone significant changes. Update your `config.yaml` file as follows:
+
+```diff
+component:
+    rss:
+---     id: rss-rsshub
++++     id: rsshub-core
+---     network: rss
++++     network: rsshub
+---     worker: rsshub
++++     worker: core
+```
+
+For operators using the automated deployer, the upgrade process is:
+
+1. Update your `config.yaml` file in the `config/` directory.
+2. Execute the following command in the same directory as your existing `docker-compose.yaml` file to initiate the automated upgrade process:
+
+   ```shell
+   curl -s https://raw.githubusercontent.com/RSS3-Network/Node-Automated-Deployer/main/automated_deploy.sh | bash
+   ```
+
+This command will automatically upgrade all necessary components of your Node.
 
 ### Sample config.yaml
 
