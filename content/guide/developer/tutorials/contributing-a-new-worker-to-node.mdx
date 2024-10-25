@@ -27,7 +27,7 @@ The Node repository implements core logics for indexing, transforming, storing, 
 
 - **Engine**
   - **Protocol**: The indexing logic for specific networks.
-  - **Worker**: The transforming logic for specific ÐApps (the focus of this tutorial).
+  - **Worker**: The transforming logic for specific DApps (the focus of this tutorial).
 - **Indexer**: Handles data indexing, transforming, and storing.
 - **Core API**: Serves Node APIs, including decentralized, federated, and RSS data querying logics, as well as Node information APIs for operators.
 - **Broadcaster**: Registers nodes to Global Indexers (GIs). Learn more [here](https://docs.rss3.io/guide/dsl/global-indexer).
@@ -134,7 +134,7 @@ Within the `internal/engine/worker` directory, you'll find three primary subdire
 
 Our system currently supports three distinct categories of workers:
 
-1. For integrating new decentralized applications (ÐApps), implement the transformation logic in the `decentralized/contract` directory.
+1. For integrating new decentralized applications (DApps), implement the transformation logic in the `decentralized/contract` directory.
 2. When contributing a fediverse platform, develop the transformation logic in the `federated/core/<fediverse_name>` directory.
 3. For RSS workers, implement the logic in the `rss/core/<rss_app_name>` directory.
 
@@ -213,9 +213,9 @@ var ToPlatformMap = map[Worker]Platform{
 }
 ```
 
-### Analyze the ÐApp for Integration
+### Analyze the DApp for Integration
 
-To effectively integrate a new ÐApp, it's crucial to first immerse yourself in its functionality. Utilize both the mainnet and testnet (if available) to gain a comprehensive understanding of its core processes and relevant information.
+To effectively integrate a new DApp, it's crucial to first immerse yourself in its functionality. Utilize both the mainnet and testnet (if available) to gain a comprehensive understanding of its core processes and relevant information.
 
 We strongly recommend thoroughly reviewing the project's documentation and smart contracts to identify key elements such as contract addresses, ABIs, and essential Event Hashes. For instance, the `Router` contract's ABI, transactions, and event logs can be examined on [Optimism Scan](https://optimistic.etherscan.io/address/0xd7F1Dd5D49206349CaE8b585fcB0Ce3D96f1696F#code).
 
