@@ -1,66 +1,75 @@
 ---
-title: Contributing a New Worker to Node
+title: Contributing a New Worker
 ---
 
 ## Introduction
 
-A worker is the fundamental unit of a Node, encompassing a set of logics to index, structure, and store Open Information. While we've already integrated many popular Open Information applications into our Node (see [supported workers](https://docs.rss3.io/guide/dsl/worker)), you can extend its capabilities by contributing new workers.
+A worker is the fundamental unit of a Node, encompassing a set of logics to index, structure, and store Open Information.
+While many workers have already been implmented (see [supported workers](/guide/dsl/worker)), you can extend its capabilities by contributing new workers.
 
-Our Node is open-source and built on the [RSS3 Protocol](https://github.com/RSS3-Network/Protocol). You can find the Node's source code [here](https://github.com/RSS3-Network/Node).
+RSS3 Node is open-source and conforms to the [RSS3 Protocol](https://github.com/RSS3-Network/Protocol).
+You can find the Node's source code [here](https://github.com/RSS3-Network/Node).
 
 ## Repository Overview and System Design
 
-We maintain two core repositories for our Node:
+Two repositories are critical to the develop of the Node:
 
 - [Protocol-Go](https://github.com/RSS3-Network/Protocol-Go): A Go implementation of the [RSS3 Protocol](https://github.com/RSS3-Network/Protocol).
-- [Node](https://github.com/RSS3-Network/Node): The RSS3 Data Sublayer (DSL) component.
+- [Node](https://github.com/RSS3-Network/Node): The RSS3 Data Sublayer (DSL) component that is responsible for indexing, transforming, storing, and ultimately serving the Open Information to the end users.
 
 ### Protocol-Go
 
-The Protocol-Go project implements the Open Data Protocols (ODPs) of RSS3 Protocol in Go. It defines all networks, Open Information activities data structures, and metadata schemas used in Node.
+Protocol-Go is a Go implement of the RSS3 Protocol.
 
-We've already covered common networks like Ethereum, Arweave, Near, etc. (See the full list [here](https://docs.rss3.io/guide/dsl/supported-networks)) and defined numerous data structures and schemas. If you don't need to add a new network or define new metadata, you can simply use the latest `Protocol-Go` version in Node (`go get github.com/rss3-network/protocol-go`).
+Popular networks like Ethereum, Arweave, and Near are already supported, along with various structures and schemas.
+If your contribution does not involve adding a new network or defining a new structure, you can simply use the latest `Protocol-Go` version in Node (`go get github.com/rss3-network/protocol-go`).
 
 ### Node
 
-The Node repository implements core logics for indexing, transforming, storing, and serving Open Information to end users. It includes these main components:
+The repository implements core logics for indexing, transforming, storing, and serving Open Information to end users.
+It includes these the following main components:
 
 - **Engine**
   - **Protocol**: The indexing logic for specific networks.
-  - **Worker**: The transforming logic for specific DApps (the focus of this tutorial).
+  - **Worker**: The transforming logic for specific dApps (the focus of this tutorial).
 - **Indexer**: Handles data indexing, transforming, and storing.
 - **Core API**: Serves Node APIs, including decentralized, federated, and RSS data querying logics, as well as Node information APIs for operators.
-- **Broadcaster**: Registers nodes to Global Indexers (GIs). Learn more [here](https://docs.rss3.io/guide/dsl/global-indexer).
+- **Broadcaster**: Registers nodes to Global Indexers (GIs).
+  Learn more [here](https://docs.rss3.io/guide/dsl/global-indexer).
 - **Monitor**: Monitors data indexing progress and prunes outdated data.
 
 ## Development Guide
 
-Don't worry if this seems complex! We've designed the worker component as a standalone module in the engine. You can integrate and test a new worker by modifying only a few files related to data transformation, without needing to handle data indexing and storing logics.
+Don't worry if this seems complex!
+The worker component is designed as a standalone module within the engine.
+You can integrate and test a new worker by modifying just a few files related to data transformation, without dealing with data indexing or storage logic.
 
 ### Prerequisites and Setup
 
-Our Node is built with Go, so basic knowledge of Go is recommended. Familiarity with SQL, Docker, Git, and Linux command line is also helpful.
+Node is written in Go, so basic knowledge of Go is recommended.
+Familiarity with SQL, Docker, Git, and Linux command line is also beneficial.
 
-You'll need Go and Git installed on your machine before starting.
+You'll need to have Go and Git installed on your machine.
 
 #### Clone the Repository
 
-	```bash
-	git clone https://github.com/RSS3-Network/Node.git
-	cd Node
-	```
+```bash
+git clone https://github.com/RSS3-Network/Node.git
+cd Node
+```
 
 #### Install Dependencies
 
-For GoLand users, dependencies are automatically managed upon project opening. Users of other Integrated Development Environments (IDEs) may need to manually install dependencies using the following command:
+For GoLand users, dependencies are automatically managed upon launching.
+Users of other Integrated Development Environments (IDEs) may need to install dependencies manually via the following command:
 
-	```bash
-	go mod tidy
-	```
+```bash
+go mod tidy
+```
 
 #### Project Structure
 
-The Node project structure is organized as follows:
+The project structure is organized as follows:
 
 ```
 .
@@ -112,18 +121,18 @@ The Node project structure is organized as follows:
 └── go.sum
 ```
 
-- `cmd`: Contains the entry point for the Node application. Execute `go run cmd/main.go` to initiate the Node.
-- `common`: Houses utility functions and shared components.
-- `config`: Stores configuration files and related logic.
-- `deploy`: Includes deployment-specific files and instructions.
-- `docs`: Contains OpenAPI documentation.
-- `internal`: Encompasses core Node components, such as the engine, database, core API, and telemetry.
-- `provider`: Implements custom data providers for various networks, IPFS, Redis, and other services.
-- `schema`: Defines data structures and schemas for workers.
-- `tool`: Contains test generation utilities for workers.
-- Additional files at the root level serve various purposes.
+- `cmd`: the entrypoint for the application, execute `go run cmd/main.go` to launch.
+- `common`: utility functions and shared components.
+- `config`: configuration files and related logic.
+- `deploy`: deployment-specific files and instructions.
+- `docs`: OpenAPI documentation.
+- `internal`: core Node components, such as the engine, database, core API, and telemetry.
+- `provider`: custom data providers for various networks, IPFS, Redis, and other services.
+- `schema`: data structures and schemas for workers.
+- `tool`: test generation utilities for workers.
+- Additional files located at the root level serve various purposes.
 
-Within the `internal/engine/worker` directory, you'll find three primary subdirectories:
+In the `internal/engine/worker` directory, you'll find three subdirectories:
 
 ```
 .
@@ -132,13 +141,13 @@ Within the `internal/engine/worker` directory, you'll find three primary subdire
 ├── rss/
 ```
 
-Our system currently supports three distinct categories of workers:
+Node currently supports three distinct categories of workers:
 
-1. For integrating new decentralized applications (DApps), implement the transformation logic in the `decentralized/contract` directory.
+1. For integrating new decentralized applications (dApps), implement the transformation logic in the `decentralized/contract` directory.
 2. When contributing a fediverse platform, develop the transformation logic in the `federated/core/<fediverse_name>` directory.
 3. For RSS workers, implement the logic in the `rss/core/<rss_app_name>` directory.
 
-The standard structure for a worker directory is as follows:
+The standard structure for a worker directory should look like this:
 
 ```
 .
@@ -146,7 +155,7 @@ The standard structure for a worker directory is as follows:
 ├── worker_test.go
 ```
 
-### Defining Worker Schema
+### Define Worker Schema
 
 This guide explains how to define a worker schema in the `schema/worker` directory, specifically for decentralized workers.
 
@@ -159,42 +168,42 @@ First, extend the `Worker` enum in `worker.go`:
 type Worker int
 
 const (
-	Aave       Worker = iota + 1 // aave
+    Aave       Worker = iota + 1 // aave
     // ...other workers
-	Zerion                       // zerion
+    Zerion                       // zerion
 )
 ```
 
 Generate the corresponding string utilities by running the generate command:
 
-	```bash
-	go:generate go run --mod=mod github.com/dmarkham/enumer@v1.5.9 --values --type=Worker --linecomment --output worker_string.go --json --yaml --sql
-	```
+```bash
+go:generate go run --mod=mod github.com/dmarkham/enumer@v1.5.9 --values --type=Worker --linecomment --output worker_string.go --json --yaml --sql
+```
 
 #### Map Worker to Tags
 
-Update the tag mapping in the `ToTagsMap`:
+Update the `Tag` mapping in the `ToTagsMap`:
 
 ```go
 // ToTagsMap is a map of worker to tags
 var ToTagsMap = map[Worker][]tag.Tag{
-	Aave:       {tag.Exchange},
+    Aave:       {tag.Exchange},
     // ...other tag maps
-	Zerion:     {tag.Exchange, tag.Transaction},
+    Zerion:     {tag.Exchange, tag.Transaction},
 }
 ```
 
-#### Define Platform Types
+#### Add Worker Platform
 
-Add new platform types to the `Platform` enum:
+Add worker platform to the `Platform` enum:
 
 ```go
 //go:generate go run --mod=mod github.com/dmarkham/enumer@v1.5.9 --values --type=Platform --linecomment --output platform_string.go --json --yaml --sql
 type Platform uint64
 const (
-	PlatformUnknown    Platform = iota // Unknown
-	// ...other platforms
-	PlatformZerion                     // Zerion
+    PlatformUnknown    Platform = iota // Unknown
+    // ...other platforms
+    PlatformZerion                     // Zerion
 )
 ```
 
@@ -207,19 +216,22 @@ Finally, map the worker to its corresponding platform in `ToPlatformMap`:
 ```go
 // ToPlatformMap is a map of worker to platform
 var ToPlatformMap = map[Worker]Platform{
-	Aave:       PlatformAAVE,
-	// ...other platform maps
-	Zerion:     PlatformZerion,
+    Aave:       PlatformAAVE,
+    // ...other platform maps
+    Zerion:     PlatformZerion,
 }
 ```
 
-### Analyze the DApp for Integration
+### Analyze the dApp for Integration
 
-To effectively integrate a new DApp, it's crucial to first immerse yourself in its functionality. Utilize both the mainnet and testnet (if available) to gain a comprehensive understanding of its core processes and relevant information.
+Before integrating a new dApp, it is essential to fully understand its functionality.
 
-We strongly recommend thoroughly reviewing the project's documentation and smart contracts to identify key elements such as contract addresses, ABIs, and essential Event Hashes. For instance, the `Router` contract's ABI, transactions, and event logs can be examined on [Optimism Scan](https://optimistic.etherscan.io/address/0xd7F1Dd5D49206349CaE8b585fcB0Ce3D96f1696F#code).
+We highly recommend carefully reviewing the project’s documentation and smart contracts to identify key elements, including contract addresses, ABIs, and critical event hashes.
+For instance, Zerion's `Router` contract ABI, transactions, and event logs can be examined at [Optimism Scan](https://optimistic.etherscan.io/address/0xd7F1Dd5D49206349CaE8b585fcB0Ce3D96f1696F#code).
 
-Subsequently, establish all contract addresses, event hashes, and the Go SDK for the target contract in the `provider/ethereum/contract` directory. A typical Ethereum contract directory structure is as follows:
+It then sets up all contract addresses, event hashes, and the Go SDK for the target contract in the `provider/ethereum/contract` directory.
+
+A typical Ethereum contract directory structure is as follows:
 
 ```
 .
@@ -228,364 +240,369 @@ Subsequently, establish all contract addresses, event hashes, and the Go SDK for
 ├── router.go
 ```
 
-In `contract.go`, we can set the contract address and event hash:
+`contract.go` sets the contract address and event hash:
 
 ```go
 //go:generate go run --mod=mod github.com/ethereum/go-ethereum/cmd/abigen --abi ./Router.abi --pkg zerion --type Router --out router.go
 var (
-	AddressRouter      = common.HexToAddress("0xd7F1Dd5D49206349CaE8b585fcB0Ce3D96f1696F")
-	AddressNativeToken = common.HexToAddress("0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE")
+    AddressRouter      = common.HexToAddress("0xd7F1Dd5D49206349CaE8b585fcB0Ce3D96f1696F")
+    AddressNativeToken = common.HexToAddress("0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE")
 
-	EventHashExecuted = contract.EventHash("Executed(address,uint256,uint256,address,uint256,uint256,uint256,uint256,(uint8,(uint256,address),(uint256,address),address,address,bytes),address)")
+    EventHashExecuted = contract.EventHash("Executed(address,uint256,uint256,address,uint256,uint256,uint256,uint256,(uint8,(uint256,address),(uint256,address),address,address,bytes),address)")
 )
-
 ```
 
-And you can execute the following command in the `provider/ethereum/contract` directory to generate the `router.go` file automatically:
+And you can execute the following command in the `provider/ethereum/contract` directory to generate a `router.go` file automatically:
 
-	```bash
-	go:generate go run --mod=mod github.com/ethereum/go-ethereum/cmd/abigen --abi ./Router.abi --pkg zerion --type Router --out router.go
-	```
+```bash
+go:generate go run --mod=mod github.com/ethereum/go-ethereum/cmd/abigen --abi ./Router.abi --pkg zerion --type Router --out router.go
+```
 
 All these packages will be imported in the `worker.go`.
 
-### Implement transforming logic of a new worker
+### Implement Transform Logic
 
-Here is a simple example of a evm-based swap worker:
+Here is a simple example of an EVM-based swap worker:
 
 ```go
 package zerion
 
 import (
-	"context"
-	"fmt"
-	"math/big"
+    "context"
+    "fmt"
+    "math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/rss3-network/node/config"
-	"github.com/rss3-network/node/internal/engine"
-	source "github.com/rss3-network/node/internal/engine/protocol/ethereum"
-	"github.com/rss3-network/node/provider/ethereum"
-	"github.com/rss3-network/node/provider/ethereum/contract"
-	"github.com/rss3-network/node/provider/ethereum/contract/erc20"
-	"github.com/rss3-network/node/provider/ethereum/contract/zerion"
-	"github.com/rss3-network/node/provider/ethereum/token"
-	"github.com/rss3-network/node/schema/worker/decentralized"
-	"github.com/rss3-network/protocol-go/schema"
-	activityx "github.com/rss3-network/protocol-go/schema/activity"
-	"github.com/rss3-network/protocol-go/schema/metadata"
-	"github.com/rss3-network/protocol-go/schema/network"
-	"github.com/rss3-network/protocol-go/schema/tag"
-	"github.com/rss3-network/protocol-go/schema/typex"
-	"github.com/samber/lo"
-	"github.com/shopspring/decimal"
-	"go.uber.org/zap"
+    "github.com/ethereum/go-ethereum/common"
+    "github.com/rss3-network/node/config"
+    "github.com/rss3-network/node/internal/engine"
+    source "github.com/rss3-network/node/internal/engine/protocol/ethereum"
+    "github.com/rss3-network/node/provider/ethereum"
+    "github.com/rss3-network/node/provider/ethereum/contract"
+    "github.com/rss3-network/node/provider/ethereum/contract/erc20"
+    "github.com/rss3-network/node/provider/ethereum/contract/zerion"
+    "github.com/rss3-network/node/provider/ethereum/token"
+    "github.com/rss3-network/node/schema/worker/decentralized"
+    "github.com/rss3-network/protocol-go/schema"
+    activityx "github.com/rss3-network/protocol-go/schema/activity"
+    "github.com/rss3-network/protocol-go/schema/metadata"
+    "github.com/rss3-network/protocol-go/schema/network"
+    "github.com/rss3-network/protocol-go/schema/tag"
+    "github.com/rss3-network/protocol-go/schema/typex"
+    "github.com/samber/lo"
+    "github.com/shopspring/decimal"
+    "go.uber.org/zap"
 )
 
 var _ engine.Worker = (*worker)(nil)
 
 // worker represents the Zerion worker, which processes Zerion-related transactions.
 type worker struct {
-	config         *config.Module
-	ethereumClient ethereum.Client
-	tokenClient    token.Client
-	erc20Filterer  *erc20.ERC20Filterer
-	routerFilterer *zerion.RouterFilterer
+    config         *config.Module
+    ethereumClient ethereum.Client
+    tokenClient    token.Client
+    erc20Filterer  *erc20.ERC20Filterer
+    routerFilterer *zerion.RouterFilterer
 }
 
 // Name returns the name of the worker.
 func (w *worker) Name() string {
-	return decentralized.Zerion.String()
+    return decentralized.Zerion.String()
 }
 
 // Platform returns the platform name for the Zerion worker.
 func (w *worker) Platform() string {
-	return decentralized.PlatformZerion.String()
+    return decentralized.PlatformZerion.String()
 }
 
 // Network returns the list of networks supported by the Zerion worker.
 func (w *worker) Network() []network.Network {
-	return []network.Network{
-		network.BinanceSmartChain,
-		network.Polygon,
-		network.Arbitrum,
-		network.Avalanche,
-		network.Optimism,
-		network.Linea,
-		network.Gnosis,
-		network.XLayer,
-		network.Base,
-	}
+    return []network.Network{
+        network.BinanceSmartChain,
+        network.Polygon,
+        network.Arbitrum,
+        network.Avalanche,
+        network.Optimism,
+        network.Linea,
+        network.Gnosis,
+        network.XLayer,
+        network.Base,
+    }
 }
 
 // Tags returns the list of tags associated with the Zerion worker.
 func (w *worker) Tags() []tag.Tag {
-	return []tag.Tag{
-		tag.Exchange,
-		tag.Transaction,
-	}
+    return []tag.Tag{
+        tag.Exchange,
+        tag.Transaction,
+    }
 }
 
 // Types returns the list of activity types that the Zerion worker can process.
 func (w *worker) Types() []schema.Type {
-	return []schema.Type{
-		typex.ExchangeSwap,
-		typex.TransactionTransfer,
-	}
+    return []schema.Type{
+        typex.ExchangeSwap,
+        typex.TransactionTransfer,
+    }
 }
 
 // Filter returns the data protocol filter for the Zerion worker.
 func (w *worker) Filter() engine.DataSourceFilter {
-	return &source.Filter{
-		LogAddresses: []common.Address{
-			zerion.AddressRouter,
-		},
-		LogTopics: []common.Hash{
-			zerion.EventHashExecuted,
-		},
-	}
+    return &source.Filter{
+        LogAddresses: []common.Address{
+            zerion.AddressRouter,
+        },
+        LogTopics: []common.Hash{
+            zerion.EventHashExecuted,
+        },
+    }
 }
 
 // Transform processes the input task and transforms it into an activity.
 func (w *worker) Transform(ctx context.Context, task engine.Task) (*activityx.Activity, error) {
-	ethereumTask, ok := task.(*source.Task)
-	if !ok {
-		return nil, fmt.Errorf("invalid task type %T", task)
-	}
+    ethereumTask, ok := task.(*source.Task)
+    if !ok {
+        return nil, fmt.Errorf("invalid task type %T", task)
+    }
 
-	activity, err := ethereumTask.BuildActivity(activityx.WithActivityPlatform(w.Platform()))
+    activity, err := ethereumTask.BuildActivity(activityx.WithActivityPlatform(w.Platform()))
 
-	if err != nil {
-		return nil, fmt.Errorf("build activity: %w", err)
-	}
+    if err != nil {
+        return nil, fmt.Errorf("build activity: %w", err)
+    }
 
-	// Iterate through all logs in the transaction receipt
-	for _, log := range ethereumTask.Receipt.Logs {
-		if len(log.Topics) == 0 {
-			continue
-		}
+    // Iterate through all logs in the transaction receipt
+    for _, log := range ethereumTask.Receipt.Logs {
+        if len(log.Topics) == 0 {
+            continue
+        }
 
-		switch {
-		case w.matchSwapLog(ethereumTask, log):
-			actions, err := w.transformSwapLog(ctx, ethereumTask, log)
-			if err != nil {
-				zap.L().Warn("handle settlement trade log", zap.Error(err), zap.String("worker", w.Name()), zap.String("task", ethereumTask.ID()))
-				continue
-			}
+        switch {
+        case w.matchSwapLog(ethereumTask, log):
+            actions, err := w.transformSwapLog(ctx, ethereumTask, log)
+            if err != nil {
+                zap.L().Warn("handle settlement trade log", zap.Error(err), zap.String("worker", w.Name()), zap.String("task", ethereumTask.ID()))
+                continue
+            }
 
-			activity.Actions = append(activity.Actions, actions...)
+            activity.Actions = append(activity.Actions, actions...)
 
-		default:
-			zap.L().Debug("unsupported log", zap.String("worker", w.Name()), zap.String("task", ethereumTask.ID()), zap.Stringer("topic", log.Topics[0]))
-		}
-	}
+        default:
+            zap.L().Debug("unsupported log", zap.String("worker", w.Name()), zap.String("task", ethereumTask.ID()), zap.Stringer("topic", log.Topics[0]))
+        }
+    }
 
-	if len(activity.Actions) == 0 {
-		return nil, fmt.Errorf("no actions")
-	}
+    if len(activity.Actions) == 0 {
+        return nil, fmt.Errorf("no actions")
+    }
 
-	zap.L().Info("Processing task", zap.Any("task", ethereumTask))
-	zap.L().Info("activity is: ", zap.Any("activity", activity))
+    zap.L().Info("Processing task", zap.Any("task", ethereumTask))
+    zap.L().Info("activity is: ", zap.Any("activity", activity))
 
-	activity.Type = typex.ExchangeSwap
+    activity.Type = typex.ExchangeSwap
 
-	return activity, nil
+    return activity, nil
 }
 
 // matchSwapLog checks if the given log matches a Zerion swap event.
 func (w *worker) matchSwapLog(_ *source.Task, log *ethereum.Log) bool {
-	return contract.MatchEventHashes(log.Topics[0], zerion.EventHashExecuted) &&
-		contract.MatchAddresses(log.Address, zerion.AddressRouter)
+    return contract.MatchEventHashes(log.Topics[0], zerion.EventHashExecuted) &&
+        contract.MatchAddresses(log.Address, zerion.AddressRouter)
 }
 
 // transformSwapLog transforms a Zerion swap log into a list of actions.
 func (w *worker) transformSwapLog(ctx context.Context, task *source.Task, log *ethereum.Log) ([]*activityx.Action, error) {
-	event, err := w.routerFilterer.ParseExecuted(log.Export())
-	if err != nil {
-		return nil, fmt.Errorf("parse Executed event: %w", err)
-	}
+    event, err := w.routerFilterer.ParseExecuted(log.Export())
+    if err != nil {
+        return nil, fmt.Errorf("parse Executed event: %w", err)
+    }
 
-	var actions []*activityx.Action
+    var actions []*activityx.Action
 
-	// Handle protocol fee if present
-	if event.ProtocolFeeAmount.Sign() == 1 {
-		feeAction, err := w.buildTransactionTransferAction(ctx, task, event.Sender, zerion.AddressRouter, lo.Ternary(event.OutputToken == zerion.AddressNativeToken, nil, &event.OutputToken), event.ProtocolFeeAmount)
-		if err != nil {
-			return nil, fmt.Errorf("build transaction transfer action for fee: %w", err)
-		}
+    // Handle protocol fee if present
+    if event.ProtocolFeeAmount.Sign() == 1 {
+        feeAction, err := w.buildTransactionTransferAction(ctx, task, event.Sender, zerion.AddressRouter, lo.Ternary(event.OutputToken == zerion.AddressNativeToken, nil, &event.OutputToken), event.ProtocolFeeAmount)
+        if err != nil {
+            return nil, fmt.Errorf("build transaction transfer action for fee: %w", err)
+        }
 
-		actions = append(actions, feeAction)
-	}
+        actions = append(actions, feeAction)
+    }
 
-	// Build the main swap action
-	swapAction, err := w.buildExchangeSwapAction(ctx, task, event.Sender, event.Sender, event.InputToken, event.OutputToken, event.AbsoluteInputAmount, event.ReturnedAmount)
-	if err != nil {
-		return nil, fmt.Errorf("build exchange swap action: %w", err)
-	}
+    // Build the main swap action
+    swapAction, err := w.buildExchangeSwapAction(ctx, task, event.Sender, event.Sender, event.InputToken, event.OutputToken, event.AbsoluteInputAmount, event.ReturnedAmount)
+    if err != nil {
+        return nil, fmt.Errorf("build exchange swap action: %w", err)
+    }
 
-	actions = append(actions, swapAction)
+    actions = append(actions, swapAction)
 
-	return actions, nil
+    return actions, nil
 }
 
 // buildTransactionTransferAction creates a TransactionTransfer action for a given transfer.
 func (w *worker) buildTransactionTransferAction(ctx context.Context, task *source.Task, from, to common.Address, tokenAddress *common.Address, amount *big.Int) (*activityx.Action, error) {
-	tokenMetadata, err := w.tokenClient.Lookup(ctx, task.ChainID, tokenAddress, nil, task.Header.Number)
-	if err != nil {
-		return nil, fmt.Errorf("lookup token metadata: %w", err)
-	}
+    tokenMetadata, err := w.tokenClient.Lookup(ctx, task.ChainID, tokenAddress, nil, task.Header.Number)
+    if err != nil {
+        return nil, fmt.Errorf("lookup token metadata: %w", err)
+    }
 
-	tokenMetadata.Value = lo.ToPtr(decimal.NewFromBigInt(amount, 0))
+    tokenMetadata.Value = lo.ToPtr(decimal.NewFromBigInt(amount, 0))
 
-	return &activityx.Action{
-		Type:     typex.TransactionTransfer,
-		Platform: w.Platform(),
-		From:     from.String(),
-		To:       to.String(),
-		Metadata: metadata.TransactionTransfer(*tokenMetadata),
-	}, nil
+    return &activityx.Action{
+        Type:     typex.TransactionTransfer,
+        Platform: w.Platform(),
+        From:     from.String(),
+        To:       to.String(),
+        Metadata: metadata.TransactionTransfer(*tokenMetadata),
+    }, nil
 }
 
 // buildExchangeSwapAction creates an ExchangeSwap action for a given swap.
 func (w *worker) buildExchangeSwapAction(ctx context.Context, task *source.Task, from, to, tokenIn, tokenOut common.Address, amountIn, amountOut *big.Int) (*activityx.Action, error) {
-	tokenInAddress := lo.Ternary(tokenIn != zerion.AddressNativeToken, &tokenIn, nil)
-	tokenOutAddress := lo.Ternary(tokenOut != zerion.AddressNativeToken, &tokenOut, nil)
+    tokenInAddress := lo.Ternary(tokenIn != zerion.AddressNativeToken, &tokenIn, nil)
+    tokenOutAddress := lo.Ternary(tokenOut != zerion.AddressNativeToken, &tokenOut, nil)
 
-	tokenInMetadata, err := w.tokenClient.Lookup(ctx, task.ChainID, tokenInAddress, nil, task.Header.Number)
-	if err != nil {
-		return nil, fmt.Errorf("lookup token in metadata: %w", err)
-	}
+    tokenInMetadata, err := w.tokenClient.Lookup(ctx, task.ChainID, tokenInAddress, nil, task.Header.Number)
+    if err != nil {
+        return nil, fmt.Errorf("lookup token in metadata: %w", err)
+    }
 
-	tokenInMetadata.Value = lo.ToPtr(decimal.NewFromBigInt(amountIn, 0))
+    tokenInMetadata.Value = lo.ToPtr(decimal.NewFromBigInt(amountIn, 0))
 
-	tokenOutMetadata, err := w.tokenClient.Lookup(ctx, task.ChainID, tokenOutAddress, nil, task.Header.Number)
-	if err != nil {
-		return nil, fmt.Errorf("lookup token out metadata: %w", err)
-	}
+    tokenOutMetadata, err := w.tokenClient.Lookup(ctx, task.ChainID, tokenOutAddress, nil, task.Header.Number)
+    if err != nil {
+        return nil, fmt.Errorf("lookup token out metadata: %w", err)
+    }
 
-	tokenOutMetadata.Value = lo.ToPtr(decimal.NewFromBigInt(amountOut, 0))
+    tokenOutMetadata.Value = lo.ToPtr(decimal.NewFromBigInt(amountOut, 0))
 
-	return &activityx.Action{
-		Type:     typex.ExchangeSwap,
-		Platform: w.Platform(),
-		From:     from.String(),
-		To:       to.String(),
-		Metadata: metadata.ExchangeSwap{
-			From: *tokenInMetadata,
-			To:   *tokenOutMetadata,
-		},
-	}, nil
+    return &activityx.Action{
+        Type:     typex.ExchangeSwap,
+        Platform: w.Platform(),
+        From:     from.String(),
+        To:       to.String(),
+        Metadata: metadata.ExchangeSwap{
+            From: *tokenInMetadata,
+            To:   *tokenOutMetadata,
+        },
+    }, nil
 }
 
 // NewWorker creates and initializes a new Zerion worker.
 func NewWorker(config *config.Module) (engine.Worker, error) {
-	var err error
+    var err error
 
-	instance := worker{
-		config: config,
-	}
+    instance := worker{
+        config: config,
+    }
 
-	// Initialize token client.
-	instance.tokenClient = token.NewClient(instance.ethereumClient)
+    // Initialize token client.
+    instance.tokenClient = token.NewClient(instance.ethereumClient)
 
-	// Initialize filterers.
-	instance.erc20Filterer = lo.Must(erc20.NewERC20Filterer(ethereum.AddressGenesis, nil))
-	instance.routerFilterer = lo.Must(zerion.NewRouterFilterer(zerion.AddressRouter, nil))
+    // Initialize filterers.
+    instance.erc20Filterer = lo.Must(erc20.NewERC20Filterer(ethereum.AddressGenesis, nil))
+    instance.routerFilterer = lo.Must(zerion.NewRouterFilterer(zerion.AddressRouter, nil))
 
-	if instance.ethereumClient, err = ethereum.Dial(context.Background(), config.Endpoint.URL, config.Endpoint.BuildEthereumOptions()...); err != nil {
-		return nil, fmt.Errorf("initialize ethereum client: %w", err)
-	}
+    if instance.ethereumClient, err = ethereum.Dial(context.Background(), config.Endpoint.URL, config.Endpoint.BuildEthereumOptions()...); err != nil {
+        return nil, fmt.Errorf("initialize ethereum client: %w", err)
+    }
 
-	instance.tokenClient = token.NewClient(instance.ethereumClient)
+    instance.tokenClient = token.NewClient(instance.ethereumClient)
 
-	return &instance, nil
+    return &instance, nil
 }
 
 ```
 
 For a comprehensive understanding of the implementation, please refer to the source code available [here](https://github.com/RSS3-Network/Node/blob/main/internal/engine/worker/decentralized/contract/zerion/worker.go).
 
-To facilitate a more structured analysis, we will dissect the code into its key components and examine each in detail.
+For a more structured analysis, let’s break down the code into its key components and examine each in detail.
 
 #### Worker struct and NewWorker function
 
 ```go
 // worker represents the Zerion worker, which processes Zerion-related transactions.
 type worker struct {
-	config         *config.Module
-	ethereumClient ethereum.Client
-	tokenClient    token.Client
-	erc20Filterer  *erc20.ERC20Filterer
-	routerFilterer *zerion.RouterFilterer
+    config         *config.Module
+    ethereumClient ethereum.Client
+    tokenClient    token.Client
+    erc20Filterer  *erc20.ERC20Filterer
+    routerFilterer *zerion.RouterFilterer
 }
 ```
 
-The worker struct exemplifies the core components necessary for the Zerion worker's functionality. It incorporates several key elements:
+It incorporates several key elements:
 
-1. `token.Client`: Dependent on `ethereum.Client`, this component is responsible for retrieving and parsing token metadata.
-2. `erc20.ERC20Filterer`: This filterer is utilized to process ERC20 transfer logs.
-3. `zerion.RouterFilterer`: Specifically designed to filter Zerion swap logs.
+1. `token.Client`: component is responsible for retrieving and parsing token metadata.
+2. `erc20.ERC20Filterer`: filterer to filter ERC20 transfer logs.
+3. `zerion.RouterFilterer`: filterer to filter Zerion swap logs.
 
 These components are essential for the worker's operations and are therefore defined as fields within the struct.
 
-To instantiate and configure the worker, we implement the `NewWorker` function. This function serves as the initialization point, setting up all necessary components and connections for the worker to function effectively.
+Implement the `NewWorker` function to instantiate and configure the worker.
+This function sets up all necessary components.
 
 ```go
 // NewWorker creates and initializes a new Zerion worker.
 func NewWorker(config *config.Module) (engine.Worker, error) {
-	var err error
+    var err error
 
-	instance := worker{
-		config: config,
-	}
+    instance := worker{
+        config: config,
+    }
 
-	// Initialize token client.
-	instance.tokenClient = token.NewClient(instance.ethereumClient)
+    // Initialize token client.
+    instance.tokenClient = token.NewClient(instance.ethereumClient)
 
-	// Initialize filterers.
-	instance.erc20Filterer = lo.Must(erc20.NewERC20Filterer(ethereum.AddressGenesis, nil))
-	instance.routerFilterer = lo.Must(zerion.NewRouterFilterer(zerion.AddressRouter, nil))
+    // Initialize filterers.
+    instance.erc20Filterer = lo.Must(erc20.NewERC20Filterer(ethereum.AddressGenesis, nil))
+    instance.routerFilterer = lo.Must(zerion.NewRouterFilterer(zerion.AddressRouter, nil))
 
-	if instance.ethereumClient, err = ethereum.Dial(context.Background(), config.Endpoint.URL, config.Endpoint.BuildEthereumOptions()...); err != nil {
-		return nil, fmt.Errorf("initialize ethereum client: %w", err)
-	}
+    if instance.ethereumClient, err = ethereum.Dial(context.Background(), config.Endpoint.URL, config.Endpoint.BuildEthereumOptions()...); err != nil {
+        return nil, fmt.Errorf("initialize ethereum client: %w", err)
+    }
 
-	instance.tokenClient = token.NewClient(instance.ethereumClient)
+    instance.tokenClient = token.NewClient(instance.ethereumClient)
 
-	return &instance, nil
+    return &instance, nil
 }
 ```
 
 #### Interface and Implementation
 
-The `Worker` interface, defined in `internal/engine/worker/worker.go`, serves as a blueprint for all worker components. This interface ensures consistency and standardization across various worker implementations. Each worker is required to adhere to this interface, implementing its methods to maintain a uniform structure within the system.
+The `Worker` interface, defined in `internal/engine/worker/worker.go`, serves as a blueprint for all other rworkers.
+This interface enforces consistency and standardization across all worker implementations.
+Each worker must comply with the interface, implementing its methods to maintain a uniform structure, facilitating development and maintenance.
 
 ```go
 type Worker interface {
-	// Name is the name of the worker.
-	Name() string
-	// Platform returns the display name of the worker as the `platform` in the final Activity response.
-	Platform() string
-	// Network returns all networks where the worker runs on and displayed as the `network` in the final Activity response.
-	Network() []network.Network
-	// Tags the possible `tag` of the worker, displayed in the final Activity response.
-	Tags() []tag.Tag
-	// Types the possible `type` of the worker, displayed in the final Activity response.
-	Types() []schema.Type
-	// Filter the DataSourceFilter of the worker(network, state, start logics, etc.).
-	Filter() DataSourceFilter
-	// Transform the core logic of the worker and returns the Activity.
-	Transform(ctx context.Context, task Task) (*activityx.Activity, error)
+    // Name is the name of the worker.
+    Name() string
+    // Platform returns the display name of the worker as the `platform` in the final Activity response.
+    Platform() string
+    // Network returns all networks where the worker runs on and displayed as the `network` in the final Activity response.
+    Network() []network.Network
+    // Tags the possible `tag` of the worker, displayed in the final Activity response.
+    Tags() []tag.Tag
+    // Types the possible `type` of the worker, displayed in the final Activity response.
+    Types() []schema.Type
+    // Filter the DataSourceFilter of the worker(network, state, start logics, etc.).
+    Filter() DataSourceFilter
+    // Transform the core logic of the worker and returns the Activity.
+    Transform(ctx context.Context, task Task) (*activityx.Activity, error)
 }
 ```
 
-The `Name`, `Platform`, `Network`, `Tags`, and `Types` functions are straightforward implementations that return their respective values.
+The `Name`, `Platform`, `Network`, `Tags`, and `Types` functions are simple implementations that return their respective values.
 
-For the `Filter` function, it is crucial to pass the contract address and event hash to the `source.Filter` struct when applicable. This enables the Node to efficiently filter logs from specific contracts and events.
+In the `Filter` function, passing the contract address and event hash to the source.
+Filter struct, when applicable, enables the Node to efficiently filter logs from specific contracts and events.
 
-The `Transform` function serves as the core logic of the worker. Its primary responsibilities include parsing events from logs, constructing actions, and assembling the final activity. We will explore the intricacies of the `Transform` function in greater detail in the subsequent section.
+The `Transform` function, which forms the core logic of the worker, is responsible for parsing events from logs, constructing actions, and assembling the final activity.
 
 #### Transform
+
+This section explores the `Transform` function in detail in.
 
 ```go
 ethereumTask, ok := task.(*source.Task)
@@ -600,7 +617,8 @@ if err != nil {
 }
 ```
 
-Within the `Transform` function, we begin by verifying the task type to ensure compatibility. Subsequently, we construct the activity object using the provided task data. This two-step process ensures type safety and initializes the activity with the necessary platform information.
+The `Transform` function verifies the task type for compatibility, then constructs the activity object using the provided task data.
+This process ensures type safety and initializes the activity with the required platform information.
 
 ```go
 // Iterate through all logs in the transaction receipt
@@ -632,85 +650,89 @@ if len(activity.Actions) == 0 {
 ```go
 // matchSwapLog checks if the given log matches a Zerion swap event.
 func (w *worker) matchSwapLog(_ *source.Task, log *ethereum.Log) bool {
-	return contract.MatchEventHashes(log.Topics[0], zerion.EventHashExecuted) &&
-		contract.MatchAddresses(log.Address, zerion.AddressRouter)
+    return contract.MatchEventHashes(log.Topics[0], zerion.EventHashExecuted) &&
+        contract.MatchAddresses(log.Address, zerion.AddressRouter)
 }
 ```
 
-Subsequently, we iterate through each log entry in the transaction receipt. For each log, we verify if it matches the expected event hash. Upon a successful match, we proceed to parse the event data from the log and construct the corresponding action based on the extracted information.
+It then iterates through each log entry in the transaction receipt, verifying whether each log matches the expected event hash.
+Upon a successful match, it parses the event data and constructs the corresponding action using the extracted information.
 
 ```go
 // transformSwapLog transforms a Zerion swap log into a list of actions.
 func (w *worker) transformSwapLog(ctx context.Context, task *source.Task, log *ethereum.Log) ([]*activityx.Action, error) {
-	event, err := w.routerFilterer.ParseExecuted(log.Export())
-	if err != nil {
-		return nil, fmt.Errorf("parse Executed event: %w", err)
-	}
+    event, err := w.routerFilterer.ParseExecuted(log.Export())
+    if err != nil {
+        return nil, fmt.Errorf("parse Executed event: %w", err)
+    }
 
-	var actions []*activityx.Action
+    var actions []*activityx.Action
 
-	// Handle protocol fee if present
-	if event.ProtocolFeeAmount.Sign() == 1 {
-		feeAction, err := w.buildTransactionTransferAction(ctx, task, event.Sender, zerion.AddressRouter, lo.Ternary(event.OutputToken == zerion.AddressNativeToken, nil, &event.OutputToken), event.ProtocolFeeAmount)
-		if err != nil {
-			return nil, fmt.Errorf("build transaction transfer action for fee: %w", err)
-		}
+    // Handle protocol fee if present
+    if event.ProtocolFeeAmount.Sign() == 1 {
+        feeAction, err := w.buildTransactionTransferAction(ctx, task, event.Sender, zerion.AddressRouter, lo.Ternary(event.OutputToken == zerion.AddressNativeToken, nil, &event.OutputToken), event.ProtocolFeeAmount)
+        if err != nil {
+            return nil, fmt.Errorf("build transaction transfer action for fee: %w", err)
+        }
 
-		actions = append(actions, feeAction)
-	}
+        actions = append(actions, feeAction)
+    }
 
-	// Build the main swap action
-	swapAction, err := w.buildExchangeSwapAction(ctx, task, event.Sender, event.Sender, event.InputToken, event.OutputToken, event.AbsoluteInputAmount, event.ReturnedAmount)
-	if err != nil {
-		return nil, fmt.Errorf("build exchange swap action: %w", err)
-	}
+    // Build the main swap action
+    swapAction, err := w.buildExchangeSwapAction(ctx, task, event.Sender, event.Sender, event.InputToken, event.OutputToken, event.AbsoluteInputAmount, event.ReturnedAmount)
+    if err != nil {
+        return nil, fmt.Errorf("build exchange swap action: %w", err)
+    }
 
-	actions = append(actions, swapAction)
+    actions = append(actions, swapAction)
 
-	return actions, nil
+    return actions, nil
 }
 ```
 
-To proceed, we must parse the event data from the log to extract essential information for a swap activity. This includes, but is not limited to, the sender's address, token addresses involved, and transaction amounts. This parsed data forms the foundation for constructing a comprehensive representation of the swap activity.
+The event data from the log must be parsed to extract key details for the swap activity, including the sender’s address, token addresses involved, and transaction amounts.
+This parsed data serves as the basis for constructing a detailed representation of the swap activity.
 
 ```go
 // buildExchangeSwapAction creates an ExchangeSwap action for a given swap.
 func (w *worker) buildExchangeSwapAction(ctx context.Context, task *source.Task, from, to, tokenIn, tokenOut common.Address, amountIn, amountOut *big.Int) (*activityx.Action, error) {
-	tokenInAddress := lo.Ternary(tokenIn != zerion.AddressNativeToken, &tokenIn, nil)
-	tokenOutAddress := lo.Ternary(tokenOut != zerion.AddressNativeToken, &tokenOut, nil)
+    tokenInAddress := lo.Ternary(tokenIn != zerion.AddressNativeToken, &tokenIn, nil)
+    tokenOutAddress := lo.Ternary(tokenOut != zerion.AddressNativeToken, &tokenOut, nil)
 
-	tokenInMetadata, err := w.tokenClient.Lookup(ctx, task.ChainID, tokenInAddress, nil, task.Header.Number)
-	if err != nil {
-		return nil, fmt.Errorf("lookup token in metadata: %w", err)
-	}
+    tokenInMetadata, err := w.tokenClient.Lookup(ctx, task.ChainID, tokenInAddress, nil, task.Header.Number)
+    if err != nil {
+        return nil, fmt.Errorf("lookup token in metadata: %w", err)
+    }
 
-	tokenInMetadata.Value = lo.ToPtr(decimal.NewFromBigInt(amountIn, 0))
+    tokenInMetadata.Value = lo.ToPtr(decimal.NewFromBigInt(amountIn, 0))
 
-	tokenOutMetadata, err := w.tokenClient.Lookup(ctx, task.ChainID, tokenOutAddress, nil, task.Header.Number)
-	if err != nil {
-		return nil, fmt.Errorf("lookup token out metadata: %w", err)
-	}
+    tokenOutMetadata, err := w.tokenClient.Lookup(ctx, task.ChainID, tokenOutAddress, nil, task.Header.Number)
+    if err != nil {
+        return nil, fmt.Errorf("lookup token out metadata: %w", err)
+    }
 
-	tokenOutMetadata.Value = lo.ToPtr(decimal.NewFromBigInt(amountOut, 0))
+    tokenOutMetadata.Value = lo.ToPtr(decimal.NewFromBigInt(amountOut, 0))
 
-	return &activityx.Action{
-		Type:     typex.ExchangeSwap,
-		Platform: w.Platform(),
-		From:     from.String(),
-		To:       to.String(),
-		Metadata: metadata.ExchangeSwap{
-			From: *tokenInMetadata,
-			To:   *tokenOutMetadata,
-		},
-	}, nil
+    return &activityx.Action{
+        Type:     typex.ExchangeSwap,
+        Platform: w.Platform(),
+        From:     from.String(),
+        To:       to.String(),
+        Metadata: metadata.ExchangeSwap{
+            From: *tokenInMetadata,
+            To:   *tokenOutMetadata,
+        },
+    }, nil
 }
 ```
 
-Following the construction of the necessary components, we proceed to assemble and return the action, which serves as the foundation for the final activity. This step is crucial in encapsulating the parsed event data into a structured format that accurately represents the swap operation within our system.
+Following the construction of the necessary components, it proceeds to assemble and return the action, which serves as the foundation for the final activity.
+This step is crucial in encapsulating the parsed event data into a structured format that accurately represents the swap operation within our system.
 
 ### Test
 
-For a comprehensive understanding of the testing cases, please refer to the [source code](https://github.com/RSS3-Network/Node/blob/main/internal/engine/worker/decentralized/contract/zerion/worker_test.go). This resource provides detailed insights into the testing logic implemented.
+For a comprehensive understanding of the testing cases, please refer to the [source code](https://github.com/RSS3-Network/Node/blob/main/internal/engine/worker/decentralized/contract/zerion/worker_test.go).
+This resource provides detailed insights into the testing logic implemented.
 
 The following section outlines the fundamental structure of the test suite:
 
@@ -718,127 +740,129 @@ The following section outlines the fundamental structure of the test suite:
 package zerion_test
 
 import (
-	"context"
-	"math/big"
-	"testing"
+    "context"
+    "math/big"
+    "testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/rss3-network/node/config"
-	source "github.com/rss3-network/node/internal/engine/protocol/ethereum"
-	worker "github.com/rss3-network/node/internal/engine/worker/decentralized/contract/zerion"
-	"github.com/rss3-network/node/provider/ethereum"
-	"github.com/rss3-network/node/provider/ethereum/contract/zerion"
-	"github.com/rss3-network/node/provider/ethereum/endpoint"
-	workerx "github.com/rss3-network/node/schema/worker/decentralized"
-	activityx "github.com/rss3-network/protocol-go/schema/activity"
-	"github.com/rss3-network/protocol-go/schema/metadata"
-	"github.com/rss3-network/protocol-go/schema/network"
-	"github.com/rss3-network/protocol-go/schema/typex"
-	"github.com/samber/lo"
-	"github.com/shopspring/decimal"
-	"github.com/stretchr/testify/require"
+    "github.com/ethereum/go-ethereum/common"
+    "github.com/ethereum/go-ethereum/common/hexutil"
+    "github.com/rss3-network/node/config"
+    source "github.com/rss3-network/node/internal/engine/protocol/ethereum"
+    worker "github.com/rss3-network/node/internal/engine/worker/decentralized/contract/zerion"
+    "github.com/rss3-network/node/provider/ethereum"
+    "github.com/rss3-network/node/provider/ethereum/contract/zerion"
+    "github.com/rss3-network/node/provider/ethereum/endpoint"
+    workerx "github.com/rss3-network/node/schema/worker/decentralized"
+    activityx "github.com/rss3-network/protocol-go/schema/activity"
+    "github.com/rss3-network/protocol-go/schema/metadata"
+    "github.com/rss3-network/protocol-go/schema/network"
+    "github.com/rss3-network/protocol-go/schema/typex"
+    "github.com/samber/lo"
+    "github.com/shopspring/decimal"
+    "github.com/stretchr/testify/require"
 )
 
 func TestWorker_Zerion(t *testing.T) {
-	t.Parallel()
+    t.Parallel()
 
-	type arguments struct {
-		task   *source.Task
-		config *config.Module
-	}
+    type arguments struct {
+        task   *source.Task
+        config *config.Module
+    }
 
-	testcases := []struct {
-		name      string
-		arguments arguments
-		want      *activityx.Activity
-		wantError require.ErrorAssertionFunc
-	}{
-		{
-			name: "Swap MATIC and SAND on Polygon",
-			arguments: struct {
-				task   *source.Task
-				config *config.Module
-			}{
-				task: &source.Task{},
-				config: &config.Module{
-					Network: network.Polygon,
-					Endpoint: config.Endpoint{
-						URL: endpoint.MustGet(network.Polygon),
-					},
-				},
-			},
-			want: &activityx.Activity{},
-			wantError: require.NoError,
-		},
-	}
+    testcases := []struct {
+        name      string
+        arguments arguments
+        want      *activityx.Activity
+        wantError require.ErrorAssertionFunc
+    }{
+        {
+            name: "Swap MATIC and SAND on Polygon",
+            arguments: struct {
+                task   *source.Task
+                config *config.Module
+            }{
+                task: &source.Task{},
+                config: &config.Module{
+                    Network: network.Polygon,
+                    Endpoint: config.Endpoint{
+                        URL: endpoint.MustGet(network.Polygon),
+                    },
+                },
+            },
+            want: &activityx.Activity{},
+            wantError: require.NoError,
+        },
+    }
 
-	for _, testcase := range testcases {
-		testcase := testcase
+    for _, testcase := range testcases {
+        testcase := testcase
 
-		t.Run(testcase.name, func(t *testing.T) {
-			t.Parallel()
+        t.Run(testcase.name, func(t *testing.T) {
+            t.Parallel()
 
-			ctx := context.Background()
+            ctx := context.Background()
 
-			instance, err := worker.NewWorker(testcase.arguments.config)
-			require.NoError(t, err)
+            instance, err := worker.NewWorker(testcase.arguments.config)
+            require.NoError(t, err)
 
-			activity, err := instance.Transform(ctx, testcase.arguments.task)
-			testcase.wantError(t, err)
+            activity, err := instance.Transform(ctx, testcase.arguments.task)
+            testcase.wantError(t, err)
 
-			t.Log(string(lo.Must(json.MarshalIndent(activity, "", "\x20\x20"))))
+            t.Log(string(lo.Must(json.MarshalIndent(activity, "", "\x20\x20"))))
 
-			require.Equal(t, testcase.want, activity)
-		})
-	}
+            require.Equal(t, testcase.want, activity)
+        })
+    }
 }
 ```
 
 To obtain mock transaction data for EVM worker testing (represented as `task: &source.Task{}` in the test case), execute the following command:
 
-	```bash
-	go run ./tool/testcase/main.go --source=ethereum --endpoint=https://rpc.ankr.com/eth --activity=0x0000000000000000000000000000000000000000000000000000000000000000
-	```
+    ```bash
+    go run ./tool/testcase/main.go --source=ethereum --endpoint=https://rpc.ankr.com/eth --activity=0x0000000000000000000000000000000000000000000000000000000000000000
+    ```
 
 ### Add new worker to factory
 
 ```go
 func newNonCoreWorker(config *config.Module, databaseClient database.Client, redisClient rueidis.Client) (engine.Worker, error) {
-	switch config.Worker {
-	case decentralized.Zerion:
-		return zerion.NewWorker(config)
-	default:
-		return nil, fmt.Errorf("unsupported worker %s", config.Worker)
-	}
+    switch config.Worker {
+    case decentralized.Zerion:
+        return zerion.NewWorker(config)
+    default:
+        return nil, fmt.Errorf("unsupported worker %s", config.Worker)
+    }
 }
 
 ```
 
-Upon successful implementation of the worker, it is necessary to integrate it into the factory located in `internal/engine/worker/decentralized/factory.go`. This integration ensures the worker's availability within the Node ecosystem.
+Upon successful implementation of the worker, it is necessary to integrate it into the factory located in `internal/engine/worker/decentralized/factory.go`.
+This integration ensures the worker's availability within the Node ecosystem.
 
 ### Incorporating the Worker into Node Configurations
 
-To enable operator access to the new worker, it must be added to the node configurations in `internal/node/component/info/network_config.go`. This process involves updating two critical areas:
+To enable operator access to the new worker, it must be added to the node configurations in `internal/node/component/info/network_config.go`.
+This process involves updating two critical areas:
 
 1. `NetworkToWorkersMap`
 
 ```go
 var NetworkToWorkersMap = map[network.Network][]worker.Worker{
-	network.Arbitrum: {
-		// ...workers
-		decentralized.Zerion,
-	},
-	network.Arweave: { // ...workers},
-	network.Avalanche: {
-		// ...workers
-		decentralized.Zerion,
-	},
-	network.Base: {
-		// ...workers
-		decentralized.Zerion,
-	},
-	// ...other networks
+    network.Arbitrum: {
+        // ...workers
+        decentralized.Zerion,
+    },
+    network.Arweave: { // ...workers},
+    network.Avalanche: {
+        // ...workers
+        decentralized.Zerion,
+    },
+    network.Base: {
+        // ...workers
+        decentralized.Zerion,
+    },
+    // ...other networks
 }
 ```
 
@@ -847,15 +871,15 @@ var NetworkToWorkersMap = map[network.Network][]worker.Worker{
 ```go
 // WorkerToConfigMap is a map of worker to config.
 var WorkerToConfigMap = map[network.Protocol]map[worker.Worker]workerConfig{
-	network.ActivityPubProtocol: { // ...configs},
-	network.ArweaveProtocol:     { // ...configs},
-	network.EthereumProtocol: {
-		// ...configs
-		decentralized.Zerion:     defaultWorkerConfig(decentralized.Zerion, network.EthereumProtocol, nil),
-	},
-	network.FarcasterProtocol: { // ...configs},
-	network.NearProtocol: { // ...configs},
-	network.RSSProtocol: { // ...configs},
+    network.ActivityPubProtocol: { // ...configs},
+    network.ArweaveProtocol:     { // ...configs},
+    network.EthereumProtocol: {
+        // ...configs
+        decentralized.Zerion:     defaultWorkerConfig(decentralized.Zerion, network.EthereumProtocol, nil),
+    },
+    network.FarcasterProtocol: { // ...configs},
+    network.NearProtocol: { // ...configs},
+    network.RSSProtocol: { // ...configs},
 }
 ```
 
@@ -863,13 +887,16 @@ var WorkerToConfigMap = map[network.Protocol]map[worker.Worker]workerConfig{
 
 #### Environment Setup
 
-To facilitate local testing, execute `make service_up` to initialize and launch essential services such as PostgreSQL, Redis, and other dependencies. If necessary, you can adjust the port configurations in the `./devcontainer` directory. To terminate all services, use the `make service_down` command.
+To facilitate local testing, execute `make service_up` to initialize and launch essential services such as PostgreSQL, Redis, and other dependencies.
+If necessary, you can adjust the port configurations in the `./devcontainer` directory.
+To terminate all services, use the `make service_down` command.
 
 #### Configuration
 
 Configure the `config.yaml` file in accordance with the specifications outlined in the [documentation](https://github.com/RSS3-Network/Node/tree/main/deploy).
 
-To incorporate a new worker, add an entry to the components section of the configuration file. For example:
+To incorporate a new worker, add an entry to the components section of the configuration file.
+For example:
 
 ```yaml
 components:
@@ -884,11 +911,12 @@ components:
 
 To initiate the Node with the newly integrated worker, execute the following command:
 
-	```bash
-	ENVIRONMENT=development go run ./cmd --worker.id=optimism-zerion
-	```
+```bash
+ENVIRONMENT=development go run ./cmd --worker.id=optimism-zerion
+```
 
-Verify the data in database to confirm the presence of activities generated by the newly implemented worker. This step is crucial for ensuring the proper functionality and integration of your worker within the system.
+Verify the data in database to confirm the presence of activities generated by the newly implemented worker.
+This step is crucial for ensuring the proper functionality and integration of your worker within the system.
 
 #### Testing the API
 
@@ -896,23 +924,27 @@ To evaluate the functionality of your newly implemented worker through the API, 
 
 1. Initiate the API server by executing the following command:
 
-   ```bash
-   ENVIRONMENT=development go run ./cmd --module=core
-   ```
+```bash
+ENVIRONMENT=development go run ./cmd --module=core
+```
 
-2. Once the server is running, you can utilize the API to retrieve activity data. This allows you to verify that the worker is correctly generating and storing activities.
+2. Once the server is running, you can use the API to retrieve activity data, enabling you to verify that the worker is properly generating and storing activities.
 
-3. To query the activities data, you can make an API request as demonstrated in the subsequent section.
+3. You can query the activity data by making an API request:
 
-	```bash
-	curl --location 'http://localhost:8080/decentralized/platform/Zerion' \
-	--header 'Authorization: Bearer test
-	```
+```bash
+curl --location 'http://localhost:8080/decentralized/platform/Zerion' \
+--header 'Authorization: Bearer test
+```
 
 ## Conclusion
 
-This tutorial has provided a comprehensive guide to contributing a new worker to the RSS3 Node. By following these steps, you've gained insights into the process of extending the Node's capabilities and integrating new Open Information applications.
+This tutorial has offered a detailed guide to contributing a new worker to the RSS3 Node.
+By following these steps, you have learned how to extend the Node’s capabilities and integrate new Open Information applications.
 
-For a more in-depth understanding of the implementation details, we encourage you to examine the following Pull Request: [feat(worker/zerion): add zerion worker #564](https://github.com/RSS3-Network/Node/pull/564). This PR serves as a practical example, demonstrating the application of the concepts discussed in this tutorial.
+For a more in-depth understanding of the implementation details, refer to the following Pull Request: [feat(worker/zerion): add zerion worker #564](https://github.com/RSS3-Network/Node/pull/564).
+This PR provides a practical example, illustrating the application of the concepts covered in this tutorial.
 
-We welcome your contributions and look forward to seeing how you'll enhance the RSS3 ecosystem with your innovative workers. Should you have any questions or require further clarification, please don't hesitate to reach out to our development community.
+We welcome any contributions and look forward to seeing your next Pull Request!
+
+If you have any questions or require further clarification, join our [Discord](https://discord.gg/rss3-network).
