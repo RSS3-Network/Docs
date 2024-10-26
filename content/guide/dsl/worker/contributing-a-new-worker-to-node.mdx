@@ -1,4 +1,5 @@
 ---
+id: worker-contributing
 title: Contributing a New Worker
 ---
 
@@ -729,10 +730,12 @@ func (w *worker) buildExchangeSwapAction(ctx context.Context, task *source.Task,
 Following the construction of the necessary components, it proceeds to assemble and return the action, which serves as the foundation for the final activity.
 This step is crucial in encapsulating the parsed event data into a structured format that accurately represents the swap operation within our system.
 
-### Test
+### Unit Test
 
 For a comprehensive understanding of the testing cases, please refer to the [source code](https://github.com/RSS3-Network/Node/blob/main/internal/engine/worker/decentralized/contract/zerion/worker_test.go).
 This resource provides detailed insights into the testing logic implemented.
+
+<Callout type="warn">Please note that a unit test is required for all new workers.</Callout>
 
 The following section outlines the fundamental structure of the test suite:
 
@@ -883,7 +886,7 @@ var WorkerToConfigMap = map[network.Protocol]map[worker.Worker]workerConfig{
 }
 ```
 
-### Local Testing
+### Testing Locally
 
 #### Environment Setup
 
