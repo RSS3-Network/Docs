@@ -571,7 +571,7 @@ func NewWorker(config *config.Module) (engine.Worker, error) {
 
 #### Interface and Implementation
 
-The `Worker` interface, defined in `internal/engine/worker/worker.go`, serves as a blueprint for all other rworkers.
+The `Worker` interface, defined in `internal/engine/worker/worker.go`, serves as a blueprint for all other workers.
 This interface enforces consistency and standardization across all worker implementations.
 Each worker must comply with the interface, implementing its methods to maintain a uniform structure, facilitating development and maintenance.
 
@@ -936,8 +936,8 @@ ENVIRONMENT=development go run ./cmd --module=core
 3. You can query the activity data by making an API request:
 
 ```bash
-curl --location 'http://localhost:8080/decentralized/platform/Zerion' \
---header 'Authorization: Bearer test
+curl --location 'http://localhost:80/decentralized/platform/Zerion' \
+--header 'Authorization: Bearer test'
 ```
 
 ## Conclusion
