@@ -110,6 +110,28 @@ To deploy your Node on Railway, follow these steps:
 
 ![](./assets/railway-7.png)
 
+### Upgrading your Node on Railway
+To upgrade your Node on Railway, follow these steps:
+
+1. Check the [Changelog](https://github.com/RSS3-Network/Node/releases) for updates and new features.
+
+2. Open the Node deployment page on Railway and update the image tag for the services that need to be updated.
+<Callout>
+  The image tags for `RSS3-Node-VSL-Core`, `RSS3-Node-Monitor`, `RSS3-Node-Core`, `RSS3-Node-Broadcaster` should be updated.
+</Callout>
+
+![](./assets/railway-upgrade-1.png)
+
+![](./assets/railway-upgrade-2.png)
+
+3. Redeploy the services with the updated image tags.
+
+![](./assets/railway-upgrade-3.png)
+
+4. Once it has been redeployed successfully, you can check your Node status and version. It should be "online" and the version should be updated.
+
+![](./assets/railway-upgrade-4.png)
+
 ## Get Help
 
 In case you run into any issues, please reach out to us on [Discord](https://link.rss3.io/discord).
