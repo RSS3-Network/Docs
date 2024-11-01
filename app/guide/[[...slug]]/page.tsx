@@ -69,8 +69,7 @@ export async function generateMetadata(props: {
 			title: page.data.title,
 			description,
 			openGraph: {
-				// url: `/docs/${page.slugs.join("/")}`,
-				url: "banner.png"
+				url: `/guide/${page.slugs.join("/")}`,
 			},
 		}),
 	);
