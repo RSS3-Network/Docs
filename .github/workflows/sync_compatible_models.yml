@@ -22,7 +22,7 @@ jobs:
       - name: Download source file
         run: |
           mkdir -p content/guide/ai/openagent
-          curl -o content/guide/ai/openagent/compatible-models.mdx https://raw.githubusercontent.com/naaive/OA/main/tests/compatible-models.mdx
+          curl -o content/guide/ai/openagent/compatible-models.mdx https://raw.githubusercontent.com/RSS3-Network/OpenAgent/main/tests/compatible-models.mdx
 
       - name: Check for changes
         id: check
