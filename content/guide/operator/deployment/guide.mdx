@@ -7,7 +7,7 @@ description: An easy guide for deploying an RSS3 Node on the Data Sublayer.
 ## Introduction
 
 This guide provides instructions for a deployment using containerized solutions including Docker and Kubernetes.
-The deployment focuses on Decentralized workers.
+The deployment focuses on Decentralized and Federated workers.
 It is assumed that the user has a basic understanding of terminal commands and containerization concepts.
 
 The guide is opinionated towards a containerized deployment solution, the source code is available at: https://github.com/RSS3-Network/Node, if one prefers an alternative deployment method.
@@ -67,7 +67,7 @@ A configuration file is required for deploying your Node.
 
 🎉 And you are done! (Yes it's that simple.)
 
-A successful deployment (if you have enabled at least 1 decentralized worker) will generate the following containers:
+A successful deployment (if you have enabled at least 1 decentralized or federated worker) will generate the following containers:
 
 1. rss3_node_core: This container is used to process incoming requests from Global Indexers.
 2. rss3_node_broadcaster: This container is used to broadcast the Node's status to Global Indexers.
@@ -163,14 +163,14 @@ redis:
 # - Blockchain networks require RPC endpoints,
 # - Arweave requires a gateway endpoint,
 # - Farcaster requires a Hubble.
-# - Mastodon requires a mastodon instance.
+# - Mastodon requires a public URL forwarding to specific localhost port.
 endpoints:
   vsl:
     url: https://rpc.rss3.io
   arweave:
     url: https://arweave.net
   mastodon:
-    url: your-kafka-ip:9092
+    url: https://public.url
 
 # `component` is used to split different types of networks.
 component:
@@ -209,6 +209,29 @@ component:
       parameters:
         # `concurrent_block_requests` is used to specify the number of concurrent block requests.
         concurrent_block_requests: 2
+
+  # `federated` network type includes workers indexing ActivityPub data from federated networks, such as Mastodon.
+  federated:
+    # Each configuration here initializes a worker for federated data collection.
+    - id: mastodon-core
+      # `network` is the network that the worker is indexing from.
+      network: mastodon
+      # `endpoint` is the public URL used by the worker for federated data collection.
+      # You can reference the endpoint defined above in the `endpoints` section.
+      # The endpoint should forward requests to a local port.
+      endpoint: mastodon
+      # `worker` is the actual worker that processes the federated data.
+      worker: core
+      # `parameters` includes specific settings for the Mastodon worker.
+      parameters:
+        # `relay_url_list` is a list of ActivityPub relay URLs that the worker will collect data from.
+        # Relays aggregate messages from different mastodon instances. 
+        # You may specify multiple relays to collect data from a variety of sources.
+        relay_url_list: ["https://relay.fedi.buzz/instance/mastodon.social", "https://relay.intahnet.co.uk/inbox"]
+        # `port` specifies the local port where requests are forwarded.
+        # The public URL in the `mastodon` endpoint should redirect to this port.
+        port: 8181
+
 ```
 
 ### Configuration Options
@@ -419,6 +442,35 @@ component:
     - For Farcaster:
       - `APIKey`: API key for Farcaster Hubble.
       - `TimestampStart`: The Farcaster seconds timestamp that the worker should start from.
+
+
+
+- `component.federated[].id`
+  - Description: Unique identifier for each federated component
+
+- `component.federated[].network`
+  - Description: Network type for each federated component (e.g., Mastodon)
+
+- `component.federated[].endpoint`
+  - Description:
+    - Public URL endpoint used by the federated worker
+    - This endpoint should forward requests to a local port specified in the `parameters.port` setting (or the default port).
+
+- `component.federated[].worker`
+  - Description:
+    - The specific worker that processes data from federated sources.
+    - Available workers can be found in the [list of supported workers](/guide/dsl/worker#available-workers).
+
+- `component.federated[].parameters`
+  - Description: Additional parameters for each federated component.
+    - For Mastodon:
+      - `relay_url_list`: 
+        - Description: List of Mastodon relay URLs used by the worker.
+        - Default: `["https://relay.toot.io/inbox", "https://relay.infosec.exchange/inbox", "https://relay.intahnet.co.uk/inbox",
+	"https://relay.fedi.buzz/instance/mas.to", "https://relay.fedi.buzz/instance/mastodon.online",]`
+      - `port`: 
+        - Description: Local port where the mastodon client listens for requests from the mastodon public URL.
+        - Default: `8181`
 
 ## Deploy via Kubernetes
 
