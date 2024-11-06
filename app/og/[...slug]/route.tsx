@@ -7,6 +7,8 @@ export const GET = metadataImage.createAPI((page) => {
 		<img
 			src={`${baseUrl}/banner.png`}
 			alt="Background"
+			width={1920}
+			height={1080}
 			style={{
 				position: "absolute",
 				top: 0,
