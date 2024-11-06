@@ -26,7 +26,7 @@ Monitor your Node closely to ensure it has sufficient storage capacity to suppor
 
 ### Sample config.yaml
 
-There is a new section under `component` for Federated components, which looks like this:
+There is a new section under `component` for the Federated component, which looks like this:
 
 ```yaml
 environment: production
@@ -51,7 +51,7 @@ component:
       # `endpoint` is defined in the `endpoints` section above.
       endpoint: mastodon
       worker: core
-      # `parameters` includes specific settings for the Mastodon worker.
+      # `parameters` includes specific settings for the mastodon-core worker.
       parameters:
         # `relay_url_list` is a list of ActivityPub relay URLs that the worker communicate with.
         # You may specify multiple relays to expand coverage.
@@ -72,5 +72,5 @@ component:
 
 In this guide, we introduced the Federated component and provided a sample configuration for deploying it.
 
-By adding a Federated component to your RSS3 Node, you can seamlessly integrate data from federated networks into the RSS3 ecosystem, expanding the coverage and utility of your Node.
+By adding a Federated component to your RSS3 Node, you can seamlessly integrate data from federated networks into your Node, expanding its coverage and utility of your Node.
 This may increase your Node's visibility and attract more requests, enhancing your Node's reputation and potential operation rewards.

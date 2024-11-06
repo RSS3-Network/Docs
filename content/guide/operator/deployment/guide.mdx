@@ -164,7 +164,6 @@ redis:
 # - Blockchain networks require RPC endpoints,
 # - Arweave requires a gateway endpoint,
 # - Farcaster requires a Hubble.
-# - Mastodon requires a public URL forwarding to specific localhost port.
 endpoints:
   vsl:
     url: https://rpc.rss3.io
@@ -173,16 +172,7 @@ endpoints:
 
 # `component` is used to split different types of networks.
 component:
-  # `rss` network type includes the worker indexing data in RSS format.
-  rss:
-    id: rss-rsshub
-    network: rsshub
-    worker: core
-    endpoint: https://your.rsshub.domain/
-    parameters:
-      authentication:
-        access_key:
-  # `decentralized` network type includes workers indexing data from decentralized networks such as blockchain networks, Arweave, etc.
+  # `decentralized` component includes workers indexing data from decentralized networks such as blockchain networks, Arweave, etc.
   decentralized:
     # Each configuration here initializes a worker.
     # `id` is the unique identifier
