@@ -36,8 +36,11 @@ environment: production
 endpoints:
   # the rest of the config...
   mastodon:
-    # `url` is the public URL which points to a Mastodon relay
-    url: https://your.mastodon.relay:8181
+    #   This URL must be publicly accessible to allow:
+    #   1. External relay services to connect
+    #   2. Federation message subscription using relay URLs
+    #   3. Reliable message delivery from relay servers
+    url: https://your.mastodon.relay
 
 component:
   # the rest of the config...
@@ -54,7 +57,7 @@ component:
       # `parameters` includes specific settings for the Mastodon worker.
       parameters:
         # `relay_url_list` is a list of ActivityPub relay URLs that the worker communicate with.
-        # You may specify multiple relays to expand coverage.
+        # You may specify multiple relays to expand coverage. If empty, a default relay URL list will be used.
         relay_url_list:
           [
             "https://relay.fedi.buzz/instance/mastodon.social",
