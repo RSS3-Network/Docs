@@ -36,11 +36,11 @@ environment: production
 endpoints:
   # the rest of the config...
   mastodon:
-    #   This URL must be publicly accessible to allow:
-    #   1. External relay services to connect
-    #   2. Federation message subscription using relay URLs
-    #   3. Reliable message delivery from relay servers
-    url: https://your.mastodon.relay
+    # This URL must be publicly accessible to allow:
+    # 1. External relay services to connect
+    # 2. Federation message subscription using relay URLs
+    # 3. Reliable message delivery from relay servers
+    url: http://your.mastodon.relay
 
 component:
   # the rest of the config...
@@ -63,8 +63,9 @@ component:
             "https://relay.fedi.buzz/instance/mastodon.social",
             "https://relay.intahnet.co.uk/inbox",
           ]
-        # `port` specifies the local port where requests are forwarded.
+        # `port` specifies the local port for forwarding requests from other relay servers.
         # The public URL in the `mastodon` endpoint should redirect to this port.
+        # Default port is 8181.
         port: 8181
 
 # the rest of the config...
