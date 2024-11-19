@@ -1,0 +1,83 @@
+---
+id: component-decentralized
+title: Decentralized Component
+description: An introduction to the Decentralized component.
+---
+
+## Introduction
+
+Decentralized networks often comprise of permissionless and open systems that enable users to interact and share data without relying on centralized authorities.
+
+These network often provide users with greater control over their data and privacy, making them an attractive alternative to traditional centralized systems.
+
+RSS3 Node has a Decentralized component that indexes data from decentralized networks, enabling users to access and interact with the data in the RSS3 ecosystem.
+
+## Deployment
+
+This guide assumes you have already deployed an RSS3 Node and are familiar with the deployment process.
+If not, refer to the [Deployment Guide](/guide/operator/deployment/guide) for detailed instructions.
+
+### Hardware Requirements
+
+The support for decentralized networks requires additional resources (mainly storage capacity) which grows with the number of networks covered and the volume of data they generate.
+
+Adding more workers will increase the CPU and memory usage of your Node, monitor your Node closely to ensure it has sufficient resources to support the Federated component’s data requirements.
+
+### Sample config.yaml
+
+There is a new section under `component` for the Decentralized component, which looks like this:
+
+```yaml
+environment: production
+
+# the rest of the config...
+
+endpoints:
+  # the rest of the config...
+  endpoints:
+    vsl:
+      # `url` is the RPC (or any data fetching service) URL for the corresponding decentralized network.
+      url: https://rpc.rss3.io
+    arweave:
+      url: https://arweave.net
+
+component:
+  # the rest of the config...
+
+  # `decentralized` component includes workers indexing data from decentralized networks such as blockchain networks, Arweave, etc.
+  decentralized:
+    # Each configuration here initializes a worker.
+    # `id` is the unique identifier
+    - id: vsl-core
+      # `network` is the network that the worker is indexing from.
+      network: vsl
+      # `endpoint` is the data access endpoint used by the worker.
+      # You can reference the endpoint defined above in the `endpoints` section.
+      # You can also use a direct URL, such as `https://rpc.rss3.io`.
+      endpoint: vsl
+      # `worker` is the actual worker that processes the data.
+      # You can find the list of available workers here: https://github.com/RSS3-Network/Node/blob/develop/README.md#supported-networks-and-workers.
+      worker: core
+    - id: arweave-mirror
+      network: arweave
+      endpoint: arweave
+      worker: mirror
+      # `ipfs_gateways` is used to specify the IPFS gateways used by the worker.
+      # Supplying multiple gateways may improve the indexing performance and reliability.
+      ipfs_gateways:
+        - https://ipfs.io
+        - https://cloudflare-ipfs.com
+      parameters:
+        # `concurrent_block_requests` is used to specify the number of concurrent block requests.
+        concurrent_block_requests: 2
+
+# the rest of the config...
+
+```
+
+## Conclusion
+
+In this guide, we introduced the Decentralized component and provided a sample configuration for deploying it.
+
+By adding a Decentralized component to your RSS3 Node, you can seamlessly integrate data from decentralized networks into your Node, expanding its coverage and utility of your Node.
+This may increase your Node's visibility and attract more requests, enhancing your Node's reputation and potential operation rewards.

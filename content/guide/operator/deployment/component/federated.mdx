@@ -26,7 +26,7 @@ Monitor your Node closely to ensure it has sufficient storage capacity to suppor
 
 ### Sample config.yaml
 
-There is a new section under `component` for Federated components, which looks like this:
+There is a new section under `component` for the Federated component, which looks like this:
 
 ```yaml
 environment: production
@@ -36,11 +36,8 @@ environment: production
 endpoints:
   # the rest of the config...
   mastodon:
-    # This URL must be publicly accessible to allow:
-    # 1. External relay services to connect
-    # 2. Federation message subscription using relay URLs
-    # 3. Reliable message delivery from relay servers
-    url: http://your.mastodon.relay
+    # `url` is the public URL which points to a Mastodon relay
+    url: https://your.mastodon.relay:8181
 
 component:
   # the rest of the config...
@@ -54,18 +51,17 @@ component:
       # `endpoint` is defined in the `endpoints` section above.
       endpoint: mastodon
       worker: core
-      # `parameters` includes specific settings for the Mastodon worker.
+      # `parameters` includes specific settings for the mastodon-core worker.
       parameters:
         # `relay_url_list` is a list of ActivityPub relay URLs that the worker communicate with.
-        # You may specify multiple relays to expand coverage. If empty, a default relay URL list will be used.
+        # You may specify multiple relays to expand coverage.
         relay_url_list:
           [
             "https://relay.fedi.buzz/instance/mastodon.social",
             "https://relay.intahnet.co.uk/inbox",
           ]
-        # `port` specifies the local port for forwarding requests from other relay servers.
+        # `port` specifies the local port where requests are forwarded.
         # The public URL in the `mastodon` endpoint should redirect to this port.
-        # Default port is 8181.
         port: 8181
 
 # the rest of the config...
@@ -76,5 +72,5 @@ component:
 
 In this guide, we introduced the Federated component and provided a sample configuration for deploying it.
 
-By adding a Federated component to your RSS3 Node, you can seamlessly integrate data from federated networks into the RSS3 ecosystem, expanding the coverage and utility of your Node.
+By adding a Federated component to your RSS3 Node, you can seamlessly integrate data from federated networks into your Node, expanding its coverage and utility of your Node.
 This may increase your Node's visibility and attract more requests, enhancing your Node's reputation and potential operation rewards.
