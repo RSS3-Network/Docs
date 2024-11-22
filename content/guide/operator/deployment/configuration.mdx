@@ -12,9 +12,9 @@ You may use the configuration file `config.yaml`, or via environment variables (
 
 ### `environment`
 
-  - Name: `NODE_ENVIRONMENT`
-  - Default: `development`
-  - Description: Environment of the Node, possible values are `development` and `production`. This enables the level of logging for debugging.
+- Name: `NODE_ENVIRONMENT`
+- Default: `development`
+- Description: Environment of the Node, possible values are `development` and `production`. This enables the level of logging for debugging.
 
 ### `discovery`
 
@@ -69,18 +69,6 @@ This section includes configuration options for the database, which is used for 
     - After this period, the data will be automatically trimmed to save storage space.
     - The minimum value is `3`.
 
-- `database.driver`
-
-  - Name: `NODE_DATABASE_DRIVER`
-  - Default: `postgres`
-  - Description: You can use any PostgreSQL-compatible database drivers such as `postgres` or `alloydb`
-
-- `database.partition`
-
-  - Name: `NODE_DATABASE_PARTITION`
-  - Default: `true`
-  - Description: Whether to use database partitioning.
-
 - `database.uri`
 
   - Name: `NODE_DATABASE_URI`
@@ -128,12 +116,6 @@ This section includes configuration options for Redis, which is used for improvi
   - Name: `NODE_REDIS_TLS_KEY_FILE`
   - Description: Path to key file for Redis TLS.
 
-- `redis.tls.insecure_skip_verify`
-
-  - Name: `NODE_REDIS_TLS_INSECURE_SKIP_VERIFY`
-  - Default: `false`
-  - Description: Whether to skip TLS verification for Redis.
-
 ### `stream`
 
 This section includes configuration options for streaming, for faster data processing.
@@ -143,18 +125,6 @@ This section includes configuration options for streaming, for faster data proce
   - Name: `NODE_STREAM_ENABLE`
   - Default: `false`
   - Description: Whether to enable streaming.
-
-- `stream.driver`
-
-  - Name: `NODE_STREAM_DRIVER`
-  - Default: `kafka`
-  - Description: Stream driver to use.
-
-- `stream.topic`
-
-  - Name: `NODE_STREAM_TOPIC`
-  - Default: `rss3.node.activities`
-  - Description: Stream topic.
 
 - `stream.uri`
 
@@ -275,8 +245,11 @@ This section includes configuration options for each component, which includes s
 - `component.decentralized[].ipfs_gateways`
 
   - Description:
-    - Used to specify the IPFS gateways used by the worker
-    - Supplying multiple gateways may improve the indexing performance and reliability
+    - Description: IPFS gateways used by the worker supplying multiple gateways may improve the indexing performance and reliability
+    - Default: `["https://ipfs.rss3.page/"
+    , "https://ipfs.io/"
+    , "https://cloudflare-ipfs.com/"
+    , "https://4everland.io/"]`
 
 - `component.decentralized[].parameters`
 
@@ -318,10 +291,13 @@ This section includes configuration options for each component, which includes s
 - `component.federated[].parameters`
   - Description: Additional parameters for each federated component.
     - For Mastodon:
-      - `relay_url_list`: 
+      - `relay_url_list`:
         - Description: List of Mastodon relay URLs used by the worker.
-        - Default: `["https://relay.toot.io/inbox", "https://relay.infosec.exchange/inbox", "https://relay.intahnet.co.uk/inbox",
-	"https://relay.fedi.buzz/instance/mas.to", "https://relay.fedi.buzz/instance/mastodon.online",]`
-      - `port`: 
+        - Default: `["https://relay.toot.io/inbox", 
+                    "https://relay.infosec.exchange/inbox", 
+                    "https://relay.intahnet.co.uk/inbox",
+                    "https://relay.fedi.buzz/instance/mas.to", 
+                    "https://relay.fedi.buzz/instance/mastodon.online"]`
+      - `port`:
         - Description: Local port where the mastodon client listens for requests from the mastodon public URL.
         - Default: `8181`

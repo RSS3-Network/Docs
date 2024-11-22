@@ -37,7 +37,9 @@ endpoints:
   # the rest of the config...
   mastodon:
     # `url` is the public URL which points to a Mastodon relay
-    url: https://your.mastodon.relay:8181
+    # should be domain, not IP address
+    # either https or http is supported
+    url: https://your.mastodon.relay
 
 component:
   # the rest of the config...
@@ -51,18 +53,6 @@ component:
       # `endpoint` is defined in the `endpoints` section above.
       endpoint: mastodon
       worker: core
-      # `parameters` includes specific settings for the mastodon-core worker.
-      parameters:
-        # `relay_url_list` is a list of ActivityPub relay URLs that the worker communicate with.
-        # You may specify multiple relays to expand coverage.
-        relay_url_list:
-          [
-            "https://relay.fedi.buzz/instance/mastodon.social",
-            "https://relay.intahnet.co.uk/inbox",
-          ]
-        # `port` specifies the local port where requests are forwarded.
-        # The public URL in the `mastodon` endpoint should redirect to this port.
-        port: 8181
 
 # the rest of the config...
 
