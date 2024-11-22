@@ -26,43 +26,43 @@ The worker stores the structured data in the Node’s database.
 Here is a list of available workers.
 
 <!-- network-worker table starts -->
-| Network/Worker | arbitrum | arweave | avax | base | binance-smart-chain | crossbell | ethereum | farcaster | gnosis | linea | near | optimism | polygon | rsshub | vsl | x-layer |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **core**[1] | ✓ |   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| 1inch |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| aave | ✓ |   | ✓ | ✓ |   |   | ✓ |   |   |   |   | ✓ | ✓ |   |   |   |
-| aavegotchi |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
-| arbitrum | ✓ |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| base |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| cow |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| crossbell |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
-| curve | ✓ |   | ✓ |   |   |   | ✓ |   | ✓ |   |   | ✓ | ✓ |   |   |   |
-| ens |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| highlight | ✓ |   |   |   |   |   | ✓ |   |   |   |   | ✓ | ✓ |   |   |   |
-| iqwiki |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
-| kiwistand |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |
-| lens |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
-| lido |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| linea |   |   |   |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |
-| linear |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |   |
-| looksrare |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| matters |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |
-| mirror |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| momoka |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| nearsocial |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |   |
-| nouns |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| opensea |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| optimism |   |   |   |   |   |   | ✓ |   |   |   |   | ✓ |   |   |   |   |
-| paragraph |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| paraswap |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| polymarket |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
-| rainbow | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   |   | ✓ |   | ✓ | ✓ |   |   |   |
-| rss3 |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| stargate | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   |   | ✓ |   | ✓ | ✓ |   |   |   |
-| uniswap |   |   |   |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |
-| vsl |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |
-| zerion | ✓ |   | ✓ | ✓ | ✓ |   |   |   | ✓ | ✓ |   | ✓ | ✓ |   |   | ✓ |
-| **Subtotal** | 8 | 3 | 6 | 6 | 4 | 2 | 21 | 1 | 3 | 6 | 3 | 10 | 11 | 1 | 1 | 2 |
+| Network/Worker | arbitrum | arweave | avax | base | binance-smart-chain | crossbell | ethereum | farcaster | gnosis | linea | mastodon | near | optimism | polygon | rsshub | vsl | x-layer |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **core**[1] | ✓ |   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| 1inch |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| aave | ✓ |   | ✓ | ✓ |   |   | ✓ |   |   |   |   |   | ✓ | ✓ |   |   |   |
+| aavegotchi |   |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
+| arbitrum | ✓ |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| base |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| cow |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| crossbell |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |
+| curve | ✓ |   | ✓ |   |   |   | ✓ |   | ✓ |   |   |   | ✓ | ✓ |   |   |   |
+| ens |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| highlight | ✓ |   |   |   |   |   | ✓ |   |   |   |   |   | ✓ | ✓ |   |   |   |
+| iqwiki |   |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
+| kiwistand |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |
+| lens |   |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
+| lido |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| linea |   |   |   |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |   |
+| linear |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |   |
+| looksrare |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| matters |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |
+| mirror |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+| momoka |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+| nearsocial |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |   |
+| nouns |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| opensea |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| optimism |   |   |   |   |   |   | ✓ |   |   |   |   |   | ✓ |   |   |   |   |
+| paragraph |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+| paraswap |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| polymarket |   |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
+| rainbow | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   |   | ✓ |   |   | ✓ | ✓ |   |   |   |
+| rss3 |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| stargate | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   |   | ✓ |   |   | ✓ | ✓ |   |   |   |
+| uniswap |   |   |   |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |   |
+| vsl |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| zerion | ✓ |   | ✓ | ✓ | ✓ |   |   |   | ✓ | ✓ |   |   | ✓ | ✓ |   |   | ✓ |
+| **Subtotal** | 8 | 3 | 6 | 6 | 4 | 2 | 21 | 1 | 3 | 6 | 1 | 3 | 10 | 11 | 1 | 1 | 2 |
 <!-- network-worker table ends -->
 
 [1] A core worker covers all the data on the open data protocol where it operates, except for the data already covered by other workers.
