@@ -1,0 +1,67 @@
+---
+id: component-rss
+title: RSS Component
+description: An introduction to the RSS component.
+---
+
+## Introduction
+
+RSS is a web feed that allows users to access updates to online content in a standardized format.
+
+It is often preceived as the first decentralized web protocol, given its open and permissionless nature,
+
+RSS3 Node has an RSS component that indexes data from RSS feeds, enabling users to access and interact with the data in the RSS3 ecosystem.
+
+## Deployment
+
+This guide assumes you have already deployed an RSS3 Node and are familiar with the deployment process.
+If not, refer to the [Deployment Guide](/guide/operator/deployment/guide) for detailed instructions.
+
+### Hardware Requirements
+
+The support for RSS feeds in RSS3 Node is achieved through RSSHub, which is a lightweight and efficient RSS feed generator.
+Thus, it does not increase the CPU or memory usage of your Node significantly.
+As the feeds are generated on-the-fly, the storage space required is also minimal.
+
+### Sample config.yaml
+
+There is a new section under `component` for the RSS component, which looks like this:
+
+```yaml
+environment: production
+
+# the rest of the config...
+
+endpoints:
+  # the rest of the config...
+  rsshub:
+    # `url` is the public URL which points to an RSSHub instance
+    url: https://your.rsshub.instance
+
+component:
+  # the rest of the config...
+
+  # `rss` component includes workers indexing data from federated networks conforming to ActivityPub protocol, such as Mastodon, Misskey, and Threads.
+  rss:
+      # `id` is a unique identifier for the worker.
+    - id: rsshub-core
+      # `network` is the network that the worker is indexing from.
+      network: rsshub
+      # `endpoint` is defined in the `endpoints` section above.
+      endpoint: rsshub
+      worker: core
+      # `parameters` includes specific settings for the rsshub-core worker.
+        parameters:
+          authentication:
+            access_key: your-access-key
+
+# the rest of the config...
+
+```
+
+## Conclusion
+
+In this guide, we introduced the RSS component and provided a sample configuration for deploying it.
+
+By adding an RSS component to your RSS3 Node, you can seamlessly integrate data from RSS feeds into your Node, expanding its coverage and utility of your Node.
+This may increase your Node's visibility and attract more requests, enhancing your Node's reputation and potential operation rewards.
