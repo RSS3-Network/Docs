@@ -1,0 +1,43 @@
+name: Sync Compatible Models
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily
+  workflow_dispatch:      # Allow manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download source file
+        run: |
+          mkdir -p content/guide/ai/openagent
+          curl -o content/guide/ai/openagent/compatible-models.mdx https://raw.githubusercontent.com/RSS3-Network/OpenAgent/docs/tests/compatible-models.mdx
+
+      - name: Check for changes
+        id: check
+        run: |
+          git add content/guide/ai/openagent/compatible-models.mdx
+          if git diff --staged --quiet; then
+            echo "No changes detected"
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changes detected"
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        if: steps.check.outputs.changes == 'true'
+        with:
+          commit_message: "chore: sync compatible models from upstream"
+          branch: main
