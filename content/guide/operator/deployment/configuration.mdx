@@ -12,9 +12,9 @@ You may use the configuration file `config.yaml`, or via environment variables (
 
 ### `environment`
 
-  - Name: `NODE_ENVIRONMENT`
-  - Default: `development`
-  - Description: Environment of the Node, possible values are `development` and `production`. This enables the level of logging for debugging.
+- Name: `NODE_ENVIRONMENT`
+- Default: `development`
+- Description: Environment of the Node, possible values are `development` and `production`. This enables the level of logging for debugging.
 
 ### `discovery`
 
@@ -246,7 +246,10 @@ This section includes configuration options for each component, which includes s
 
   - Description:
     - Description: IPFS gateways used by the worker supplying multiple gateways may improve the indexing performance and reliability
-    - Default: `["https://ipfs.rss3.page/", "https://ipfs.io/", "https://cloudflare-ipfs.com/", "https://4everland.io/"]`
+    - Default: `["https://ipfs.rss3.page/"
+    , "https://ipfs.io/"
+    , "https://cloudflare-ipfs.com/"
+    , "https://4everland.io/"]`
 
 - `component.decentralized[].parameters`
 
@@ -290,8 +293,11 @@ This section includes configuration options for each component, which includes s
     - For Mastodon:
       - `relay_url_list`:
         - Description: List of Mastodon relay URLs used by the worker.
-        - Default: `["https://relay.toot.io/inbox", "https://relay.infosec.exchange/inbox", "https://relay.intahnet.co.uk/inbox",
-	"https://relay.fedi.buzz/instance/mas.to", "https://relay.fedi.buzz/instance/mastodon.online",]`
+        - Default: `["https://relay.toot.io/inbox", 
+                    "https://relay.infosec.exchange/inbox", 
+                    "https://relay.intahnet.co.uk/inbox",
+                    "https://relay.fedi.buzz/instance/mas.to", 
+                    "https://relay.fedi.buzz/instance/mastodon.online"]`
       - `port`:
         - Description: Local port where the mastodon client listens for requests from the mastodon public URL.
         - Default: `8181`
