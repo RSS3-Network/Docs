@@ -218,6 +218,8 @@ This section includes configuration options for each component, which includes s
 
   - Name: `NODE_COMPONENT_RSS_PARAMETERS`
   - Description: Additional parameters for RSS component
+    - `authentication`: Authentication configuration
+      - `access_key`: Access key for authentication
 
 #### Decentralized
 
@@ -255,16 +257,16 @@ This section includes configuration options for each component, which includes s
 
   - Description: Additional parameters for each decentralized component
     - For Ethereum and Arweave:
-      - `BlockStart`: Block number/height that the worker should start from
-      - `BlockTarget`: Block number/height that the worker should stop at
-      - `ConcurrentBlockRequests`: Number of blocks to request concurrently
+      - `block_start`: Block number/height that the worker should start from
+      - `block_target`: Block number/height that the worker should stop at
+      - `concurrent_block_requests`: Number of blocks to request concurrently
     - For EVM-based Worker only:
-      - `BlockBatchSize`: Number of blocks to fetch in a single batch.
-      - `ReceiptsBatchSize`: Number of receipts to fetch in a single batch.
-      - `BlockReceiptsBatchSize`: Number of block receipts to fetch in a single batch.
+      - `block_batch_size`: Number of blocks to fetch in a single batch.
+      - `receipts_batch_size`: Number of receipts to fetch in a single batch.
+      - `block_receipts_batch_size`: Number of block receipts to fetch in a single batch.
     - For Farcaster:
-      - `APIKey`: API key for Farcaster Hubble.
-      - `TimestampStart`: The Farcaster seconds timestamp that the worker should start from.
+      - `api_key`: API key for Farcaster Hubble.
+      - `timestamp_start`: The Farcaster seconds timestamp that the worker should start from.
 
 #### Federated
 
@@ -293,10 +295,10 @@ This section includes configuration options for each component, which includes s
     - For Mastodon:
       - `relay_url_list`:
         - Description: List of Mastodon relay URLs used by the worker.
-        - Default: `["https://relay.toot.io/inbox", 
-                    "https://relay.infosec.exchange/inbox", 
+        - Default: `["https://relay.toot.io/inbox",
+                    "https://relay.infosec.exchange/inbox",
                     "https://relay.intahnet.co.uk/inbox",
-                    "https://relay.fedi.buzz/instance/mas.to", 
+                    "https://relay.fedi.buzz/instance/mas.to",
                     "https://relay.fedi.buzz/instance/mastodon.online"]`
       - `port`:
         - Description: Local port where the mastodon client listens for requests from the mastodon public URL.
