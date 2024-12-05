@@ -12,6 +12,21 @@ await generateFiles({
 });
 
 await generateFiles({
+	input: ["https://agent.open.network/openapi.json"],
+	output: "./content/guide/ai/openagent",
+	groupBy: "tag",
+	per: "operation",
+});
+
+// rename the ./content/guide/ai/openagent/completion folder to ./content/guide/ai/openagent/completion-API
+// remove this dir before running the script
+fs.rmSync("./content/guide/ai/openagent/completion-API", { recursive: true, force: true });
+fs.renameSync(
+	"./content/guide/ai/openagent/completion",
+	"./content/guide/ai/openagent/completion-API",
+);
+
+await generateFiles({
 	input: ["https://gi.rss3.io/docs/openapi.json"],
 	output: "./content/guide/developer/api",
 	groupBy: "tag",
