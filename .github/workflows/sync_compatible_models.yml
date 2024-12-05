@@ -22,7 +22,7 @@ jobs:
       - name: Download source file
         run: |
           mkdir -p content/guide/ai/openagent
-          curl -o content/guide/ai/openagent/compatible-models.mdx https://raw.githubusercontent.com/RSS3-Network/OpenAgent/main/tests/compatible-models.mdx
+          curl -o content/guide/ai/openagent/compatible-models.mdx https://raw.githubusercontent.com/RSS3-Network/OpenAgent/docs/tests/compatible-models.mdx
 
       - name: Check for changes
         id: check
@@ -31,13 +31,33 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes detected"
             echo "changes=false" >> $GITHUB_OUTPUT
+            echo "large_change=false" >> $GITHUB_OUTPUT
           else
             echo "Changes detected"
             echo "changes=true" >> $GITHUB_OUTPUT
+            CHANGED_LINES=$(git diff --staged --numstat | awk '{total += $1 + $2} END {print total}')
+            if [ "$CHANGED_LINES" -gt 3 ]; then
+              echo "Large changes detected ($CHANGED_LINES lines)"
+              echo "large_change=true" >> $GITHUB_OUTPUT
+            else
+              echo "Small changes detected ($CHANGED_LINES lines)"
+              echo "large_change=false" >> $GITHUB_OUTPUT
+            fi
           fi
 
+      # Create PR for large changes
+      - name: Create Pull Request
+        if: steps.check.outputs.changes == 'true' && steps.check.outputs.large_change == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "chore: sync compatible models from upstream"
+          title: "chore: sync compatible models from upstream"
+          branch: sync-compatible-models
+          delete-branch: true
+
+      # Direct commit for small changes
       - uses: stefanzweifel/git-auto-commit-action@v5
-        if: steps.check.outputs.changes == 'true'
+        if: steps.check.outputs.changes == 'true' && steps.check.outputs.large_change == 'false'
         with:
           commit_message: "chore: sync compatible models from upstream"
           branch: main
