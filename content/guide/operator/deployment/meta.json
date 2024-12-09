@@ -1,3 +1,4 @@
 {
-	"defaultOpen": false
+	"defaultOpen": false,
+	"pages": ["guide", "configuration", "serverless", "light-mode", "component"]
 }

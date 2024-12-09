@@ -7,7 +7,8 @@ description: An easy guide for deploying an RSS3 Node on the Data Sublayer.
 ## Introduction
 
 This guide provides instructions for a deployment using containerized solutions including Docker and Kubernetes.
-The deployment focuses on Decentralized workers.
+The deployment focuses on the Decentralized component.
+For deploying more components, refer to the respective guides.
 It is assumed that the user has a basic understanding of terminal commands and containerization concepts.
 
 The guide is opinionated towards a containerized deployment solution, the source code is available at: https://github.com/RSS3-Network/Node, if one prefers an alternative deployment method.
@@ -40,7 +41,7 @@ Since RSS3 Node's [coverage](/guide/dsl/coverage) is highly customizable, there 
 
 Our [interactive deployment configurator](https://explorer.rss3.io/nodes/register) will provide an estimated hardware requirement.
 
-We recommend a minimal configuration of **16 Core, 64 GB RAM, 500 GB SSD * 3** to operate a Node with full coverage to boost your work rate.
+We recommend a minimal configuration of **16 Core, 64 GB RAM, 500 GB SSD \* 3** to operate a Node with full coverage to boost your work rate.
 For that, AlloyDB should be used to replace PostgreSQL, as AlloyDB generally requires fewer resources than a PostgreSQL cluster to achieve the same performance.
 
 ### Local AI Capability
@@ -108,15 +109,15 @@ For operators using the automated deployer, the upgrade process is:
 1. Update your `config.yaml` file in the `config/` directory.
 2. Execute the following command in the same directory as your existing `docker-compose.yaml` file to initiate the automated upgrade process:
 
-   ```shell
-   curl -s https://raw.githubusercontent.com/RSS3-Network/Node-Automated-Deployer/main/automated_deploy.sh | bash
-   ```
+    ```shell
+    curl -s https://raw.githubusercontent.com/RSS3-Network/Node-Automated-Deployer/main/automated_deploy.sh | bash
+    ```
 
 This command will automatically upgrade all necessary components of your Node.
 
 ### Sample config.yaml
 
-For your reference, a config.yaml should look like this:
+For your reference, a `config.yaml` that contains the Decentralized component only should look like this:
 
 ```yaml
 # DO NOT change this value except for local debugging purposes.
@@ -142,9 +143,9 @@ discovery:
 
 # Database configuration
 database:
-  # `coverage_period` is the number of months that the database will store the data, which cannot be less than three months.
+  # `coverage_period` is the number of months that the database will store indexed data, the minimum value is 3.
   coverage_period: 3
-  # `driver` is the database driver used by the Node, currently only `postgres` is supported
+  # `driver` is the database driver used by the Node, currently only `postgres` is supported.
   driver: postgres
   # `partition` is used to enable the partition feature of the database.
   partition: true
@@ -163,27 +164,16 @@ redis:
 # - Blockchain networks require RPC endpoints,
 # - Arweave requires a gateway endpoint,
 # - Farcaster requires a Hubble.
-# - Mastodon requires a mastodon instance.
+# - Mastodon requires a public URL forwarding to specific localhost port.
 endpoints:
   vsl:
     url: https://rpc.rss3.io
   arweave:
     url: https://arweave.net
-  mastodon:
-    url: your-kafka-ip:9092
 
 # `component` is used to split different types of networks.
 component:
-  # `rss` network type includes the worker indexing data in RSS format.
-  rss:
-    id: rss-rsshub
-    network: rsshub
-    worker: core
-    endpoint: https://your.rsshub.domain/
-    parameters:
-      authentication:
-        access_key:
-  # `decentralized` network type includes workers indexing data from decentralized networks such as blockchain networks, Arweave, etc.
+  # `decentralized` component includes workers indexing data from decentralized networks such as blockchain networks, Arweave, etc.
   decentralized:
     # Each configuration here initializes a worker.
     # `id` is the unique identifier
@@ -210,215 +200,6 @@ component:
         # `concurrent_block_requests` is used to specify the number of concurrent block requests.
         concurrent_block_requests: 2
 ```
-
-### Configuration Options
-
-- `environment`
-  - Environment: `NODE_ENVIRONMENT`
-  - Default: `development`
-  - Description: Environment of the Node, possible values are `development` and `production`.
-
-- `discovery.operator.evm_address`
-  - Environment: `NODE_DISCOVERY_OPERATOR_EVM_ADDRESS`
-  - Description: Wallet address used during your registration on the RSS3 Explorer.
-
-- `discovery.operator.signature`
-  - Environment: `NODE_DISCOVERY_OPERATOR_SIGNATURE`
-  - Description:
-    - The signature obtained during registration
-    - Used to verify your ownership of this Node
-    - You MUST NOT share the signature with anyone
-
-- `discovery.server.endpoint`
-  - Environment: `NODE_DISCOVERY_SERVER_ENDPOINT`
-  - Description:
-    - Endpoint is how Global Indexers access your Node
-    - You can use a domain or an IP address
-
-- `discovery.server.global_indexer_endpoint`
-  - Environment: `NODE_DISCOVERY_SERVER_GLOBAL_INDEXER_ENDPOINT`
-  - Default: `https://gi.rss3.io`
-  - Description:
-    - If your Node is registered on the VSL Testnet, use `https://gi.rss3.dev`
-    - Otherwise, DO NOT change this value
-
-- `discovery.server.access_token`
-  - Environment: `NODE_DISCOVERY_SERVER_ACCESS_TOKEN`
-  - Description:
-    - Access token used to gate certain APIs provided by your Node
-    - This token is shared with Global Indexers to access your Node
-    - This token can be supplied by you or auto-generated by automated deployer
-
-- `database.coverage_period`
-  - Environment: `NODE_DATABASE_COVERAGE_PERIOD`
-  - Default: `3`
-  - Description: Number of months that the database will store the data, which cannot be less than three months.
-
-- `database.driver`
-  - Environment: `NODE_DATABASE_DRIVER`
-  - Default: `postgres`
-  - Description: You can use PostgreSQL-compatible database drivers such as `postgres` or `alloydb`
-
-- `database.partition`
-  - Environment: `NODE_DATABASE_PARTITION`
-  - Default: `true`
-  - Description: Whether to use database partitioning
-
-- `database.uri`
-  - Environment: `NODE_DATABASE_URI`
-  - Default: `postgres://postgres@localhost:5432/postgres`
-  - Description: Database connection URI
-
-- `redis.endpoint`
-  - Environment: `NODE_REDIS_ENDPOINT`
-  - Default: `localhost:6379`
-  - Description: Redis server endpoint
-
-- `redis.username`
-  - Environment: `NODE_REDIS_USERNAME`
-  - Description: Redis username
-
-- `redis.password`
-  - Environment: `NODE_REDIS_PASSWORD`
-  - Description: Redis password
-
-- `redis.tls.enabled`
-  - Environment: `NODE_REDIS_TLS_ENABLED`
-  - Default: `false`
-  - Description: Whether to enable TLS for Redis connection
-
-- `redis.tls.ca_file`
-  - Environment: `NODE_REDIS_TLS_CA_FILE`
-  - Description: Path to CA file for Redis TLS
-
-- `redis.tls.cert_file`
-  - Environment: `NODE_REDIS_TLS_CERT_FILE`
-  - Description: Path to certificate file for Redis TLS
-
-- `redis.tls.key_file`
-  - Environment: `NODE_REDIS_TLS_KEY_FILE`
-  - Description: Path to key file for Redis TLS
-
-- `redis.tls.insecure_skip_verify`
-  - Environment: `NODE_REDIS_TLS_INSECURE_SKIP_VERIFY`
-  - Default: `false`
-  - Description: Whether to skip TLS verification for Redis
-
-- `stream.enable`
-  - Environment: `NODE_STREAM_ENABLE`
-  - Default: `false`
-  - Description: Whether to enable streaming
-
-- `stream.driver`
-  - Environment: `NODE_STREAM_DRIVER`
-  - Default: `kafka`
-  - Description: Stream driver to use
-
-- `stream.topic`
-  - Environment: `NODE_STREAM_TOPIC`
-  - Default: `rss3.node.activities`
-  - Description: Stream topic
-
-- `stream.uri`
-  - Environment: `NODE_STREAM_URI`
-  - Default: `localhost:9092`
-  - Description: Stream connection URI
-
-- `observability.opentelemetry.metrics.enable`
-  - Environment: `NODE_OBSERVABILITY_OPENTELEMETRY_METRICS_ENABLE`
-  - Default: `false`
-  - Description: Whether to enable OpenTelemetry metrics
-
-- `observability.opentelemetry.metrics.endpoint`
-  - Environment: `NODE_OBSERVABILITY_OPENTELEMETRY_METRICS_ENDPOINT`
-  - Default: `0.0.0.0:9090`
-  - Description: Endpoint for OpenTelemetry metrics
-
-- `observability.opentelemetry.traces.enable`
-  - Environment: `NODE_OBSERVABILITY_OPENTELEMETRY_TRACES_ENABLE`
-  - Default: `false`
-  - Description: Whether to enable OpenTelemetry traces
-
-- `observability.opentelemetry.traces.insecure`
-  - Environment: `NODE_OBSERVABILITY_OPENTELEMETRY_TRACES_INSECURE`
-  - Default: `false`
-  - Description: Whether to use insecure connection for OpenTelemetry traces
-
-- `observability.opentelemetry.traces.endpoint`
-  - Environment: `NODE_OBSERVABILITY_OPENTELEMETRY_TRACES_ENDPOINT`
-  - Default: `0.0.0.0:4318`
-  - Description: Endpoint for OpenTelemetry traces
-
-- `endpoints.*.url`
-  - Environment: `NODE_ENDPOINTS_{NAME}_URL`
-  - Description: URL for each defined endpoint
-
-- `endpoints.*.http_headers`
-  - Environment: `NODE_ENDPOINTS_{NAME}_HTTP_HEADERS`
-  - Description: HTTP headers for each defined endpoint
-
-- `endpoints.*.http2_disabled`
-  - Environment: `NODE_ENDPOINTS_{NAME}_HTTP2_DISABLED`
-  - Default: `false`
-  - Description: Whether HTTP/2 is disabled for the endpoint
-
-- `component.rss.id`
-  - Environment: `NODE_COMPONENT_RSS_ID`
-  - Description: Unique identifier for RSS component
-
-- `component.rss.network`
-  - Environment: `NODE_COMPONENT_RSS_NETWORK`
-  - Description: Network type for RSS component
-
-- `component.rss.worker`
-  - Environment: `NODE_COMPONENT_RSS_WORKER`
-  - Description:
-    - Actual worker that processes the RSS data
-    - View the [list of available workers](/guide/dsl/worker#available-workers)
-
-- `component.rss.endpoint`
-  - Environment: `NODE_COMPONENT_RSS_ENDPOINT`
-  - Description: Endpoint for RSS worker
-
-- `component.rss.parameters`
-  - Environment: `NODE_COMPONENT_RSS_PARAMETERS`
-  - Description: Additional parameters for RSS component
-
-- `component.decentralized[].id`
-  - Description: Unique identifier for each decentralized component
-
-- `component.decentralized[].network`
-  - Description: Network type for each decentralized component
-
-- `component.decentralized[].endpoint`
-  - Description:
-    - Data access endpoint used by the worker
-    - You can reference the endpoint defined above in the endpoints section
-    - You can also use a direct URL, such as `https://rpc.rss3.io`
-
-- `component.decentralized[].worker`
-  - Description:
-    - Actual worker that processes the data
-    - View the [list of available workers](/guide/dsl/worker#available-workers)
-
-- `component.decentralized[].ipfs_gateways`
-  - Description:
-    - Used to specify the IPFS gateways used by the worker
-    - Supplying multiple gateways may improve the indexing performance and reliability
-
-- `component.decentralized[].parameters`
-  - Description: Additional parameters for each decentralized component
-    - For Ethereum and Arweave:
-      - `BlockStart`: Block number/height that the worker should start from
-      - `BlockTarget`: Block number/height that the worker should stop at
-      - `ConcurrentBlockRequests`: Number of blocks to request concurrently
-    - For EVM-based Worker only:
-      - `BlockBatchSize`: Number of blocks to fetch in a single batch.
-      - `ReceiptsBatchSize`: Number of receipts to fetch in a single batch.
-      - `BlockReceiptsBatchSize`: Number of block receipts to fetch in a single batch.
-    - For Farcaster:
-      - `APIKey`: API key for Farcaster Hubble.
-      - `TimestampStart`: The Farcaster seconds timestamp that the worker should start from.
 
 ## Deploy via Kubernetes
 
