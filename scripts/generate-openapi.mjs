@@ -18,8 +18,6 @@ await generateFiles({
 	per: "operation",
 });
 
-// rename the ./content/guide/ai/openagent/completion folder to ./content/guide/ai/openagent/completion-API
-// remove this dir before running the script
 fs.rmSync("./content/guide/ai/openagent/completion-API", { recursive: true, force: true });
 fs.renameSync(
 	"./content/guide/ai/openagent/completion",
