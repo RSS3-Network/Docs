@@ -4,8 +4,6 @@ permissions:
   contents: write
 
 on:
-  schedule:
-    - cron: '0 0 * * *'  # Run daily
   workflow_dispatch:      # Allow manual trigger
 
 jobs:
@@ -22,7 +20,7 @@ jobs:
       - name: Download source file
         run: |
           mkdir -p content/guide/ai/openagent
-          curl -o content/guide/ai/openagent/compatible-models.mdx https://raw.githubusercontent.com/RSS3-Network/OpenAgent/docs/tests/compatible-models.mdx
+          curl -o content/guide/ai/openagent/compatible-models.mdx https://raw.githubusercontent.com/naaive/OA/refs/heads/main/tests/compatible-models.mdx
 
       - name: Check for changes
         id: check
