@@ -27,6 +27,6 @@ const content = fs.readFileSync(
 fs.writeFileSync(
 	"./content/guide/developer/api/index.mdx",
 	`---
-id: api
+id: dsl-openapi
 icon: Openapi${content.replace("---", "")}`,
 );

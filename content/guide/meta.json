@@ -37,6 +37,7 @@
 		"delegator/redemption",
 		"---AI---",
 		"ai/index",
+		"ai/agent-data",
 		"ai/open-data",
 		"ai/openagent",
 		"ai/chatgpt/index",
