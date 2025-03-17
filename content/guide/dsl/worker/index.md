@@ -28,15 +28,15 @@ Here is a list of available workers.
 <!-- network-worker table starts -->
 | Network/Worker | arbitrum | arweave | avax | base | binance-smart-chain | crossbell | ethereum | farcaster | gnosis | linea | mastodon | near | optimism | polygon | rsshub | vsl | x-layer |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **core**[1] | ✓ |   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| 1inch |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
-| aave | ✓ |   | ✓ | ✓ |   |   | ✓ |   |   |   |   |   | ✓ | ✓ |   |   |   |
+| **core**[1] | ✓ |   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| 1inch | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   | ✓ |   |   |   | ✓ | ✓ |   |   |   |
+| aave | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   | ✓ |   |   |   | ✓ | ✓ |   |   |   |
 | aavegotchi |   |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
 | arbitrum | ✓ |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
 | base |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
-| cow |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| cow | ✓ |   |   | ✓ |   |   | ✓ |   | ✓ |   |   |   |   |   |   |   |   |
 | crossbell |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |
-| curve | ✓ |   | ✓ |   |   |   | ✓ |   | ✓ |   |   |   | ✓ | ✓ |   |   |   |
+| curve | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   | ✓ |   |   |   | ✓ | ✓ |   |   | ✓ |
 | ens |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
 | highlight | ✓ |   |   |   |   |   | ✓ |   |   |   |   |   | ✓ | ✓ |   |   |   |
 | iqwiki |   |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
@@ -46,6 +46,7 @@ Here is a list of available workers.
 | linea |   |   |   |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |   |
 | linear |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |   |
 | looksrare |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| mastodon |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |
 | matters |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |   |
 | mirror |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 | momoka |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
@@ -54,15 +55,15 @@ Here is a list of available workers.
 | opensea |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
 | optimism |   |   |   |   |   |   | ✓ |   |   |   |   |   | ✓ |   |   |   |   |
 | paragraph |   | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| paraswap |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
+| paraswap | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   |   |   |   |   | ✓ | ✓ |   |   |   |
 | polymarket |   |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   |   |
 | rainbow | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   |   | ✓ |   |   | ✓ | ✓ |   |   |   |
 | rss3 |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
 | stargate | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   |   | ✓ |   |   | ✓ | ✓ |   |   |   |
-| uniswap |   |   |   |   |   |   | ✓ |   |   | ✓ |   |   |   |   |   |   |   |
+| uniswap | ✓ |   | ✓ | ✓ | ✓ |   | ✓ |   |   | ✓ |   |   | ✓ | ✓ |   |   |   |
 | vsl |   |   |   |   |   |   | ✓ |   |   |   |   |   |   |   |   |   |   |
 | zerion | ✓ |   | ✓ | ✓ | ✓ |   |   |   | ✓ | ✓ |   |   | ✓ | ✓ |   |   | ✓ |
-| **Subtotal** | 8 | 3 | 6 | 6 | 4 | 2 | 21 | 1 | 3 | 6 | 1 | 3 | 10 | 11 | 1 | 1 | 2 |
+| **Subtotal** | 12 | 3 | 9 | 11 | 9 | 2 | 21 | 1 | 6 | 6 | 1 | 3 | 13 | 14 | 1 | 1 | 3 |
 <!-- network-worker table ends -->
 
 [1] A core worker covers all the data on the open data protocol where it operates, except for the data already covered by other workers.
