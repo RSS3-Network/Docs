@@ -190,6 +190,39 @@ This section includes configuration options for each endpoint, which can be refe
 
 This section includes configuration options for each component, which includes specific configurations for individual workers.
 
+#### AI
+
+- `component.ai.id`
+
+  - Name: `NODE_COMPONENT_AI_ID`
+  - Description: Unique identifier for AI component (e.g., `agentdata-core`)
+
+- `component.ai.worker`
+
+  - Name: `NODE_COMPONENT_AI_WORKER`
+  - Description:
+    - Specifies the AI worker type to use (e.g., `core`)
+
+- `component.ai.endpoint`
+
+  - Name: `NODE_COMPONENT_AI_ENDPOINT`
+  - Description: The endpoint URL for the AI component (e.g., `https://your.agentdata.com/`).
+
+- `component.ai.parameters`
+
+  - Name: `NODE_COMPONENT_AI_PARAMETERS`
+  - Description: Additional parameters for AI component
+    - `agentdata_db_url`: URL for the AgentData database connection
+    - `openai_api_key`: API key for OpenAI services integration
+    - `ollama_host`: Host address for Ollama API services
+    - `kaito_api_token`: API token for Kaito services
+    - `twitter`: Twitter API configuration
+      - `bearer_token`: Twitter API bearer token for authentication
+      - `api_key`: Twitter API key for app authentication
+      - `api_secret`: Twitter API secret for app authentication
+      - `access_token`: Twitter access token for user authentication
+      - `access_token_secret`: Twitter access token secret for user authentication
+
 #### RSS
 
 - `component.rss.id`
