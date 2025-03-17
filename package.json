@@ -11,7 +11,7 @@
 		"lint": "biome check",
 		"lint:fix": "biome check --write",
 		"generate:dsl-info": "node scripts/generate-dsl-info.mjs",
-		"generate:openapi": "node scripts/generate-openapi.mjs"
+		"generate:dsl-openapi": "node scripts/generate-dsl-openapi.mjs"
 	},
 	"dependencies": {
 		"@rss3/web3-icons-react": "^0.0.16",
