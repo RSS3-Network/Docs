@@ -1,0 +1,63 @@
+---
+id: component-ai
+title: AI Component
+description: An introduction to the AI component.
+---
+
+## Introduction
+
+RSS3 AgentData is a robust service designed to deliver high-fidelity, real-time information streams tailored for AI agents.
+This service delivers a diverse set of inputs from multiple sources, including trending topics, social insights, news, and more.
+By leveraging this data, AI agents can make contextually relevant decisions, refine their models, and stay current with the latest trends.
+
+RSS3 Node has an AI component that indexes data from AgentData, enabling users to access and interact with the data in the RSS3 ecosystem.
+
+## Deployment
+
+This guide assumes you have already deployed an RSS3 Node and are familiar with the deployment process.
+If not, refer to the [Deployment Guide](/guide/operator/deployment/guide) for detailed instructions.
+
+### Hardware Requirements
+
+The support for AI in RSS3 Node is achieved through AgentData ecosystem, which is a lightweight and efficient AI data generator.
+Thus, it does not increase the CPU or memory usage of your Node significantly, and the storage space required is also minimal.
+
+### Sample config.yaml
+
+There is a new section under `component` for the AI component, which looks like this:
+
+```yaml
+environment: production
+
+# the rest of the config...
+
+component:
+  # the rest of the config...
+
+  # `ai` type includes the worker indexing data in AI format.
+  ai:
+    id: agentdata-core
+    worker: core
+    endpoint: https://your.agentdata.com/
+    parameters:
+      agentdata_db_url:
+      openai_api_key:
+      ollama_host:
+      kaito_api_token:
+      twitter:
+        bearer_token:
+        api_key:
+        api_secret:
+        access_token:
+        access_token_secret:
+
+# the rest of the config...
+
+```
+
+## Conclusion
+
+In this guide, we introduced the AI component and provided a sample configuration for deploying it.
+
+By adding an AI component to your RSS3 Node, you can seamlessly integrate data from AgentData, expanding its coverage and utility of your Node.
+This may increase your Node's visibility and attract more requests, enhancing your Node's reputation and potential operation rewards.

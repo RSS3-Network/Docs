@@ -1,0 +1,58 @@
+---
+id: deploy-upgrade
+title: Upgrade
+description: A guide to upgrade your Node to the latest version.
+---
+
+# Upgrading Your Node
+
+Maintaining an up-to-date Node is crucial for optimal performance and security.
+We recommend regularly checking the [Changelog](https://github.com/RSS3-Network/Node/releases) for updates and new features.
+
+<Callout type="info">
+When upgrading, ensure that you update your `config.yaml` file or modify the configurations in accordance with the latest [Deployment Guide](https://docs.rss3.io/guide/operator/deployment/guide#configuration-options).
+</Callout>
+
+<Callout type="warning">
+Before proceeding with any upgrade, carefully review the release notes, particularly for major version changes.
+Major versions may introduce breaking changes that require additional steps or modifications.
+</Callout>
+
+## Upgrade to v2.0.x
+
+When upgrading from v1.2.x or older versions to v2.0.x, it is now possible to include a new `ai` component.
+Update your `config.yaml` file as follows:
+
+```diff
+component:
++++    ai:
++++      - id: agentdata-core
++++        worker: core
++++        endpoint: https://your.agentdata.com/
++++        parameters:
++++          agentdata_db_url:
++++          openai_api_key:
++++          ollama_host:
++++          kaito_api_token:
++++          twitter:
++++            bearer_token:
++++            api_key:
++++            api_secret:
++++            access_token:
++++            access_token_secret:
+```
+
+Pull and start the latest container image after updating the `config.yaml` file.
+
+### Automated Deployer
+
+For operators using the automated deployer, the process is simple:
+
+1. Update your `config.yaml` file in the `config/` directory.
+2. Execute the following command in the same directory as your existing `docker-compose.yaml` file to initiate the automated upgrade process:
+
+    ```shell
+    curl -s https://raw.githubusercontent.com/RSS3-Network/Node-Automated-Deployer/main/automated_deploy.sh | bash
+    ```
+
+This command will automatically upgrade all necessary components of your Node.

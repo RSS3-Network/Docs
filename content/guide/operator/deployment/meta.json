@@ -1,4 +1,11 @@
 {
 	"defaultOpen": false,
-	"pages": ["guide", "configuration", "serverless", "light-mode", "component"]
+	"pages": [
+		"guide",
+		"configuration",
+		"upgrade",
+		"serverless",
+		"light-mode",
+		"component"
+	]
 }

@@ -68,52 +68,15 @@ A configuration file is required for deploying your Node.
 
 🎉 And you are done! (Yes it's that simple.)
 
-A successful deployment (if you have enabled at least 1 decentralized worker) will generate the following containers:
+A successful deployment will generate the following containers:
 
 1. rss3_node_core: This container is used to process incoming requests from Global Indexers.
 2. rss3_node_broadcaster: This container is used to broadcast the Node's status to Global Indexers.
 3. rss3_node_monitor: This container is used to monitor worker status.
 4. rss3_node_alloydb: This container is used to store data.
 5. rss3_node_redis: This container is used to cache data.
-6. worker containers: These containers are used to index data from their corresponding sources.
-
-### Upgrading Your Node
-
-Maintaining an up-to-date Node is crucial for optimal performance and security. We recommend regularly checking the [Changelog](https://github.com/RSS3-Network/Node/releases) for updates and new features.
-
-<Callout type="info">
-When upgrading, ensure that you update your `config.yaml` file or modify the configurations in accordance with the latest [Deployment Guide](https://docs.rss3.io/guide/operator/deployment/guide#configuration-options).
-</Callout>
-
-<Callout type="warning">
-Before proceeding with any upgrade, carefully review the release notes, particularly for major version changes. Major versions may introduce breaking changes that require additional steps or modifications.
-</Callout>
-
-#### Upgrade Process for v1.0.x or older to v1.1.x
-
-When upgrading from v1.0.x or older versions to v1.1.x, please note that the `rss` component has undergone significant changes. Update your `config.yaml` file as follows:
-
-```diff
-component:
-    rss:
----     id: rss-rsshub
-+++     id: rsshub-core
----     network: rss
-+++     network: rsshub
----     worker: rsshub
-+++     worker: core
-```
-
-For operators using the automated deployer, the upgrade process is:
-
-1. Update your `config.yaml` file in the `config/` directory.
-2. Execute the following command in the same directory as your existing `docker-compose.yaml` file to initiate the automated upgrade process:
-
-    ```shell
-    curl -s https://raw.githubusercontent.com/RSS3-Network/Node-Automated-Deployer/main/automated_deploy.sh | bash
-    ```
-
-This command will automatically upgrade all necessary components of your Node.
+6. rss3_node_agentdata: This container is used to provide AI capabilities.
+7. worker containers: These containers are used to index data from their corresponding sources. (if you have enabled at least 1 decentralized/federated worker)
 
 ### Sample config.yaml
 
@@ -173,6 +136,22 @@ endpoints:
 
 # `component` is used to split different types of networks.
 component:
+  # `ai` type includes the worker indexing data in AI format.
+  ai:
+    id: agentdata-core
+    worker: core
+    endpoint: https://your.agentdata.com/
+    parameters:
+      agentdata_db_url:
+      openai_api_key:
+      ollama_host:
+      kaito_api_token:
+      twitter:
+        bearer_token:
+        api_key:
+        api_secret:
+        access_token:
+        access_token_secret:
   # `decentralized` component includes workers indexing data from decentralized networks such as blockchain networks, Arweave, etc.
   decentralized:
     # Each configuration here initializes a worker.
@@ -199,6 +178,25 @@ component:
       parameters:
         # `concurrent_block_requests` is used to specify the number of concurrent block requests.
         concurrent_block_requests: 2
+  # `rss` network type includes the worker indexing data in RSS format.
+  rss:
+    id: rsshub-core
+    network: rsshub
+    worker: core
+    endpoint: https://your.rsshub.com/
+    parameters:
+      authentication:
+        access_key:
+  # `federated` network type includes workers indexing data from federated networks such as ActivityPub, Atprotocol.
+  federated:
+    # mastodon
+    - id: mastodon-mastodon
+      network: mastodon
+      worker: mastodon
+      endpoint: mastodon
+      parameters:
+        relay_url_list: [ "https://relay.fedi.buzz/instance/mastodon.social"]
+        port: 8181
 ```
 
 ## Deploy via Kubernetes
