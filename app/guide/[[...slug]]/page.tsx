@@ -62,7 +62,7 @@ export async function generateMetadata(props: {
 	if (!page) notFound();
 
 	const description =
-		page.data.description ?? "The library for building documentation sites";
+		page.data.description ?? "Everything you need to build with RSS3.";
 
 	return createMetadata(
 		metadataImage.withImage(page.slugs, {
